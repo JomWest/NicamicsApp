@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.CarritoPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <ScrollView>
+            <Frame x:Name="MainContent" BackgroundColor="Transparent" Padding="0" HasShadow="True" CornerRadius="0">
+                <VerticalStackLayout VerticalOptions="FillAndExpand">
+                    <!-- Parte superior: Imagen de flecha, título y configuración -->
+                    <VerticalStackLayout>
+                        <Image Source="arrow.png" HorizontalOptions="Start" Margin="30" HeightRequest="25" WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnImageTapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Carrito" CharacterSpacing="0.5" HorizontalOptions="Center" Margin="0,-55,0,0" FontSize="20" FontAttributes="Bold"/>
+                        <Image Source="configuracion.png"
+                               HorizontalOptions="End"
+                               Margin="0,-19,25,0"
+                               HeightRequest="6.5">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnImageTappedMenu"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Frame Margin="-90,40,80,0" WidthRequest="600">
+                            <HorizontalStackLayout>
+                                <Image Source="poster.png" WidthRequest="160" HeightRequest="160" HorizontalOptions="Start" Margin="160,0,0,0"/>
+                                <VerticalStackLayout>
+                                    <Label Text="Re:zero" FontSize="25"/>
+                                    <HorizontalStackLayout>
+                                        <VerticalStackLayout>
+                                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="0" Margin="0,70,0,0">
+                                                <Frame Padding="0" HeightRequest="30" WidthRequest="30">
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnDecrementClicked"/>
+                                                    </Frame.GestureRecognizers>
+                                                    <Label Text="-" FontSize="22" BackgroundColor="#E0E0E0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                </Frame>
+                                                <Frame Padding="0" 
+                                                    BackgroundColor="#E0E0E0"
+                                                    CornerRadius="-10" 
+                                                    WidthRequest="30" 
+                                                    HeightRequest="30"
+                                                    HorizontalOptions="Center">
+                                                    <Label x:Name="LabelCantidad" 
+                                                        Text="1" 
+                                                        FontSize="18" 
+                                                        HorizontalTextAlignment="Center" 
+                                                       VerticalTextAlignment="Center" />
+                                                </Frame>
+                                                <Frame HeightRequest="30" WidthRequest="30" Padding="0" BackgroundColor="#E0E0E0">
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnIncrementClicked"/>
+                                                    </Frame.GestureRecognizers>
+                                                    <Label Text="+" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                </Frame>
+                                            </HorizontalStackLayout>
+                                            <Label Text="$ 8.70" FontSize="22" FontAttributes="Bold" Margin="10,0,0,0"/>
+                                        </VerticalStackLayout>
+                                        <Image Source="eliminarr.png" WidthRequest="30" HeightRequest="30" Margin="100,80,0,0"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame HeightRequest="60" WidthRequest="350" CornerRadius="50" Padding="0" BackgroundColor="#E0E0E0" Margin="0,310,0,0">
+                            <HorizontalStackLayout Spacing="180" VerticalOptions="Center" HorizontalOptions="Center">
+                                <Label Text="Total" FontSize="22" FontAttributes="Bold"/>
+                                <Label Text="$8.70" FontSize="22" FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="30" 
+                           Padding="0" 
+                           WidthRequest="300" 
+                           HeightRequest="60" 
+                            Margin="0,20,0,0"
+                           HasShadow="True">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#F2F2F2" Offset="0.0" />
+                                    <GradientStop Color="#A2B2FC" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Button Text="Comprar Ahora" 
+                                                  FontSize="18" 
+                                TextColor="Black" 
+                                BackgroundColor="Transparent" 
+                                HorizontalOptions="Center" 
+                                VerticalOptions="Center"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </ScrollView>
+
+        <!-- Overlay oscuro -->
+        <BoxView x:Name="Overlay"
+                 BackgroundColor="Black"
+                 Opacity="0.5"
+                 IsVisible="False"
+                 VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"/>
+
+        <!-- Menú inferior deslizable -->
+        <Frame x:Name="BottomMenu"
+               CornerRadius="98"
+               Padding="10"
+               IsVisible="False"
+               BackgroundColor="White"
+               TranslationY="700"
+               HeightRequest="800"
+               WidthRequest="450"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="End"
+               Margin="0,0,0,-60">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#F2F2F2" Offset="0.0" />
+                    <GradientStop Color="#A2B2FC" Offset="1.0" />
+                </LinearGradientBrush>
+            </Frame.Background>
+            <StackLayout>
+                <Image Source="menos.png" HorizontalOptions="Center" HeightRequest="120" WidthRequest="70" Margin="0,-40,0,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedSalidaMenu"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <VerticalStackLayout Spacing="-20">
+                    <Button Text="Ajustes" FontSize="22" WidthRequest="450" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,300,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Historial de Compras" FontSize="22" WidthRequest="550" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,265,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Lista de Deseos" FontSize="22" WidthRequest="550" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,315,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Cerrar Sesión" FontSize="22" WidthRequest="450" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,235,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
+                </VerticalStackLayout>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

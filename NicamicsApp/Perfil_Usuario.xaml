@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.Perfil_Usuario"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Frame x:Name="MainContent" BackgroundColor="Transparent" Padding="0" HasShadow="True" CornerRadius="0">
+            <VerticalStackLayout VerticalOptions="FillAndExpand">
+                <VerticalStackLayout>
+                    <Image Source="arrow.png" HorizontalOptions="Start" Margin="30" HeightRequest="25" WidthRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Mi Perfil" CharacterSpacing="0.5" HorizontalOptions="Center" Margin="0,-55,0,0" FontSize="20" FontAttributes="Bold"/>
+                    <Image Source="configuracion.png"
+                           HorizontalOptions="End"
+                           Margin="0,-19,25,0"
+                           HeightRequest="6.5"
+                           >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImageTappedMenu"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </VerticalStackLayout>
+
+                <Grid Margin="22,50,0,0">
+                    <Frame Padding="10" CornerRadius="100" WidthRequest="75" HeightRequest="75" HorizontalOptions="Start" Margin="20" HasShadow="True" BorderColor="LightBlue">
+                        <Image Source="kanye.jpeg" HeightRequest="75" WidthRequest="130" />
+                    </Frame>
+                    <VerticalStackLayout HorizontalOptions="Center" Margin="11,29,50,0">
+                        <Label Text="YE_KIm" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
+                        <Label Text="Kanye West" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Label Text="Me Gustas" Margin="37,20,0,0" FontSize="20"/>
+
+                <VerticalStackLayout>
+                    <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Transparent" HasShadow="True" Margin="0,30,0,0">
+                        <Frame.Shadow>
+                            <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="100"/>
+                        </Frame.Shadow>
+                        <HorizontalStackLayout>
+                            <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
+                                <Image Source="poster.jpeg"/>
+                            </Frame>
+                            <VerticalStackLayout Margin="10,0,0,0">
+                                <Label Text="Re:zero" FontSize="20" Margin="0,0,0,0"/>
+                                <Label Text="From Tyler the Creator" Margin="0,0,0,0" TextColor="Grey"/>
+                                <Label Text="Baratito comprenlo" Margin="0,25,0,0"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="End" Margin="20,0,0,0">
+                                <Frame CornerRadius="100" HasShadow="True" BorderColor="Transparent" HeightRequest="40" WidthRequest="40">
+                                    <Frame.Shadow>
+                                        <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="10"/>
+                                    </Frame.Shadow>
+                                    <Frame.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#F2F2F2" Offset="0.0" />
+                                            <GradientStop Color="#A2B2FC" Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                    <Image Source="corazon.png" HeightRequest="15" WidthRequest="15" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                </Frame>
+                                <Label Text="Marca 9.9" Margin="0,35,0,0" HorizontalOptions="Center" FontSize="12"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+        <BoxView x:Name="Overlay"
+                 BackgroundColor="Black"
+                 Opacity="0.5"
+                 IsVisible="False"
+                 VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"/>
+        <Frame x:Name="BottomMenu"
+               CornerRadius="98"
+               Padding="10"
+               IsVisible="False"
+               BackgroundColor="White"
+               TranslationY="700"
+               HeightRequest="800"
+               WidthRequest="450"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="End"
+               Margin="0,0,0,-60"
+               >
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#F2F2F2" Offset="0.0" />
+                    <GradientStop Color="#A2B2FC" Offset="1.0" />
+                </LinearGradientBrush>
+            </Frame.Background>
+            <StackLayout>
+                <Image Source="menos.png" HorizontalOptions="Center" HeightRequest="120" WidthRequest="70" Margin="0,-40,0,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedSalidaMenu"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <VerticalStackLayout Spacing="-20">
+                    <Button Text="Ajustes"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,300,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Historial de Compras"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,265,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Lista de Deseos"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,315,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                    <Button Text="Cerrar Sesion"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,235,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+
+
+                </VerticalStackLayout>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
