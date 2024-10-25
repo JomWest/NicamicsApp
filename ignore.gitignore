@@ -1,0 +1,55 @@
+# Configuración general de .NET
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+
+# Archivos generados automáticamente por la compilación
+*.exe
+*.dll
+*.pdb
+*.app
+*.ipa
+*.apk
+*.aab
+*.log
+*.nupkg
+*.snupkg
+*.db
+
+# Configuración de sistema y otros archivos generados
+.DS_Store
+Thumbs.db
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de paquetes NuGet
+**/packages/*
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Archivos de configuración local
+*.localhistory/
+*.localstorage/
+.env
+appsettings.Development.json
+
+# Archivos de configuración de macOS (MAUI)
+*.plist
+*.dylib
+
+# Archivos de respaldo de Visual Studio
+*.bak
+*.orig
+
+# Archivos temporales y generados por Xamarin
+*.db-shm
+*.db-wal
+
+# Carpeta oculta de control de versiones en MAUI
+**/.maui-cache/
