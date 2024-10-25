@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using NicamicsApp.Service;
 
 namespace NicamicsApp
 {
@@ -15,8 +16,14 @@ namespace NicamicsApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<HttpClient>();
+            builder.Services.AddSingleton<AuthService>();
+
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<LoginPage>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

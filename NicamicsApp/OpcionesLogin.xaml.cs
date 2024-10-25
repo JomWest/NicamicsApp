@@ -2,14 +2,17 @@ namespace NicamicsApp
 {
     public partial class OpcionesLogin : ContentPage
     {
-        public OpcionesLogin()
+        IServiceProvider _serviceProvider;
+        public OpcionesLogin(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
         }
 
         private async void OnTappedLogin(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginPage());
+            var loginPage = _serviceProvider.GetService<LoginPage>();
+            await Navigation.PushAsync(loginPage);
         }
     }
 }
