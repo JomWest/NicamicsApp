@@ -1,3 +1,4 @@
+using NicamicsApp.Models.AuthRequest;
 using NicamicsApp.Service;
 
 namespace NicamicsApp;
@@ -33,8 +34,9 @@ public partial class RegisterPage : ContentPage
             await DisplayAlert("Error", "Las contraseñas no coinciden", "OK");
             return;
         }
+        var request = new RegisterRequest(username, password, correo);
 
-        var response = await _authService.RegisterUser(username, password, correo);
+        var response = await _authService.RegisterUser(request);
 
         if (response.Contains("Success")) 
         {

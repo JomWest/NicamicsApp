@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NicamicsApp.Models.AuthRequest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
@@ -22,15 +23,16 @@ namespace NicamicsApp.Service
             };
         }
 
-        public async Task<string> LoginUser(string email, string password)
+        public async Task<string> LoginUser(LoginRequest loginRequest)
         {
             try
             {
                 // Construir la URL con los parámetros de consulta
-                var url = $"/api/Auth/login?correo={email}&contraseña={password}";
+                var url = $"/api/Auth/login";
 
                 // Realizar la solicitud POST sin contenido adicional en el cuerpo
-                var response = await _httpClient.PostAsync(url, null);
+
+                var response = await _httpClient.PostAsJsonAsync(url, loginRequest);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -52,13 +54,13 @@ namespace NicamicsApp.Service
             }
         }
 
-        public async Task<string> RegisterUser(string username, string contraseña, string correo)
+        public async Task<string> RegisterUser(RegisterRequest registerRequest)
         {
             try
             {
-                var url = $"/api/Auth/register?username={username}&password={contraseña}&email={correo}";
+                var url = $"/api/Auth/register";
 
-                var response = await _httpClient.PostAsync(url, null);
+                var response = await _httpClient.PostAsJsonAsync(url, registerRequest);
 
                 if (response.IsSuccessStatusCode)
                 {

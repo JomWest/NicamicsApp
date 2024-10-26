@@ -44,7 +44,7 @@
             </Frame.Background>
 
             <VerticalStackLayout>
-                <Entry x:Name="UsernameEntry"
+                <Entry x:Name="EmailEntry"
                        Placeholder="Correo electrónico"
                        PlaceholderColor="White"
                        TextColor="White"
@@ -55,7 +55,7 @@
                        BackgroundColor="Transparent"
                        />
 
-                <Entry x:Name="EmailEntry"
+                <Entry x:Name="UsernameEntry"
                 Placeholder="Usuario"
                 PlaceholderColor="White"
                 TextColor="White"

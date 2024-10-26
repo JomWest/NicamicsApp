@@ -4,6 +4,7 @@ using BackendlessAPI.Exception;
 using System;
 using Microsoft.Maui.Controls;
 using NicamicsApp.Service;
+using NicamicsApp.Models.AuthRequest;
 
 namespace NicamicsApp
 {
@@ -25,7 +26,9 @@ namespace NicamicsApp
 
             var password = PasswordEntry.Text;
 
-            var response = await _authService.LoginUser(email, password);
+            var request = new LoginRequest(email, password);
+
+            var response = await _authService.LoginUser(request);
 
             if (!response.Contains("Error")) 
             {
