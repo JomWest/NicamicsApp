@@ -14,9 +14,9 @@ namespace NicamicsApp.Models.AuthRequest
 
         public RegisterRequest(string username, string password, string email) 
         { 
-            this.Username = username;
-            this.Password = password;
-            this.Email = email;
+            this.Username = username.Trim();
+            this.Password = password.Trim();
+            this.Email = email.Trim();
         }
 
     }

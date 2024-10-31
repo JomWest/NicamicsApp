@@ -13,8 +13,8 @@ namespace NicamicsApp.Models.AuthRequest
 
         public LoginRequest(string correo, string contraseña)
         { 
-            this.Correo = correo;
-            this.Contraseña = contraseña;
+            this.Correo = correo.Trim();
+            this.Contraseña = contraseña.Trim();
         }
     }
 }

@@ -38,7 +38,7 @@
         <Frame WidthRequest="395" HeightRequest="600" CornerRadius="25" Margin="0,50,0,0">
             <Frame.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#98D9FF" Offset="1.0" />
+                    <GradientStop Color="#1335D0" Offset="1.0" />
                     <GradientStop Color="#1335D0" Offset="0.1" />
                 </LinearGradientBrush>
             </Frame.Background>
