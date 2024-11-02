@@ -17,7 +17,6 @@ namespace NicamicsApp
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _authService = authService;
-
         }
 
         async void IniciarSesionClicked(object sender, EventArgs e)
@@ -32,8 +31,9 @@ namespace NicamicsApp
 
             if (!response.Contains("Error")) 
             {
+                var mainPage = _serviceProvider.GetService<MainPage>();
                 await DisplayAlert("Éxtio", "Has iniciado sesión con éxito", "OK");
-                await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(mainPage);
             }
             else
             {

@@ -11,6 +11,7 @@ namespace NicamicsApp.Service
     public class AuthService
     {
         HttpClient _httpClient;
+
         public AuthService(HttpClient httpClient)
         {
             var handler = new HttpClientHandler
@@ -19,7 +20,7 @@ namespace NicamicsApp.Service
             };
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://10.0.2.2:7077") // Usa la IP de tu máquina o dirección correcta
+                BaseAddress = new Uri($"https://{IpAddress.ip}:7077") // Usa la IP de tu máquina o dirección correcta
             };
         }
 

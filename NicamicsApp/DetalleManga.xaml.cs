@@ -1,19 +1,47 @@
-
+using NicamicsApp.Service;
 
 namespace NicamicsApp;
 
 public partial class DetalleManga : ContentPage
 {
     private int cantidad = 1;
-    public DetalleManga()
-	{
-		InitializeComponent();
+    IServiceProvider _serviceProvider;
+    ComicService _comicService;
+
+
+    public DetalleManga(IServiceProvider serviceProvider, ComicService comicService, string comicId)
+    {
+        InitializeComponent();
         UpdateCantidad();
+        _serviceProvider = serviceProvider;
+        _comicService = comicService;
+        LoadComic(comicId);
     }
+
+    private async void LoadComic(string comicId)
+    {
+        try
+        {
+            var response = await _comicService.ObtenerComicPorId(comicId);
+
+            lblDesc.Text = response.descripcion;
+            lblName.Text = response.nombre;
+            lblPrecio.Text = $"C$ {response.precio}";
+            imgPortada.Source = !string.IsNullOrEmpty(response.imagenPortada) ? response.imagenPortada : null;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
+
     private async void OnImageTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        var _mainPage = _serviceProvider.GetService<MainPage>();
+
+        await Navigation.PushAsync(_mainPage);
     }
+
 
     private async void OnImageTappedMenu(object sender, EventArgs e)
     {
@@ -66,9 +94,11 @@ public partial class DetalleManga : ContentPage
         LabelCantidad.Text = cantidad.ToString();
     }
 
-    private void carriticliked(object sender, EventArgs e)
+    private async void carriticliked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CarritoPage());
+        var _carritoPage = _serviceProvider.GetService<CarritoPage>();
+
+        await Navigation.PushAsync(_carritoPage);
     }
 
 

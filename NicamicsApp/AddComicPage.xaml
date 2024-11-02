@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.AddComicPage"
+            NavigationPage.HasNavigationBar="False">
+
+    <VerticalStackLayout  HorizontalOptions="CenterAndExpand">
+        <Label Text="Subir Producto" FontSize="18" HorizontalTextAlignment="Center"></Label>
+
+        <Label Text="Nombre del artículo" FontSize="16" HorizontalTextAlignment="Center"></Label>
+        <Entry x:Name="entryNombre" Text="" FontSize="14"></Entry>
+
+        <Label Text="Precio del artículo" FontSize="16" HorizontalTextAlignment="Center"></Label>
+        <Entry x:Name="entryPrecio" Text="" FontSize="14"></Entry>
+        
+        <Label Text="Imágenes" FontSize="16" HorizontalTextAlignment="Center"></Label>
+
+        <HorizontalStackLayout>
+            <Button x:Name="btnUploadImage" Text="+"  HeightRequest="120" WidthRequest="75" Clicked="btnUploadImage_Clicked"></Button>
+            <Image x:Name="imgUploadedImage" HeightRequest="120" WidthRequest="75"></Image>
+        </HorizontalStackLayout>
+
+        <Label Text="Descripción del Artículo" FontSize="16"></Label>
+        <Entry x:Name="entryDesc" Text="" FontSize="14" HeightRequest="300"></Entry>
+
+        <Label Text="Cantidad en stock" FontSize="16"></Label>
+
+        <HorizontalStackLayout>
+            <Button x:Name="btnLess" Text="-" FontSize="16" Clicked="btnLess_Clicked"></Button>
+
+            <Frame
+                Padding="10"
+                MinimumHeightRequest="65"
+                MinimumWidthRequest="65"
+    CornerRadius="20"
+    BackgroundColor="#1335D0"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+                <Label
+                    x:Name="lblStock"
+        Text="1"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        FontSize="Medium"
+        TextColor="White"
+                    
+                    />
+            </Frame>
+            
+            <Button x:Name="btnPlus" Text="+" FontSize="16"  Clicked="btnPlus_Clicked"></Button>
+        </HorizontalStackLayout>
+
+        <Button x:Name="btnSubir" Text="Subir" FontSize="16" WidthRequest="200" BackgroundColor="#1335D0" Clicked="btnSubir_Clicked"></Button>
+    </VerticalStackLayout>
+
+</ContentPage>

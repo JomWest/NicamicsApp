@@ -80,7 +80,7 @@
                         Clicked="IniciarSesionClicked"/>
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Label  Text="No tienes una cuenta?" Margin="0,15,0,0" FontSize="16" Padding="-4" TextColor="White"/>
-                    <Button x:Name="btnRegister" Text="Registrate!" FontSize="16" Background="Transparent"  TextColor="Blue"  Margin="0,0,0,0" Clicked="btnRegister_Clicked"/>
+                    <Button x:Name="btnRegister" Text="Registrate!" FontSize="16" Background="Transparent"  TextColor="White"  Margin="0,0,0,0" Clicked="btnRegister_Clicked"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 

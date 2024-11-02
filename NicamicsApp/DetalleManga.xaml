@@ -29,17 +29,17 @@
                     <!-- Imagen principal y detalles -->
                     <VerticalStackLayout>
                         <Frame Padding="0" Margin="0,40,0,0" HeightRequest="220" WidthRequest="395" CornerRadius="35">
-                            <Image Source="poster.jpeg" HeightRequest="820" WidthRequest="465" Margin="0,0,0,-50"/>
+                            <Image x:Name="imgPortada" Source="poster.jpeg" HeightRequest="820" WidthRequest="465" Margin="0,0,0,-50"/>
                         </Frame>
 
                         <!-- Título y precio -->
                         <HorizontalStackLayout>
                             <VerticalStackLayout Margin="20">
-                                <Label Text="Re:Zero" FontSize="22" TextColor="Black"/>
+                                <Label x:Name="lblName" Text="Re:Zero" FontSize="22" TextColor="Black"/>
                                 <Label Text="Novela ligera re:zero" TextColor="Grey"/>
                             </VerticalStackLayout>
                             <Frame BackgroundColor="#A2B2FC" Padding="10" Margin="80,0,0,0" CornerRadius="100" WidthRequest="125" HeightRequest="45">
-                                <Label Text="C$ 600.00" FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0"/>
+                                <Label x:Name="lblPrecio" Text="C$ 600.00" FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0"/>
                             </Frame>
                         </HorizontalStackLayout>
 
@@ -61,7 +61,7 @@
                         </HorizontalStackLayout>
 
                         <!-- Descripción -->
-                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie est nec gravida dictum. Nunc dictum lectus quam, non maximus urna ornare sit amet. Aliquam id sapien in massa commodo volutpat vel vitae quam."
+                        <Label x:Name="lblDesc" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie est nec gravida dictum. Nunc dictum lectus quam, non maximus urna ornare sit amet. Aliquam id sapien in massa commodo volutpat vel vitae quam."
                                HorizontalOptions="Center" WidthRequest="330" Margin="0,10,0,0" FontSize="16"/>
 
                         <!-- Stepper para cantidad -->

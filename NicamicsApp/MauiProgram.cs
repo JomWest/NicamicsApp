@@ -10,6 +10,7 @@ namespace NicamicsApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+               
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -18,9 +19,25 @@ namespace NicamicsApp
 
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<AuthService>();
+            builder.Services.AddSingleton<ComicService>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<AddComicPage>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<CarritoPage>();
+            builder.Services.AddTransient<DetalleMangaFactory>();
+
+            /* Cambio no fusionado mediante combinación del proyecto 'NicamicsApp (net8.0-android)'
+            Antes:
+                        builder.Services.AddTransient<DetalleManga.DetalleManga>();
+                        builder.Services.AddTransient<Perfil_Usuario>();
+            Después:
+                        builder.Services.AddTransient<NicamicsApp.DetalleManga>();
+                        builder.Services.AddTransient<Perfil_Usuario>();
+            */
+            builder.Services.AddTransient<DetalleManga>();
+            builder.Services.AddTransient<Perfil_Usuario>();
 
 #if DEBUG
             builder.Logging.AddDebug();

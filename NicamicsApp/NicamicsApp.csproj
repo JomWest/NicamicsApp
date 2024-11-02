@@ -103,6 +103,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AddComicPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="CarritoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

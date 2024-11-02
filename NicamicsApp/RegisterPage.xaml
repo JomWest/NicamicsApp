@@ -4,15 +4,16 @@
              x:Class="NicamicsApp.RegisterPage"
              Title="RegisterPage"
              NavigationPage.HasNavigationBar="False">
-    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
 
-        <VerticalStackLayout Margin="0,0,0,140">
-            <Label Text="Bienvenido" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,70,0,0"/>
-            <Label Text="Iniciar Sesión para empezar" FontSize="16" TextColor="Grey" HorizontalOptions="Center"/>
-        </VerticalStackLayout>
+            <VerticalStackLayout Margin="0,0,0,140">
+                <Label Text="Bienvenido" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,70,0,0"/>
+                <Label Text="Iniciar Sesión para empezar" FontSize="16" TextColor="Grey" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
 
-        <VerticalStackLayout Margin="0,-90,0,0">
-            <Frame
+            <VerticalStackLayout Margin="0,-90,0,0">
+                <Frame
                HasShadow="True"
                CornerRadius="50"
                Padding="10"
@@ -20,31 +21,31 @@
                BackgroundColor="White"
                 WidthRequest="280"
                 HeightRequest="45">
-                <Frame.Shadow>
-                    <Shadow
+                    <Frame.Shadow>
+                        <Shadow
                       Brush="#000000"
                       Opacity="0.3"
                       Offset="5,5"
                       Radius="50"/>
-                </Frame.Shadow>
-                <HorizontalStackLayout>
-                    <Image Source="google.png" HorizontalOptions="Start" WidthRequest="25" HeightRequest="25"/>
-                    <Label Text="Continuar con Google" HorizontalOptions="Center" Margin="25,0,0,0" FontSize="17"  />
-                </HorizontalStackLayout>
-            </Frame>
+                    </Frame.Shadow>
+                    <HorizontalStackLayout>
+                        <Image Source="google.png" HorizontalOptions="Start" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="Continuar con Google" HorizontalOptions="Center" Margin="25,0,0,0" FontSize="17"  />
+                    </HorizontalStackLayout>
+                </Frame>
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <Frame WidthRequest="395" HeightRequest="600" CornerRadius="25" Margin="0,50,0,0">
-            <Frame.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1335D0" Offset="1.0" />
-                    <GradientStop Color="#1335D0" Offset="0.1" />
-                </LinearGradientBrush>
-            </Frame.Background>
+            <Frame WidthRequest="395" HeightRequest="600" CornerRadius="25" Margin="0,50,0,0">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1335D0" Offset="1.0" />
+                        <GradientStop Color="#1335D0" Offset="0.1" />
+                    </LinearGradientBrush>
+                </Frame.Background>
 
-            <VerticalStackLayout>
-                <Entry x:Name="EmailEntry"
+                <VerticalStackLayout>
+                    <Entry x:Name="EmailEntry"
                        Placeholder="Correo electrónico"
                        PlaceholderColor="White"
                        TextColor="White"
@@ -55,7 +56,7 @@
                        BackgroundColor="Transparent"
                        />
 
-                <Entry x:Name="UsernameEntry"
+                    <Entry x:Name="UsernameEntry"
                 Placeholder="Usuario"
                 PlaceholderColor="White"
                 TextColor="White"
@@ -66,7 +67,7 @@
                 BackgroundColor="Transparent"
                 />
 
-                <Entry x:Name="PasswordEntry"
+                    <Entry x:Name="PasswordEntry"
                        Placeholder="Contraseña"
                        FontSize="16"
                        IsPassword="True"
@@ -78,7 +79,7 @@
                        BackgroundColor="Transparent"
                        />
 
-                <Entry x:Name="RepeatPasswordEntry"
+                    <Entry x:Name="RepeatPasswordEntry"
                  Placeholder="Repetir Contraseña"
                  FontSize="16"
                  IsPassword="True"
@@ -90,9 +91,9 @@
                  BackgroundColor="Transparent"
                  />
 
-                <Label HorizontalOptions="End" Text="Olvidaste tu contraseña?" Background="Transparent" TextColor="White" BackgroundColor="Transparent" Margin="0,0,20,0"/>
+                    <Label HorizontalOptions="End" Text="Olvidaste tu contraseña?" Background="Transparent" TextColor="White" BackgroundColor="Transparent" Margin="0,0,20,0"/>
 
-                <Button 
+                    <Button 
                     x:Name="btnRegister"
                     Text="Continuar"
                         FontSize="18"
@@ -104,13 +105,12 @@
                         CornerRadius="50"
                         Clicked="btnRegister_Clicked"
                         />
-                <HorizontalStackLayout HorizontalOptions="Center">
-                    <Label  Text="Tienes una cuenta?" Margin="0,15,0,0" FontSize="16" Padding="-4" TextColor="White"/>
-                    <Button x:Name="btnLogin" Text="Iniciar Sesión!" FontSize="16" Background="Transparent"  TextColor="Blue"  Margin="0,0,0,0" Clicked="btnLogin_Clicked"/>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-
-        </Frame>
-
-    </VerticalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label  Text="Tienes una cuenta?" Margin="0,15,0,0" FontSize="16" Padding="-4" TextColor="White"/>
+                        <Button x:Name="btnLogin" Text="Iniciar Sesión!" FontSize="16" Background="Transparent"  TextColor="White"  Margin="0,0,0,0" Clicked="btnLogin_Clicked"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

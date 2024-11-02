@@ -122,33 +122,9 @@
 
                     <Label Text="Contenido mas leido" FontSize="20" FontAttributes="Bold" Margin="10,10" />
                 </VerticalStackLayout>
-                
-                <ScrollView Orientation="Horizontal">
-                    
-                    <HorizontalStackLayout Spacing="15">
-                        <Grid ColumnDefinitions="*,*,*,*" >
-                            <StackLayout Grid.Column="0" Margin="10">
-                                <Frame Padding="0" CornerRadius="20">
-                                    <Image Source="comic_primero.jpg" WidthRequest="120" HeightRequest="180" Aspect="AspectFill"/>
-                                </Frame>
-                                <Label Text="SPYxFAMILY" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                            </StackLayout>
-                            <StackLayout Grid.Column="1" Margin="10">
-                                <Frame Padding="0" CornerRadius="20">
-                                    <Image Source="tokuma_shoten.jpg" WidthRequest="120" HeightRequest="180" Aspect="AspectFill"/>
-                                </Frame>
-                                <Label Text="Tokuma Shoten" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                            </StackLayout>
-                            <StackLayout Grid.Column="2" Margin="10">
-                                <Frame Padding="0" CornerRadius="20" >
-                                    <Image Source="nori_tama.jpeg" WidthRequest="120" HeightRequest="180" Aspect="AspectFill"/>
-                                </Frame>
 
-                                <Label Text="Nori Tama 2" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                            </StackLayout>
-                        </Grid>
-                        
-                    </HorizontalStackLayout>
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout x:Name="ComicContainer" Spacing="15" />
                 </ScrollView>
 
             </VerticalStackLayout>

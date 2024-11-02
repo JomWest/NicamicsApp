@@ -3,13 +3,17 @@ namespace NicamicsApp;
 public partial class CarritoPage : ContentPage
 {
     private int cantidad = 1;
-    public CarritoPage()
+    IServiceProvider _serviceProvider;
+    public CarritoPage(IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
+        _serviceProvider = serviceProvider; 
 	}
     private async void OnImageTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        var _mainPage = _serviceProvider.GetService<MainPage>();
+
+        await Navigation.PushAsync(_mainPage);
     }
 
     private async void OnImageTappedMenu(object sender, EventArgs e)

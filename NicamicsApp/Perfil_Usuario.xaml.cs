@@ -2,14 +2,17 @@ namespace NicamicsApp;
 
 public partial class Perfil_Usuario : ContentPage
 {
-    public Perfil_Usuario()
+    IServiceProvider _serviceProvider;
+    public Perfil_Usuario(IServiceProvider serviceProvider)
     {
         InitializeComponent();
+        _serviceProvider = serviceProvider;
     }
 
     private async void OnImageTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        var _mainPage = _serviceProvider.GetService<MainPage>();
+        await Navigation.PushAsync(_mainPage);
     }
 
     private async void OnImageTappedMenu(object sender, EventArgs e)
