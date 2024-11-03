@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.RegisterPage"
              Title="RegisterPage"
+             xmlns:viewmodel="clr-namespace:NicamicsApp.ViewModels"
+             x:DataType="viewmodel:RegisterViewModel"
              NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
@@ -46,6 +48,7 @@
 
                 <VerticalStackLayout>
                     <Entry x:Name="EmailEntry"
+                           Text="{Binding Correo}"
                        Placeholder="Correo electrónico"
                        PlaceholderColor="White"
                        TextColor="White"
@@ -57,6 +60,7 @@
                        />
 
                     <Entry x:Name="UsernameEntry"
+                           Text="{Binding Username}"
                 Placeholder="Usuario"
                 PlaceholderColor="White"
                 TextColor="White"
@@ -68,6 +72,7 @@
                 />
 
                     <Entry x:Name="PasswordEntry"
+                       Text="{Binding Contraseña}"    
                        Placeholder="Contraseña"
                        FontSize="16"
                        IsPassword="True"
@@ -80,6 +85,7 @@
                        />
 
                     <Entry x:Name="RepeatPasswordEntry"
+                 Text="{Binding RepetirContraseña}"
                  Placeholder="Repetir Contraseña"
                  FontSize="16"
                  IsPassword="True"
@@ -103,7 +109,8 @@
                         WidthRequest="280"
                         HeightRequest="43"
                         CornerRadius="50"
-                        Clicked="btnRegister_Clicked"
+                       
+                        Command="{Binding RegistrarUsuarioCommand}"
                         />
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Label  Text="Tienes una cuenta?" Margin="0,15,0,0" FontSize="16" Padding="-4" TextColor="White"/>
