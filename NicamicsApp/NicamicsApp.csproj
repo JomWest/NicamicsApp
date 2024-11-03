@@ -74,6 +74,8 @@
 	  <None Remove="Resources\Images\eliminarr.png" />
 	  <None Remove="Resources\Images\espadas.png" />
 	  <None Remove="Resources\Images\favorito.png" />
+	  <None Remove="Resources\Images\favorito_blanco.png" />
+	  <None Remove="Resources\Images\favorito_rojo.png" />
 	  <None Remove="Resources\Images\filtrar.png" />
 	  <None Remove="Resources\Images\google.png" />
 	  <None Remove="Resources\Images\hada.png" />

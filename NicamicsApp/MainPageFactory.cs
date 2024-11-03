@@ -24,7 +24,7 @@ namespace NicamicsApp
         {
             var perfilUsuario = _serviceProvider.GetService<Perfil_Usuario>();
             var carritoPage = _serviceProvider.GetService<CarritoPage>();
-            var detalleManga = new DetalleMangaFactory(_serviceProvider, _comicService);
+            var detalleManga = new DetalleMangaFactory(_serviceProvider, _comicService, _userService);
 
             return new MainPage(_comicService, _userService, perfilUsuario, carritoPage, detalleManga);
         }

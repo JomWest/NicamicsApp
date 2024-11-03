@@ -43,7 +43,7 @@
                             </Frame>
                         </HorizontalStackLayout>
 
-                        <Button x:Name="btnFav" Text="Agregar" WidthRequest="100" Clicked="btnFav_Clicked"></Button>
+                        <ImageButton x:Name="imgBtnFav" Source="favorito_blanco" WidthRequest="150" HeightRequest="150" Clicked="imgBtnFav_Clicked"></ImageButton>
 
                         <!-- Rating y capítulos -->
                         <HorizontalStackLayout>

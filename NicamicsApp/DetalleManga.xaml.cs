@@ -1,3 +1,5 @@
+using BackendlessAPI.Service;
+using NicamicsApp.Models.UserRequest;
 using NicamicsApp.Service;
 
 namespace NicamicsApp;
@@ -8,13 +10,19 @@ public partial class DetalleManga : ContentPage
     IServiceProvider _serviceProvider;
     ComicService _comicService;
 
+    UserServices _userServices;
 
-    public DetalleManga(IServiceProvider serviceProvider, ComicService comicService, string comicId)
+    private string _comicId;
+
+
+    public DetalleManga(IServiceProvider serviceProvider, ComicService comicService, UserServices userServices,string comicId)
     {
         InitializeComponent();
         UpdateCantidad();
         _serviceProvider = serviceProvider;
         _comicService = comicService;
+        _userServices = userServices;
+        _comicId = comicId;
         LoadComic(comicId);
     }
 
@@ -28,10 +36,25 @@ public partial class DetalleManga : ContentPage
             lblName.Text = response.nombre;
             lblPrecio.Text = $"C$ {response.precio}";
             imgPortada.Source = !string.IsNullOrEmpty(response.imagenPortada) ? response.imagenPortada : null;
+
+            CambiarImagenFavorito(IpAddress.userId,comicId);
         }
         catch (Exception ex)
         {
             await DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
+
+    private async void CambiarImagenFavorito(string userId, string comicId)
+    {
+        var response = await _userServices.VerificarComicEnFavoritos(userId, comicId);
+        if (response)
+        {
+            imgBtnFav.Source = ImageSource.FromFile("favorito_rojo.png");
+        }
+        else
+        {
+            imgBtnFav.Source = ImageSource.FromFile("favorito_blanco.png");
         }
     }
 
@@ -101,8 +124,24 @@ public partial class DetalleManga : ContentPage
         await Navigation.PushAsync(_carritoPage);
     }
 
-    private void btnFav_Clicked(object sender, EventArgs e)
+    private async void imgBtnFav_Clicked(object sender, EventArgs e)
     {
+        try
+        {
+            var request = new AgregarFavoritoRequest
+            {
+                UserId = IpAddress.userId,
+                NuevoFavorito = _comicId
+            };
 
+            var response = await _userServices.AgregarEliminarComicFavorito(request);
+
+            CambiarImagenFavorito(IpAddress.userId, _comicId);
+            Console.WriteLine(response);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error {ex.Message}");
+        }
     }
 }

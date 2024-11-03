@@ -1,4 +1,5 @@
 ﻿using NicamicsApp.Models;
+using NicamicsApp.Models.UserRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,100 @@ namespace NicamicsApp.Service
             {
                 // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
+        public async Task<List<Comic>> ObtenerComicsFavoritos(string userId)
+        {
+            try
+            {
+                var url = $"/api/User/ObtenerComicsFavoritos?userId={userId}";
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadFromJsonAsync<List<Comic>>();
+                    return responseData;
+                }
+                else
+                {
+                    return new List<Comic>();
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de error de red
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otros errores
+                throw new Exception($"Error: {ex.Message}");
+            }
+
+        }
+
+        public async Task<bool> VerificarComicEnFavoritos(string userId, string comicId)
+        {
+            try
+            {
+                var url = $"/api/User/VerificarComicEnFavoritos?userId={userId}&comicId={comicId}";
+
+                var response = await _httpClient.GetAsync(url);
+
+                Console.WriteLine($"Respuesta {response.StatusCode} {response.ReasonPhrase}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de error de red
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otros errores
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<string> AgregarEliminarComicFavorito(AgregarFavoritoRequest agregarFavoritoRequest)
+        {
+            try
+            {
+                var url = "/api/User/agregarFavorito";
+
+                var response = await _httpClient.PutAsJsonAsync(url, agregarFavoritoRequest);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    return responseData;
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode} - {response.ReasonPhrase}";
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de error de red
+                return $"Error: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otros errores
+                return $"Error: {ex.Message}";
             }
         }
     }

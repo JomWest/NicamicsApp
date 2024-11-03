@@ -35,7 +35,12 @@
                     </VerticalStackLayout>
                 </Grid>
 
-                <Label Text="Me Gustas" Margin="37,20,0,0" FontSize="20"/>
+                <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
+
+                <ScrollView Orientation="Vertical">
+                    <VerticalStackLayout x:Name="ComicFavoritos" Spacing="15" />
+                </ScrollView>
+
 
                 <VerticalStackLayout>
                     <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Transparent" HasShadow="True" Margin="0,30,0,0">
@@ -70,6 +75,7 @@
                     </Frame>
                 </VerticalStackLayout>
             </VerticalStackLayout>
+            
         </Frame>
         <BoxView x:Name="Overlay"
                  BackgroundColor="Black"
