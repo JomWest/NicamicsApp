@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using NicamicsApp.Service;
+using NicamicsApp.ViewModels;
 
 namespace NicamicsApp
 {
@@ -40,6 +41,8 @@ namespace NicamicsApp
             */
             builder.Services.AddTransient<DetalleManga>();
             builder.Services.AddTransient<Perfil_Usuario>();
+
+            builder.Services.AddSingleton<MainPageViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
