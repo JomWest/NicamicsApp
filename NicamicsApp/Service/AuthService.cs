@@ -1,4 +1,5 @@
-﻿using NicamicsApp.Models.AuthRequest;
+﻿using Newtonsoft.Json;
+using NicamicsApp.Models.AuthRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace NicamicsApp.Service
             };
         }
 
-        public async Task<string> LoginUser(LoginRequest loginRequest)
+        public async Task<LoginResponse> LoginUser(LoginRequest loginRequest)
         {
             try
             {
@@ -38,20 +39,21 @@ namespace NicamicsApp.Service
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    return responseData; 
+                    var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseData);
+                    return loginResponse;
                 }
                 else
                 {
-                    return $"Error: {response.StatusCode} - {response.ReasonPhrase}";
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                return $"Error: {ex.Message}";
+                throw new Exception($"Error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return $"Error: {ex.Message}";
+                throw new Exception($"Error: {ex.Message}");
             }
         }
 

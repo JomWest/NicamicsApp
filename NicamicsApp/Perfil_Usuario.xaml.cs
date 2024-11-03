@@ -1,12 +1,32 @@
+using NicamicsApp.Service;
+
 namespace NicamicsApp;
 
 public partial class Perfil_Usuario : ContentPage
 {
     IServiceProvider _serviceProvider;
-    public Perfil_Usuario(IServiceProvider serviceProvider)
+    UserServices _userServices;
+    public Perfil_Usuario(IServiceProvider serviceProvider, UserServices userService)
     {
         InitializeComponent();
         _serviceProvider = serviceProvider;
+        _userServices = userService;
+        LoadUser();
+    }
+
+    private async void LoadUser()
+    {
+        try
+        {
+            var user = await _userServices.ObtenerUsuarioPorId(IpAddress.userId);
+
+            imgFoto.Source = user.foto;
+            lblNombre.Text = user.nombre;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
     }
 
     private async void OnImageTapped(object sender, EventArgs e)

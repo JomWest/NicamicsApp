@@ -43,6 +43,8 @@
                             </Frame>
                         </HorizontalStackLayout>
 
+                        <Button x:Name="btnFav" Text="Agregar" WidthRequest="100" Clicked="btnFav_Clicked"></Button>
+
                         <!-- Rating y capítulos -->
                         <HorizontalStackLayout>
                             <Frame Margin="45,10,0,0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="20" WidthRequest="305" HeightRequest="110" HasShadow="True" BorderColor="White">

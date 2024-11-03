@@ -14,11 +14,11 @@
                               Tapped="OnProfileImageTapped" 
                               NumberOfTapsRequired="1" />
                         </Frame.GestureRecognizers>
-                        <Image Source="kanye.jpeg"  HeightRequest="70" WidthRequest="120"  />
+                        <Image x:Name="imgPerfil" Source="kanye.jpeg"  HeightRequest="70" WidthRequest="120"  />
                     </Frame>
                     <VerticalStackLayout HorizontalOptions="Center" Margin="100,32,50,0">
                         <Label Text="Toma un descanso" FontAttributes="Bold" TextColor="Grey" FontSize="14"/>
-                        <Label Text="Kanye West" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+                        <Label x:Name="lblNombre" Text="Kanye West" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
                     </VerticalStackLayout>
 

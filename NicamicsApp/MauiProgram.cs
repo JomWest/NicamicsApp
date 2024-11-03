@@ -20,14 +20,16 @@ namespace NicamicsApp
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<ComicService>();
+            builder.Services.AddSingleton<UserServices>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<AddComicPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<CarritoPage>();
-            builder.Services.AddTransient<DetalleMangaFactory>();
 
+            builder.Services.AddTransient<DetalleMangaFactory>();
+            builder.Services.AddTransient<MainPageFactory>();
             /* Cambio no fusionado mediante combinación del proyecto 'NicamicsApp (net8.0-android)'
             Antes:
                         builder.Services.AddTransient<DetalleManga.DetalleManga>();

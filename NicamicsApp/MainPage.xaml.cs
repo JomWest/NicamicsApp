@@ -1,4 +1,5 @@
-﻿using NicamicsApp.Models;
+﻿using BackendlessAPI.Service;
+using NicamicsApp.Models;
 using NicamicsApp.Service;
 
 namespace NicamicsApp
@@ -8,18 +9,26 @@ namespace NicamicsApp
         int count = 0;
 
         ComicService _comicService;
+        UserServices _userService;
+
         Perfil_Usuario _perfil;
         CarritoPage _carritoPage;
         DetalleMangaFactory _detalleManga;
 
-        public MainPage(ComicService comicService, Perfil_Usuario perfilUsuario,CarritoPage carritoPage, DetalleMangaFactory detalleMangaFactory)
+        public MainPage(ComicService comicService, UserServices userService,
+            Perfil_Usuario perfilUsuario,CarritoPage carritoPage,
+            DetalleMangaFactory detalleMangaFactory)
         {
             InitializeComponent();
             _comicService = comicService;
             _perfil = perfilUsuario;
             _carritoPage = carritoPage;
             _detalleManga = detalleMangaFactory;
+            _userService = userService;
+            _perfil = perfilUsuario;
+
             LoadComics();
+            LoadUser();
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
@@ -28,7 +37,7 @@ namespace NicamicsApp
         }
         private void OnProfileImageTapped(object sender, EventArgs e)
         {
-            Navigation.PushAsync(_perfil);
+             Navigation.PushAsync(_perfil);
         }
         private async void OnCarritoClicked(object sender, EventArgs e)
         {
@@ -38,6 +47,21 @@ namespace NicamicsApp
         {
            var detalle = _detalleManga.Create("");
             await Navigation.PushAsync(detalle);
+        }
+
+        private async void LoadUser()
+        {
+            try
+            {
+                var user = await _userService.ObtenerUsuarioPorId(IpAddress.userId);
+
+                imgPerfil.Source = user.foto;
+                lblNombre.Text = user.nombre;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error {ex.Message}");
+            }
         }
 
         private async void LoadComics()

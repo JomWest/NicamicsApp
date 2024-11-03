@@ -101,5 +101,8 @@ public partial class DetalleManga : ContentPage
         await Navigation.PushAsync(_carritoPage);
     }
 
+    private void btnFav_Clicked(object sender, EventArgs e)
+    {
 
+    }
 }

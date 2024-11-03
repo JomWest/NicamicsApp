@@ -12,11 +12,15 @@ namespace NicamicsApp
     {
         IServiceProvider _serviceProvider;
         AuthService _authService;
-        public LoginPage(IServiceProvider serviceProvider, AuthService authService)
+        MainPageFactory _mainPageFactory;
+       
+
+        public LoginPage(IServiceProvider serviceProvider, AuthService authService, MainPageFactory mainPageFactory)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _authService = authService;
+            _mainPageFactory = mainPageFactory;
         }
 
         async void IniciarSesionClicked(object sender, EventArgs e)
@@ -29,9 +33,11 @@ namespace NicamicsApp
 
             var response = await _authService.LoginUser(request);
 
-            if (!response.Contains("Error")) 
+            if (!response.Token.Contains("Error")) 
             {
-                var mainPage = _serviceProvider.GetService<MainPage>();
+                IpAddress.userId = response.UserId;
+                var mainPage = _mainPageFactory.Create();
+
                 await DisplayAlert("Éxtio", "Has iniciado sesión con éxito", "OK");
                 await Navigation.PushAsync(mainPage);
             }
