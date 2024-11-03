@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Weborb.Client;
 
 namespace NicamicsApp.ViewModels
 {
@@ -22,6 +23,7 @@ namespace NicamicsApp.ViewModels
             _comicService = comicService;
             _userService = userService;
             LoadComics();
+            ComicMasVendidoFunc();
         }
 
 
@@ -36,6 +38,9 @@ namespace NicamicsApp.ViewModels
 
         [ObservableProperty]
         private string mensaje = "";
+
+        [ObservableProperty]
+        private Comic? comicMasVendido;
 
         [ObservableProperty]
         private string selectedComic;
@@ -63,6 +68,23 @@ namespace NicamicsApp.ViewModels
             {
                 var comicsList = await _comicService.Obtener20Comics();
                 Comics = new ObservableCollection<Comic>(comicsList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error {ex.Message}");
+            }
+        }
+
+        private async void ComicMasVendidoFunc()
+        {
+            try
+            {
+                var response = await _comicService.ComicConMasVentas();
+
+                if(response != null)
+                {
+                    ComicMasVendido = response;
+                }
             }
             catch (Exception ex)
             {

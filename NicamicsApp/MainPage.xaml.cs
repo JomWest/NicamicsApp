@@ -68,7 +68,7 @@ namespace NicamicsApp
 
         private async void CompraTapped(object sender, EventArgs e)
         {
-           var detalle = _detalleManga.Create("");
+           var detalle = _detalleManga.Create(_mainPageViewModel.ComicMasVendido.comicId);
             await Navigation.PushAsync(detalle);
         }
     }
