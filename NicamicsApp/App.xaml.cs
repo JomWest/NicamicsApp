@@ -12,8 +12,9 @@ namespace NicamicsApp
 
             var loginPage = serviceProvider.GetService<LoginPage>();
             var comicPage = serviceProvider.GetService<AddComicPage>();
+            var detalle = serviceProvider.GetService<Detallecompra>();
 
-            MainPage = new NavigationPage(loginPage);
+            MainPage = new NavigationPage(detalle);
         }
     }
 }
