@@ -115,5 +115,38 @@ namespace NicamicsApp.Service
                 throw new Exception($"Error: {ex.Message}");
             }
         }
+
+        public async Task<Comic> ComicConMasVentas()
+        {
+            try
+            {
+                // Construir la URL con los parámetros de consulta
+                var url = $"/api/Comic/ComicMasVendido";
+
+                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadFromJsonAsync<Comic>();
+                    return responseData;
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de error de red
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otros errores
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
     }
 }

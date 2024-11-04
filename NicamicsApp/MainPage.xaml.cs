@@ -1,6 +1,8 @@
 ﻿using BackendlessAPI.Service;
 using NicamicsApp.Models;
 using NicamicsApp.Service;
+using NicamicsApp.ViewModels;
+using System.ComponentModel;
 
 namespace NicamicsApp
 {
@@ -15,9 +17,11 @@ namespace NicamicsApp
         CarritoPage _carritoPage;
         DetalleMangaFactory _detalleManga;
 
+        MainPageViewModel _mainPageViewModel;
+
         public MainPage(ComicService comicService, UserServices userService,
             Perfil_Usuario perfilUsuario,CarritoPage carritoPage,
-            DetalleMangaFactory detalleMangaFactory)
+            DetalleMangaFactory detalleMangaFactory, MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
             _comicService = comicService;
@@ -27,8 +31,26 @@ namespace NicamicsApp
             _userService = userService;
             _perfil = perfilUsuario;
 
-            LoadComics();
-            LoadUser();
+            mainPageViewModel.LoadUser();
+            _mainPageViewModel = mainPageViewModel;
+            BindingContext = mainPageViewModel;
+
+            _mainPageViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        }
+
+        private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_mainPageViewModel.SelectedComic))
+            {
+                // Verifica si hay un cómic seleccionado
+                if (_mainPageViewModel.SelectedComic != null && _mainPageViewModel.SelectedComic != "")
+                {
+                    // Navega a la página de detalle
+                    await Navigation.PushAsync(_detalleManga.Create(_mainPageViewModel.SelectedComic));
+                    // Limpia el cómic seleccionado después de la navegación
+                    _mainPageViewModel.SelectedComic = string.Empty;
+                }
+            }
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
@@ -43,91 +65,11 @@ namespace NicamicsApp
         {
             await Navigation.PushAsync(_carritoPage); 
         }
+
         private async void CompraTapped(object sender, EventArgs e)
         {
-           var detalle = _detalleManga.Create("");
+           var detalle = _detalleManga.Create(_mainPageViewModel.ComicMasVendido.comicId);
             await Navigation.PushAsync(detalle);
-        }
-
-        private async void LoadUser()
-        {
-            try
-            {
-                var user = await _userService.ObtenerUsuarioPorId(IpAddress.userId);
-
-                imgPerfil.Source = user.foto;
-                lblNombre.Text = user.nombre;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error {ex.Message}");
-            }
-        }
-
-        private async void LoadComics()
-        {
-            try
-            {
-                // Llama a la función para obtener los cómics
-                List<Comic> comics = await _comicService.Obtener20Comics();
-
-                foreach (var comic in comics)
-                {
-                    // Crear el contenedor principal para cada cómic
-                    var comicStack = new StackLayout
-                    {
-                        Margin = new Thickness(10),
-                        WidthRequest = 120,
-                    };
-
-                    // Crear el marco y la imagen del cómic
-                    var comicFrame = new Frame
-                    {
-                        Padding = 0,
-                        CornerRadius = 20,
-                        BackgroundColor = string.IsNullOrEmpty(comic.imagenPortada) ? Colors.Blue : Colors.Transparent
-                    };
-
-                    var comicImage = new Image
-                    {
-                        Source = !string.IsNullOrEmpty(comic.imagenPortada) ? comic.imagenPortada : null,
-                        WidthRequest = 120,
-                        HeightRequest = 180,
-                        Aspect = Aspect.AspectFill
-                    };
-
-                    comicFrame.Content = comicImage;
-
-                    // Crear el label para el nombre del cómic
-                    var comicLabel = new Label
-                    {
-                        Text = comic.nombre,
-                        FontSize = 14,
-                        FontAttributes = FontAttributes.Bold,
-                        HorizontalTextAlignment = TextAlignment.Center
-                    };
-
-                    // Añadir el marco de la imagen y el label al StackLayout del cómic
-                    comicStack.Children.Add(comicFrame);
-                    comicStack.Children.Add(comicLabel);
-
-                    comicFrame.GestureRecognizers.Add(new TapGestureRecognizer
-                    {
-                        Command = new Command(async () =>
-                        {
-                            // Navegar a la página DetalleManga pasando comicId
-                            await Navigation.PushAsync(_detalleManga.Create(comic.comicId));
-                        })
-                    });
-
-                    // Añadir el StackLayout del cómic al contenedor principal
-                    ComicContainer.Children.Add(comicStack);
-                }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "OK");
-            }
         }
     }
 

@@ -1,10 +1,12 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.MainPage"
+             xmlns:viewmodel="clr-namespace:NicamicsApp.ViewModels"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
+             x:DataType="viewmodel:MainPageViewModel"
               NavigationPage.HasNavigationBar="False">
 
     <Grid RowDefinitions="*,Auto" Padding="0">
-
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="10,20">
                 <Grid ColumnDefinitions="Auto,*">
@@ -14,11 +16,11 @@
                               Tapped="OnProfileImageTapped" 
                               NumberOfTapsRequired="1" />
                         </Frame.GestureRecognizers>
-                        <Image x:Name="imgPerfil" Source="kanye.jpeg"  HeightRequest="70" WidthRequest="120"  />
+                        <Image x:Name="imgPerfil" Source="{Binding FotoUsuario}"  HeightRequest="70" WidthRequest="120"  />
                     </Frame>
                     <VerticalStackLayout HorizontalOptions="Center" Margin="100,32,50,0">
                         <Label Text="Toma un descanso" FontAttributes="Bold" TextColor="Grey" FontSize="14"/>
-                        <Label x:Name="lblNombre" Text="Kanye West" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+                        <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
                     </VerticalStackLayout>
 
@@ -33,7 +35,7 @@
                             </Frame.Shadow>
                             <ImageButton Source="carrito.png" HeightRequest="22" WidthRequest="22" Clicked="OnCarritoClicked" />
                         </Frame>
-                        
+
                     </HorizontalStackLayout>
                 </Grid>
 
@@ -87,7 +89,7 @@
                             </Frame.Shadow>
                             <Button Text="Romance" FontSize="14" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" Margin="0,0,0,0" />
                         </Frame>
-                        
+
                         <Frame WidthRequest="95" HeightRequest="40" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
                             <Frame.Shadow>
                                 <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="20"/>
@@ -110,27 +112,38 @@
                     </VerticalStackLayout.GestureRecognizers>
                     <Frame CornerRadius="50" Padding="0" Margin="0,10" HasShadow="True">
                         <Grid>
-                            <Image Source="poster.jpeg" Aspect="AspectFill" HeightRequest="350" WidthRequest="400"/>
-
+                            <Image Source="{Binding ComicMasVendido.imagenPortada}" Aspect="AspectFill" HeightRequest="350" WidthRequest="400"/>
                         </Grid>
                     </Frame>
                     <StackLayout Padding="15" HorizontalOptions="Start" Margin="0,-10,0,10">
-                        <Label Text="Re-zero: segunda novela ligera" FontSize="21" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding ComicMasVendido.nombre}" FontSize="21" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="Top 1 en ventas" FontSize="22" TextColor="#A2B2FC" />
-                        <Label Text="Adentrate a una nueva aventura con Subaru" FontSize="12" TextColor="Black"/>
+                        <Label Text="{Binding ComicMasVendido.descripcion}" FontSize="12" TextColor="Black"/>
                     </StackLayout>
 
                     <Label Text="Contenido mas leido" FontSize="20" FontAttributes="Bold" Margin="10,10" />
                 </VerticalStackLayout>
 
-                <ScrollView Orientation="Horizontal">
-                    <HorizontalStackLayout x:Name="ComicContainer" Spacing="15" />
-                </ScrollView>
+                <!-- Lista de Comics -->
+                <CollectionView ItemsSource="{Binding Comics}" x:Name="ComicContainer" ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Comic">
+                            <StackLayout Margin="10" WidthRequest="120">
+                                <Frame Padding="0" CornerRadius="20" BackgroundColor="Blue">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=SelectComicCommand}"
+                            CommandParameter="{Binding comicId}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Image Source="{Binding imagenPortada}" WidthRequest="120" HeightRequest="180" Aspect="AspectFill"/>
+                                </Frame>
+                                <Label Text="{Binding nombre}" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
             </VerticalStackLayout>
         </ScrollView>
-
-
     </Grid>
-
 </ContentPage>

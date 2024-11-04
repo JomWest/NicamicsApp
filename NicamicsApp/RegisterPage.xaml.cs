@@ -1,5 +1,7 @@
 using NicamicsApp.Models.AuthRequest;
 using NicamicsApp.Service;
+using NicamicsApp.ViewModels;
+using System.ComponentModel;
 
 namespace NicamicsApp;
 
@@ -12,40 +14,30 @@ public partial class RegisterPage : ContentPage
 		InitializeComponent();
         _serviceProvider = serviceProvider;
         _authService = authService;
-	}
+
+        var navigation = this.Navigation;
+        var viewModel = new RegisterViewModel(serviceProvider, authService, navigation);
+        BindingContext = viewModel;
+
+        // Suscribir el evento cuando cambia el BindingContext
+        viewModel.PropertyChanged += OnViewModelPropertyChanged;
+    }
+
+    private async void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(RegisterViewModel.Mensaje))
+        {
+            var viewModel = (RegisterViewModel)BindingContext;
+            if (!string.IsNullOrEmpty(viewModel.Mensaje))
+            {
+                await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                viewModel.Mensaje = string.Empty; // Limpiar el mensaje después de mostrarlo
+            }
+        }
+    }
 
     private async void btnLogin_Clicked(object sender, EventArgs e)
     {
 		await Navigation.PopAsync();
-    }
-
-    private async void btnRegister_Clicked(object sender, EventArgs e)
-    {
-        string correo = EmailEntry.Text;
-
-        string password = PasswordEntry.Text;
-
-        string repeatPassword = RepeatPasswordEntry.Text;
-
-        string username = UsernameEntry.Text;
-
-        if(password != repeatPassword)
-        {
-            await DisplayAlert("Error", "Las contraseñas no coinciden", "OK");
-            return;
-        }
-        var request = new RegisterRequest(username, password, correo);
-
-        var response = await _authService.RegisterUser(request);
-
-        if (response.Contains("Success")) 
-        {
-            await DisplayAlert("Éxito", "Cuenta creada exitosamente", "OK");
-            await Navigation.PopAsync();
-        }
-        else
-        {
-            await DisplayAlert("Error", $"{response}", "OK");
-        }
     }
 }

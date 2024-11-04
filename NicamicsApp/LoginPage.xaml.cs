@@ -5,6 +5,8 @@ using System;
 using Microsoft.Maui.Controls;
 using NicamicsApp.Service;
 using NicamicsApp.Models.AuthRequest;
+using NicamicsApp.ViewModels;
+using System.ComponentModel;
 
 namespace NicamicsApp
 {
@@ -18,39 +20,25 @@ namespace NicamicsApp
         public LoginPage(IServiceProvider serviceProvider, AuthService authService, MainPageFactory mainPageFactory)
         {
             InitializeComponent();
-            _serviceProvider = serviceProvider;
-            _authService = authService;
-            _mainPageFactory = mainPageFactory;
+            var navigation = this.Navigation;
+            var viewModel = new LoginViewModel(serviceProvider, authService, mainPageFactory, navigation);
+            BindingContext = viewModel;
+
+            // Suscribir el evento cuando cambia el BindingContext
+            viewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
-        async void IniciarSesionClicked(object sender, EventArgs e)
+        private async void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var email = UsernameEntry.Text;
-
-            var password = PasswordEntry.Text;
-
-            var request = new LoginRequest(email, password);
-
-            var response = await _authService.LoginUser(request);
-
-            if (!response.Token.Contains("Error")) 
+            if (e.PropertyName == nameof(LoginViewModel.Mensaje))
             {
-                IpAddress.userId = response.UserId;
-                var mainPage = _mainPageFactory.Create();
-
-                await DisplayAlert("Éxtio", "Has iniciado sesión con éxito", "OK");
-                await Navigation.PushAsync(mainPage);
+                var viewModel = (LoginViewModel)BindingContext;
+                if (!string.IsNullOrEmpty(viewModel.Mensaje))
+                {
+                    await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                    viewModel.Mensaje = string.Empty; // Limpiar el mensaje después de mostrarlo
+                }
             }
-            else
-            {
-                await DisplayAlert("Error", $"{response}", "OK");
-            }
-        }
-
-        private async void btnRegister_Clicked(object sender, EventArgs e)
-        {
-            var registerPage = _serviceProvider.GetService<RegisterPage>();
-            await Navigation.PushAsync(registerPage);
         }
     }
 }
