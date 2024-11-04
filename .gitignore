@@ -53,3 +53,4 @@ appsettings.Development.json
 
 # Carpeta oculta de control de versiones en MAUI
 **/.maui-cache/
+.vs

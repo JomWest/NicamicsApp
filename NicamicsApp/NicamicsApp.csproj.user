@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Pixel 5 API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
+    <ActiveDebugProfile>Pixel 6 Pro - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <DefaultDevice>Pixel_5_API_34</DefaultDevice>
   </PropertyGroup>
@@ -41,7 +41,11 @@
     <MauiXaml Update="RegisterPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+<<<<<<< HEAD
     <MauiXaml Update="Reportes.xaml">
+=======
+    <MauiXaml Update="Reportes\ReporteComicsMasVendidos.xaml">
+>>>>>>> c3a00f4f3b216429097a67ccfdc7cbe2b185411c
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
