@@ -1,54 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\",
+  "WorkspaceRootPath": "D:\\C# Projects\\Nicamics\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\detallemanga.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\reportes\\reportecomicsmasvendidos.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\reportes\\reportecomicsmasvendidos.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\service\\reporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\service\\reporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\detallemanga.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\detallemanga.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\carritopage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\carritopage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\reportes\\reportecomicsmasvendidos.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\reportes\\reportecomicsmasvendidos.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\detallemanga.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\detallemanga.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\opcioneslogin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\opcioneslogin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\viewmodels\\mainpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\viewmodels\\mainpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\opcioneslogin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\opcioneslogin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\converters\\booleantoopacityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\converters\\booleantoopacityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\carritopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\carritopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|c:\\users\\azazel\\onedrive\\escritorio\\nicamicsapp\\nicamicsapp\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|d:\\c# projects\\nicamics\\nicamicsapp\\service\\comicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{655BBA6E-F013-4645-8900-335E600CD6FA}|NicamicsApp\\NicamicsApp.csproj|solutionrelative:nicamicsapp\\service\\comicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,155 +42,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "OpcionesLogin.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\OpcionesLogin.xaml.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\OpcionesLogin.xaml.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\OpcionesLogin.xaml.cs",
-              "RelativeToolTip": "NicamicsApp\\OpcionesLogin.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T08:50:01.976Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BooleanToOpacityConverter.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\Converters\\BooleanToOpacityConverter.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\Converters\\BooleanToOpacityConverter.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\Converters\\BooleanToOpacityConverter.cs",
-              "RelativeToolTip": "NicamicsApp\\Converters\\BooleanToOpacityConverter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ReporteComicsMasVendidos.xaml.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml.cs",
+              "RelativeToolTip": "NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T08:48:15.346Z"
+              "WhenOpened": "2024-11-04T01:22:11.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReporteComicsMasVendidos.xaml",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml",
+              "RelativeDocumentMoniker": "NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml",
+              "RelativeToolTip": "NicamicsApp\\Reportes\\ReporteComicsMasVendidos.xaml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABoAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-04T01:20:57.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DetalleManga.xaml.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\DetalleManga.xaml.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\DetalleManga.xaml.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\DetalleManga.xaml.cs",
+              "RelativeToolTip": "NicamicsApp\\DetalleManga.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T01:22:06.634Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CarritoPage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\CarritoPage.xaml.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\CarritoPage.xaml.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\CarritoPage.xaml.cs*",
-              "RelativeToolTip": "NicamicsApp\\CarritoPage.xaml.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Title": "ReporteService.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Service\\ReporteService.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\Service\\ReporteService.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Service\\ReporteService.cs",
+              "RelativeToolTip": "NicamicsApp\\Service\\ReporteService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwBoAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T07:49:29.366Z",
+              "WhenOpened": "2024-11-04T01:13:19.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\MainPage.xaml.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\MainPage.xaml.cs",
+              "RelativeToolTip": "NicamicsApp\\MainPage.xaml.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowEQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T22:53:25.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "MainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MainPage.xaml",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\MainPage.xaml",
               "RelativeDocumentMoniker": "NicamicsApp\\MainPage.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MainPage.xaml",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\MainPage.xaml",
               "RelativeToolTip": "NicamicsApp\\MainPage.xaml",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAGwAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAMwHMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-12T07:34:06.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CarritoPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\CarritoPage.xaml",
-              "RelativeDocumentMoniker": "NicamicsApp\\CarritoPage.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\CarritoPage.xaml",
-              "RelativeToolTip": "NicamicsApp\\CarritoPage.xaml",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAUwEUAAACJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-12T07:32:03.169Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DetalleManga.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\DetalleManga.xaml",
-              "RelativeDocumentMoniker": "NicamicsApp\\DetalleManga.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\DetalleManga.xaml",
-              "RelativeToolTip": "NicamicsApp\\DetalleManga.xaml",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAAAHUAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-12T04:50:37.169Z",
+              "WhenOpened": "2024-11-03T22:50:49.753Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LoginPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\LoginPage.xaml",
-              "RelativeDocumentMoniker": "NicamicsApp\\LoginPage.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\LoginPage.xaml",
-              "RelativeToolTip": "NicamicsApp\\LoginPage.xaml",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-05T04:16:07.783Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DetalleManga.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\DetalleManga.xaml.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\DetalleManga.xaml.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\DetalleManga.xaml.cs",
-              "RelativeToolTip": "NicamicsApp\\DetalleManga.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAwAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "ComicService.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Service\\ComicService.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\Service\\ComicService.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\Service\\ComicService.cs",
+              "RelativeToolTip": "NicamicsApp\\Service\\ComicService.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAiwHYAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-03T01:24:03.772Z",
+              "WhenOpened": "2024-11-03T22:46:40.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "OpcionesLogin.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\OpcionesLogin.xaml",
-              "RelativeDocumentMoniker": "NicamicsApp\\OpcionesLogin.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\OpcionesLogin.xaml",
-              "RelativeToolTip": "NicamicsApp\\OpcionesLogin.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-12T07:40:23.175Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainPage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MainPage.xaml.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\MainPage.xaml.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MainPage.xaml.cs",
-              "RelativeToolTip": "NicamicsApp\\MainPage.xaml.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBkAAAA7AAAAAAAAAA==",
+              "Title": "MainPageViewModel.cs",
+              "DocumentMoniker": "D:\\C# Projects\\Nicamics\\NicamicsApp\\ViewModels\\MainPageViewModel.cs",
+              "RelativeDocumentMoniker": "NicamicsApp\\ViewModels\\MainPageViewModel.cs",
+              "ToolTip": "D:\\C# Projects\\Nicamics\\NicamicsApp\\ViewModels\\MainPageViewModel.cs",
+              "RelativeToolTip": "NicamicsApp\\ViewModels\\MainPageViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T07:37:18.429Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AppShell.xaml",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\AppShell.xaml",
-              "RelativeDocumentMoniker": "NicamicsApp\\AppShell.xaml",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\AppShell.xaml",
-              "RelativeToolTip": "NicamicsApp\\AppShell.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-12T07:33:57.178Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MauiProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MauiProgram.cs",
-              "RelativeDocumentMoniker": "NicamicsApp\\MauiProgram.cs",
-              "ToolTip": "C:\\Users\\Azazel\\OneDrive\\Escritorio\\NicamicsApp\\NicamicsApp\\MauiProgram.cs",
-              "RelativeToolTip": "NicamicsApp\\MauiProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T07:40:24.681Z"
+              "WhenOpened": "2024-11-03T22:12:22.492Z",
+              "EditorCaption": ""
             }
           ]
         }
