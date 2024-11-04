@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.formaPago"
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout Padding="20" Spacing="15">
+        <!-- Encabezado -->
+        <Label Text="Forma de Pago"
+               FontSize="Title"
+               TextColor="Black"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <Frame BackgroundColor="#DAEBF5" CornerRadius="10" Padding="15" Margin="0,50,0,0">
+            <StackLayout>
+                <Label Text="Selecciona tu método de pago"
+                       FontSize="18"
+                       TextColor="Black" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <Frame BackgroundColor="#394867" CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="icon_credit_card.png"
+                               WidthRequest="30"
+                               HeightRequest="30" />
+                        <Label Text="Tarjeta de Crédito/Débito"
+                               FontSize="16"
+                               TextColor="White" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="#394867" CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="icon_paypal.png"
+                               WidthRequest="30"
+                               HeightRequest="30" />
+                        <Label Text="PayPal"
+                               FontSize="16"
+                               TextColor="White" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="#394867" CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="icon_cash.png"
+                               WidthRequest="30"
+                               HeightRequest="30" />
+                        <Label Text="Efectivo"
+                               FontSize="16"
+                               TextColor="White" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+
+        <!-- Información adicional -->
+        <Label Text="Detalles de Pago"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="Black"
+               Margin="0,20,0,0" 
+               HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="#DAEBF5" CornerRadius="10" Padding="15">
+            <StackLayout>
+                <!-- Campo para número de tarjeta -->
+                <Entry Placeholder="Número de Tarjeta"
+                       PlaceholderColor="White"
+                       TextColor="White"
+                       BackgroundColor="#394867"
+                       Keyboard="Numeric" />
+
+                <!-- Campo para fecha de vencimiento -->
+                <Entry Placeholder="Fecha de Vencimiento (MM/AA)"
+                       PlaceholderColor="White"
+                       TextColor="White"
+                       BackgroundColor="#394867"
+                       Keyboard="Numeric"
+                       Margin="0,10,0,0" />
+
+                <!-- Campo para CVV -->
+                <Entry Placeholder="CVV"
+                       PlaceholderColor="White"
+                       TextColor="White"
+                       BackgroundColor="#394867"
+                       Keyboard="Numeric"
+                       IsPassword="True"
+                       Margin="0,10,0,0" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Botón de confirmar compra -->
+        <Button Text="Guardar metodo de pago"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Margin="0,20,0,0" />
+    </StackLayout>
+</ContentPage>

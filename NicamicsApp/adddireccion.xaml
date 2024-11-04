@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.adddireccion"
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout Padding="20" Spacing="15">
+        <HorizontalStackLayout Spacing="20">
+            <Image Source="arrow.png"/>
+            <Label Text="Añadir dirección de envío" 
+        FontSize="Title" 
+        FontAttributes="Bold" />
+            
+        </HorizontalStackLayout>
+       
+
+
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Departamento o región autónoma" 
+                       FontSize="14" WidthRequest="250" />
+                <ImageButton Source="dropdown_icon.png" WidthRequest="24" HeightRequest="24" />
+            </StackLayout>
+        </Frame>
+
+ 
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout>
+                <Label Text="Información Personal" 
+                       FontSize="16" 
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Nombre de contacto*" FontSize="14" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="+505" FontSize="14" VerticalOptions="Center" />
+                    <Entry Placeholder="Teléfono móvil*" FontSize="14" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout>
+                <Entry Placeholder="Calle, casa*" FontSize="14" />
+                <Entry Placeholder="Ciudad*" FontSize="14" />
+                <Entry Placeholder="Código postal*" FontSize="14" />
+            </StackLayout>
+        </Frame>
+
+    
+        <Button Text="Guardar" 
+                BackgroundColor="#1D94AB" 
+                TextColor="White" 
+                CornerRadius="10" 
+                HeightRequest="50" />
+    </StackLayout>
+</ContentPage>

@@ -12,9 +12,11 @@ namespace NicamicsApp
 
             var loginPage = serviceProvider.GetService<LoginPage>();
             var comicPage = serviceProvider.GetService<AddComicPage>();
-            var detalle = serviceProvider.GetService<Detallecompra>();
+            //Me quiero morir.
+            var raton = serviceProvider.GetService<formaPago>();
 
-            MainPage = new NavigationPage(detalle);
+
+            MainPage = new NavigationPage(raton);
         }
     }
 }

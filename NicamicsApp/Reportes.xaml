@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.Reportes"
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout Padding="20" Spacing="15" BackgroundColor="#121A21">
+      
+        <Label Text="Reportes"
+               FontSize="Title"
+               TextColor="White"
+               FontAttributes="Bold" 
+               HorizontalOptions="Center"/>
+
+
+        <Frame BackgroundColor="#243647" CornerRadius="25" Padding="15" BorderColor="Transparent">
+            <StackLayout>
+                <Label Text="Órdenes Totales"
+                       FontSize="14"
+                       TextColor="White" />
+                <Label Text="583"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+            </StackLayout>
+        </Frame>
+
+        <Frame BackgroundColor="#243647" CornerRadius="25" Padding="15" BorderColor="Transparent">
+            <StackLayout>
+                <Label Text="Órdenes Pendientes"
+                       FontSize="14"
+                       TextColor="White" />
+                <Label Text="6"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+            </StackLayout>
+        </Frame>
+
+        <Frame BackgroundColor="#243647" CornerRadius="25" Padding="15" BorderColor="Transparent">
+            <StackLayout>
+                <Label Text="Órdenes Completadas"
+                       FontSize="14"
+                       TextColor="White" />
+                <Label Text="577"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+            </StackLayout>
+        </Frame>
+
+       
+        <Label Text="Acciones rápidas"
+               FontSize="16"
+               FontAttributes="Bold"
+               TextColor="White"
+               Margin="0,10,0,0" />
+
+        <Button Text="Añadir un nuevo Producto"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                CornerRadius="10" />
+
+     
+        <Label Text="Sus Productos"
+               FontSize="16"
+               FontAttributes="Bold"
+               TextColor="White"
+               Margin="0,10,0,0" />
+
+        <CollectionView ItemsSource="{Binding Productos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="5">
+                        <Image Source="{Binding Imagen}"
+                               WidthRequest="50" HeightRequest="50" />
+                        <StackLayout>
+                            <Label Text="{Binding Nombre}" TextColor="White" />
+                            <Label Text="{Binding Precio}" TextColor="Gray" />
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

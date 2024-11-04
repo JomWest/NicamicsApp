@@ -14,13 +14,19 @@
     <MauiXaml Update="AddComicPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="adddireccion.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="CarritoPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Detallecompra.xaml">
+    <MauiXaml Update="CompraDetalle.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="DetalleManga.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="formaPago.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="LoginPage.xaml">
@@ -33,6 +39,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="RegisterPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Reportes.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

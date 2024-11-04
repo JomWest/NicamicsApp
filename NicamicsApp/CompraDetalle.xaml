@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.CompraDetalle"
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+
+    <StackLayout Padding="20" Spacing="15">
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+            <Image Source="arrow.png"/>
+            <Label Text="Confirmación del pedido" 
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   Margin="10,0,0,0" />
+        </StackLayout>
+
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout>
+                <Label Text="Dirección de entrega" 
+                       FontAttributes="Bold" 
+                       FontSize="16" />
+                <Label Text="+ Añadir dirección de envío"
+                       TextColor="DodgerBlue" 
+                       FontSize="14" />
+            </StackLayout>
+        </Frame>
+
+
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout>
+                <Label Text="Método de pago" 
+                       FontAttributes="Bold" 
+                       FontSize="16" />
+                <StackLayout Orientation="Horizontal">
+                    <RadioButton WidthRequest="5"/>
+                    <Label Text="+ Añadir una tarjeta nueva"
+                           TextColor="DodgerBlue" 
+                           FontSize="14" 
+                           VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Detalle del artículo -->
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="poster.png" 
+                       WidthRequest="80" HeightRequest="80" />
+                <StackLayout Spacing="5">
+                    <Label Text="Takashi Store" FontSize="14" FontAttributes="Bold" />
+                    <Label Text="Re-zero" FontSize="14" />
+                    <Label Text="C$ 400.00" FontSize="14" FontAttributes="Bold" />
+                    <Label Text="Envío : C$70.00" FontSize="12" TextColor="Gray" />
+                    <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                        <Frame Padding="0" HeightRequest="30" WidthRequest="30">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDecrementClicked"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="-" FontSize="22" BackgroundColor="#E0E0E0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Frame>
+        <Frame Padding="0" 
+              BackgroundColor="#E0E0E0"
+              CornerRadius="-10" 
+              WidthRequest="30" 
+              HeightRequest="30"
+              HorizontalOptions="Center">
+            <Label x:Name="LabelCantidad" 
+                  Text="1" 
+                  FontSize="14" 
+                  HorizontalTextAlignment="Center" 
+                 VerticalTextAlignment="Center" />
+        </Frame>
+        <Frame HeightRequest="30" WidthRequest="30" Padding="0" BackgroundColor="#E0E0E0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnIncrementClicked"/>
+            </Frame.GestureRecognizers>
+            <Label Text="+" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Frame>
+    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Resumen de pago -->
+        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
+            <StackLayout>
+                <Label Text="Resumen" FontSize="16" FontAttributes="Bold" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Subtotal" FontSize="14" />
+                    <Label Text="C$400.00" FontSize="14" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Gastos de envío" FontSize="14" />
+                    <Label Text="C$70.00" FontSize="14" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Total -->
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Total" FontSize="16" FontAttributes="Bold" />
+            <Label Text="C$470.00" FontSize="16" FontAttributes="Bold" 
+                   HorizontalOptions="EndAndExpand" TextColor="#1D94AB" />
+        </StackLayout>
+
+        <!-- Botón de realizar pedido -->
+        <Button Text="Realizar Pedido" 
+                BackgroundColor="#1D94AB" 
+                TextColor="White" 
+                CornerRadius="10" 
+                HeightRequest="50" />
+    </StackLayout>
+</ContentPage>

@@ -28,6 +28,10 @@ namespace NicamicsApp
             builder.Services.AddTransient<AddComicPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<CarritoPage>();
+            builder.Services.AddTransient<CompraDetalle>();
+            builder.Services.AddTransient<adddireccion>();
+            builder.Services.AddTransient<Reportes>();
+            builder.Services.AddTransient<formaPago>();
 
             builder.Services.AddTransient<DetalleMangaFactory>();
             builder.Services.AddTransient<MainPageFactory>();
