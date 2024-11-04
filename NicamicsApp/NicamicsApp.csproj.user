@@ -32,6 +32,9 @@
     <MauiXaml Update="RegisterPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Reportes\ReporteComicsMasVendidos.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">

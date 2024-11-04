@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using NicamicsApp.Reportes;
 using NicamicsApp.Service;
 using NicamicsApp.ViewModels;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace NicamicsApp
 {
@@ -11,7 +13,7 @@ namespace NicamicsApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-               
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,12 +24,14 @@ namespace NicamicsApp
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<ComicService>();
             builder.Services.AddSingleton<UserServices>();
+            builder.Services.AddSingleton<ReporteService>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<AddComicPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<CarritoPage>();
+            builder.Services.AddTransient<ReporteComicsMasVendidos>();
 
             builder.Services.AddTransient<DetalleMangaFactory>();
             builder.Services.AddTransient<MainPageFactory>();
