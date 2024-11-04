@@ -3,29 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.AddComicPage"
             NavigationPage.HasNavigationBar="False">
-
     <VerticalStackLayout  HorizontalOptions="CenterAndExpand">
-        <Label Text="Subir Producto" FontSize="18" HorizontalTextAlignment="Center"></Label>
+ 
+            <Image Source="arrow.png" WidthRequest="35" Margin="0,10,330,-40"/>
+            <Image Source="logo.png" WidthRequest="250"/>
 
-        <Label Text="Nombre del artículo" FontSize="16" HorizontalTextAlignment="Center"></Label>
-        <Entry x:Name="entryNombre" Text="" FontSize="14"></Entry>
+     
+        <Label Text="Subir Producto" FontSize="22" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
 
-        <Label Text="Precio del artículo" FontSize="16" HorizontalTextAlignment="Center"></Label>
-        <Entry x:Name="entryPrecio" Text="" FontSize="14"></Entry>
+        <Label Text="Nombre del artículo" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" Margin="0,20,0,0"></Label>
+        <Frame HeightRequest="40" Margin="0,10,0,0" Padding="4" CornerRadius="50" >
+            <Entry x:Name="entryNombre" Text=""  FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="Start" Margin="0,0,0,-15" WidthRequest="250"></Entry>
+        </Frame>
         
-        <Label Text="Imágenes" FontSize="16" HorizontalTextAlignment="Center"></Label>
 
-        <HorizontalStackLayout>
+        <Label Text="Precio del artículo" FontAttributes="Bold" FontSize="18" HorizontalTextAlignment="Center" Margin="0,30,0,0"></Label>
+        <Frame HeightRequest="40" Margin="0,10,0,0" Padding="0" WidthRequest="150" CornerRadius="50" >
+            <HorizontalStackLayout>
+                <Label Text="C$" VerticalOptions="Center" FontSize="22" Margin="9,0,0,-7"/>
+                <Entry x:Name="entryPrecio" Text="" WidthRequest="85" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"  VerticalOptions="Start" Margin="15,0,0,-9" ></Entry>
+            </HorizontalStackLayout>
+           
+        </Frame>
+
+        <Label Text="Imágenes" FontAttributes="Bold" FontSize="18" Margin="0,30,0,0" HorizontalTextAlignment="Center"></Label>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="80,0,0,0">
             <Button x:Name="btnUploadImage" Text="+"  HeightRequest="120" WidthRequest="75" Clicked="btnUploadImage_Clicked"></Button>
             <Image x:Name="imgUploadedImage" HeightRequest="120" WidthRequest="75"></Image>
         </HorizontalStackLayout>
 
-        <Label Text="Descripción del Artículo" FontSize="16"></Label>
-        <Entry x:Name="entryDesc" Text="" FontSize="14" HeightRequest="300"></Entry>
+        <Label Text="Descripción del Artículo" FontSize="18" FontAttributes="Bold" Margin="0,30,0,0" HorizontalOptions="Center"></Label>
+          <Frame HeightRequest="40" Margin="0,20,0,0" Padding="4" CornerRadius="50" >
+            <Entry x:Name="entryDesc" Text=""  FontAttributes="Bold" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="Start" Margin="0,0,0,-15" WidthRequest="250"></Entry>
+          </Frame>
 
-        <Label Text="Cantidad en stock" FontSize="16"></Label>
+        <Label HorizontalOptions="Center" Text="Cantidad en stock" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"></Label>
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="2">
             <Button x:Name="btnLess" Text="-" FontSize="16" Clicked="btnLess_Clicked"></Button>
 
             <Frame
@@ -43,6 +58,7 @@
         VerticalOptions="Center"
         FontSize="Medium"
         TextColor="White"
+           
                     
                     />
             </Frame>
@@ -50,7 +66,7 @@
             <Button x:Name="btnPlus" Text="+" FontSize="16"  Clicked="btnPlus_Clicked"></Button>
         </HorizontalStackLayout>
 
-        <Button x:Name="btnSubir" Text="Subir" FontSize="16" WidthRequest="200" BackgroundColor="#1335D0" Clicked="btnSubir_Clicked"></Button>
+        <Button x:Name="btnSubir" Text="Subir" FontSize="16" WidthRequest="200" Margin="0,10,0,0" BackgroundColor="#1335D0" Clicked="btnSubir_Clicked"></Button>
     </VerticalStackLayout>
 
 </ContentPage>

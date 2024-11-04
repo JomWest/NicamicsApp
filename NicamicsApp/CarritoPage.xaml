@@ -81,13 +81,13 @@
                            HasShadow="True">
                             <Frame.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#F2F2F2" Offset="0.0" />
-                                    <GradientStop Color="#A2B2FC" Offset="1.0" />
+                                    <GradientStop Color="#1234C9" Offset="0.0" />
+                                    <GradientStop Color="#1234C9" Offset="1.0" />
                                 </LinearGradientBrush>
                             </Frame.Background>
                             <Button Text="Comprar Ahora" 
                                                   FontSize="18" 
-                                TextColor="Black" 
+                                TextColor="White" 
                                 BackgroundColor="Transparent" 
                                 HorizontalOptions="Center" 
                                 VerticalOptions="Center"/>
