@@ -97,6 +97,19 @@
                  BackgroundColor="Transparent"
                  />
 
+                    <Picker x:Name="comboBox" 
+                Title="Tipo de usuario" 
+                 ItemsSource="{Binding TiposUsuario}"
+                 SelectedItem="{Binding TipoSeleccionado, Mode=TwoWay}"
+                 FontSize="16"
+                 HeightRequest="50"
+                 WidthRequest="320"
+                 Margin="0,20,0,0"
+                 TextColor="#fff"
+                 TitleColor="#fff"
+                 BackgroundColor="Transparent">
+                    </Picker>
+
                     <Label HorizontalOptions="End" Text="Olvidaste tu contraseña?" Background="Transparent" TextColor="White" BackgroundColor="Transparent" Margin="0,0,20,0"/>
 
                     <Button 
@@ -109,7 +122,6 @@
                         WidthRequest="280"
                         HeightRequest="43"
                         CornerRadius="50"
-                       
                         Command="{Binding RegistrarUsuarioCommand}"
                         />
                     <HorizontalStackLayout HorizontalOptions="Center">

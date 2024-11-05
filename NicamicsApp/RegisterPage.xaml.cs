@@ -40,4 +40,5 @@ public partial class RegisterPage : ContentPage
     {
 		await Navigation.PopAsync();
     }
+
 }
