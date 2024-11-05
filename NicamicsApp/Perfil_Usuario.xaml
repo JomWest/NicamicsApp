@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.Perfil_Usuario"
+             xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+             x:DataType="viewModels:PerfilUsuarioViewModel"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
              NavigationPage.HasNavigationBar="False">
 
     <Grid>
@@ -27,10 +30,10 @@
 
                 <Grid Margin="22,50,0,0">
                     <Frame Padding="10" CornerRadius="100" WidthRequest="75" HeightRequest="75" HorizontalOptions="Start" Margin="20" HasShadow="True" BorderColor="LightBlue">
-                        <Image x:Name="imgFoto" Source="kanye.jpeg" HeightRequest="75" WidthRequest="130" />
+                        <Image x:Name="imgFoto" Source="{Binding FotoUsuario}" HeightRequest="75" WidthRequest="130" />
                     </Frame>
                     <VerticalStackLayout HorizontalOptions="Center" Margin="11,29,50,0">
-                        <Label x:Name="lblNombre" Text="YE_KIm" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
+                        <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
                         <Label Text="Kanye West" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
                     </VerticalStackLayout>
                 </Grid>
@@ -41,6 +44,65 @@
                     <VerticalStackLayout x:Name="ComicFavoritos" Spacing="15" />
                 </ScrollView>
 
+
+                <CollectionView x:Name="ComicFavoritosCollectionView"
+                        ItemsSource="{Binding Comics}" 
+                    SelectionMode="None"
+                    VerticalOptions="FillAndExpand">
+
+                    <!-- Definición de la plantilla de datos -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Comic">
+                            <Frame CornerRadius="10"
+                           Padding="10"
+                           Margin="5"
+                           HasShadow="True"
+                           BackgroundColor="White">
+
+                                <!-- Agrega un gesto de tap para navegar al detalle -->
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
+                                                  CommandParameter="{Binding comicId}" />
+                                </Frame.GestureRecognizers>
+
+                                <!-- Layout para organizar la imagen y el nombre -->
+                                <HorizontalStackLayout Spacing="10">
+
+                                    <!-- Contenedor de la imagen -->
+                                    <Frame WidthRequest="80"
+                                            HeightRequest="100"
+                                            CornerRadius="10"
+                                            Padding="0"
+                                            IsClippedToBounds="True">
+
+                                        <!-- Usamos un Grid para superponer el fondo azul y la imagen -->
+                                        <Grid>
+                                            <!-- Fondo azul (visible si no hay imagen) -->
+                                            <BoxView Color="#005AE1"  
+                                                WidthRequest="80"
+                                                HeightRequest="100"
+                                                IsVisible="{Binding imagenPortada, Converter={StaticResource NullOrEmptyToBooleanConverter}}" />
+
+                                                <!-- Imagen de portada -->
+                                                <Image Source="{Binding imagenPortada}"
+                                                Aspect="AspectFill"
+                                                WidthRequest="80"
+                                                HeightRequest="100"
+                                                IsVisible="{Binding imagenPortada, Converter={StaticResource NotNullOrEmptyToBooleanConverter}}" />
+                                        </Grid>
+                                    </Frame>
+
+                                    <!-- Nombre del cómic -->
+                                    <Label Text="{Binding nombre}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Start" />
+
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <VerticalStackLayout>
                     <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Transparent" HasShadow="True" Margin="0,30,0,0">
@@ -75,7 +137,7 @@
                     </Frame>
                 </VerticalStackLayout>
             </VerticalStackLayout>
-            
+
         </Frame>
         <BoxView x:Name="Overlay"
                  BackgroundColor="Black"

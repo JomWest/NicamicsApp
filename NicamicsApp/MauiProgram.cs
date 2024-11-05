@@ -52,6 +52,7 @@ namespace NicamicsApp
             builder.Services.AddTransient<Perfil_Usuario>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<PerfilUsuarioViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
