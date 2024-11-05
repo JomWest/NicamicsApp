@@ -1,4 +1,5 @@
 ﻿using BackendlessAPI;
+using NicamicsApp.ReportesMongo;
 
 namespace NicamicsApp
 {
@@ -12,11 +13,13 @@ namespace NicamicsApp
 
             var loginPage = serviceProvider.GetService<LoginPage>();
             var comicPage = serviceProvider.GetService<AddComicPage>();
+            var reportes = serviceProvider.GetService<Reportes>();
+            var reportesMongo = serviceProvider.GetService<ReporteComicsMasVendidos>();
             //Me quiero morir.
             var raton = serviceProvider.GetService<formaPago>();
 
 
-            MainPage = new NavigationPage(raton);
+            MainPage = new NavigationPage(loginPage);
         }
     }
 }

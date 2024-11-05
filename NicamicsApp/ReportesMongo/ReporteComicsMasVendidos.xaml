@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.ReportesMongo.ReporteComicsMasVendidos"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             Title="ReporteComicsMasVendidos">
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+
+            <Frame Padding="15" CornerRadius="10" HasShadow="True" BackgroundColor="White" Margin="0,0,0,30">
+                <StackLayout>
+                    <Label Text="Total de Ventas" FontSize="Title" HorizontalOptions="Center" />
+                    <Label x:Name="lblTotalVentas" FontSize="Large" HorizontalOptions="Center" TextColor="DarkGreen" />
+                </StackLayout>
+            </Frame>
+
+            <Label Text="Ventas Mensuales del Cómic" 
+            FontSize="24"
+            HorizontalOptions="Center" />
+
+            <Label x:Name="lblComicName" 
+            FontSize="18"
+            HorizontalOptions="Center" />
+
+            <microcharts:ChartView 
+            x:Name="LineChartView"
+            HeightRequest="400" 
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
+                Margin="0,0,0,30"/>
+
+            <Label Text="Comics Más Vendidos" 
+       FontSize="24"
+       HorizontalOptions="Center" />
+
+            <!-- Label para mostrar el rango de fechas -->
+            <Label x:Name="DateRangeLabel"
+       FontSize="18"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+            Margin="0,0,0,20"/>
+
+            <microcharts:ChartView 
+    x:Name="BarChartView"
+    HeightRequest="400" 
+    VerticalOptions="CenterAndExpand"
+    HorizontalOptions="FillAndExpand"
+            Margin="0,0,0,30"
+            />
+
+            <Label Text="Categorias Más Vendidas" 
+        FontSize="24"
+        HorizontalOptions="Center" />
+
+            <microcharts:ChartView 
+         x:Name="PieChartView"
+         HeightRequest="400" 
+         VerticalOptions="CenterAndExpand"
+         HorizontalOptions="FillAndExpand" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
