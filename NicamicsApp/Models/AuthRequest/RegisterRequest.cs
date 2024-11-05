@@ -11,11 +11,12 @@ namespace NicamicsApp.Models.AuthRequest
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-
         public string TipoUsuario { get; set; }
+        public string NombreCompleto { get; set; }
 
-        public RegisterRequest(string username, string password, string email, string tipoUser) 
+        public RegisterRequest(string nombreCompleto,string username, string password, string email, string tipoUser) 
         { 
+            this.NombreCompleto = nombreCompleto;
             this.Username = username.Trim();
             this.Password = password.Trim();
             this.Email = email.Trim().ToLower();

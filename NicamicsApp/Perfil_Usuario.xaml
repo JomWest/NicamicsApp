@@ -34,7 +34,7 @@
                     </Frame>
                     <VerticalStackLayout HorizontalOptions="Center" Margin="11,29,50,0">
                         <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
-                        <Label Text="Kanye West" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
+                        <Label Text="{Binding NombreCompleto}" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
                     </VerticalStackLayout>
                 </Grid>
 

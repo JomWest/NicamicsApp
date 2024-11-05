@@ -35,6 +35,9 @@ namespace NicamicsApp.ViewModels
         }
 
         [ObservableProperty]
+        private string nombreCompleto = "";
+
+        [ObservableProperty]
         private string username = "";
 
         [ObservableProperty]
@@ -63,7 +66,7 @@ namespace NicamicsApp.ViewModels
                     return;
                 }
 
-                var request = new RegisterRequest(Username, Contraseña, Correo, TipoSeleccionado);
+                var request = new RegisterRequest(NombreCompleto,Username, Contraseña, Correo, TipoSeleccionado);
 
                 var response = await _authService.RegisterUser(request);
 

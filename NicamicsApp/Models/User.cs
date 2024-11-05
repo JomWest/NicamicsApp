@@ -12,6 +12,8 @@ namespace NicamicsApp.Models
 
         public string nombre { get; set; } = null!;
 
+        public string nombreCompleto { get; set; } = null!;
+
         public string foto { get; set; } = null!;
 
         public int edad { get; set; }
@@ -21,6 +23,8 @@ namespace NicamicsApp.Models
         public string contraseña { get; set; } = null!;
 
         public string tipoUsuario { get; set; } = null!;
+
+        public Direccion? direccion { get; set; } = null;
 
         public List<string> favoritos { get; set; } = new List<string>();
 

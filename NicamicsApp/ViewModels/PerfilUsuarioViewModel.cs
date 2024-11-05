@@ -28,6 +28,9 @@ namespace NicamicsApp.ViewModels
         private string _nombreUsuario;
 
         [ObservableProperty]
+        private string _nombreCompleto;
+
+        [ObservableProperty]
         private string _selectedComic;
 
         [ObservableProperty]
@@ -43,6 +46,7 @@ namespace NicamicsApp.ViewModels
                 {
                     FotoUsuario = user.foto;
                     NombreUsuario = user.nombre;
+                    NombreCompleto = user.nombreCompleto;
                 }
 
             }
