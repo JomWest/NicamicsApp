@@ -51,6 +51,7 @@ namespace NicamicsApp.ViewModels
                 if (!response.Token.Contains("Error"))
                 {
                     IpAddress.userId = response.UserId;
+                    IpAddress.token = response.Token;
                     var mainPage = _mainPageFactory.Create();
 
                     Mensaje = "Has iniciado sesión con éxito";

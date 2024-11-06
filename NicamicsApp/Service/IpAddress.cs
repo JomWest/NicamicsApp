@@ -11,5 +11,7 @@ namespace NicamicsApp.Service
         public static string ip = "10.0.2.2";
 
         public static string userId = "";
+
+        public static string token = "";
     }
 }

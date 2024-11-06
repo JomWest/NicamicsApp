@@ -23,11 +23,14 @@ namespace NicamicsApp.Service
             };
         }
 
-        public async Task<List<Comic>> Obtener20Comics()
+        public async Task<List<Comic>> Obtener20Comics(string token)
         {
             try
             {
                 var url = "/api/Comic/20-Comics";
+
+                // Agregar el encabezado de autenticación Bearer
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
 
@@ -42,24 +45,23 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
         }
 
-        public async Task<string> CrearComic(Comic comic)
+
+        public async Task<string> CrearComic(Comic comic, string token)
         {
             try
             {
-                // Construir la URL con los parámetros de consulta
-                var url = $"/api/Comic";
+                var url = "/api/Comic";
 
-                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+                // Agregar el encabezado de autenticación Bearer
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.PostAsJsonAsync(url, comic);
 
@@ -83,21 +85,20 @@ namespace NicamicsApp.Service
             }
         }
 
-        public async Task<Comic> ObtenerComicPorId(string comicId)
+        public async Task<Comic> ObtenerComicPorId(string comicId, string token)
         {
             try
             {
-                // Construir la URL con los parámetros de consulta
                 var url = $"/api/Comic/{comicId}";
 
-                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+                // Agregar el encabezado de autenticación Bearer
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseData = await response.Content.ReadFromJsonAsync<Comic>();
-                    return responseData;
+                    return await response.Content.ReadFromJsonAsync<Comic>();
                 }
                 else
                 {
@@ -106,31 +107,29 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
         }
 
-        public async Task<Comic> ComicConMasVentas()
+
+        public async Task<Comic> ComicConMasVentas(string token)
         {
             try
             {
-                // Construir la URL con los parámetros de consulta
-                var url = $"/api/Comic/ComicMasVendido";
+                var url = "/api/Comic/ComicMasVendido";
 
-                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+                // Agregar el encabezado de autenticación Bearer
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseData = await response.Content.ReadFromJsonAsync<Comic>();
-                    return responseData;
+                    return await response.Content.ReadFromJsonAsync<Comic>();
                 }
                 else
                 {
@@ -139,14 +138,13 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
         }
+
     }
 }

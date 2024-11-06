@@ -3,6 +3,7 @@ using NicamicsApp.Models.UserRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,17 +30,17 @@ namespace NicamicsApp.Service
         {
             try
             {
-                // Construir la URL con los parámetros de consulta
                 var url = $"/api/User/{userId}";
 
-                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+                // Agregar token de autorización
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
 
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseData = await response.Content.ReadFromJsonAsync<User>();
-                    return responseData;
+                    return await response.Content.ReadFromJsonAsync<User>();
                 }
                 else
                 {
@@ -48,24 +49,23 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
         }
+
 
         public async Task<User> ObtenerUsuarioPorCorreo(string correo)
         {
             try
             {
-                // Construir la URL con los parámetros de consulta
-                var url = $"/api/User/{correo}";
+                var url = $"/api/User/correo/{correo}";
 
-                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+                // Agregar el token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
 
                 var response = await _httpClient.GetAsync(url);
 
@@ -81,12 +81,10 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
         }
@@ -96,10 +94,11 @@ namespace NicamicsApp.Service
             try
             {
                 var url = $"/api/User/{user.id}";
-                var response = await _httpClient.PutAsJsonAsync(url, user);
 
-                Console.WriteLine($"USER {user}");
-                Console.WriteLine($"CODIGO ${response.IsSuccessStatusCode}");
+                // Agregar el token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                var response = await _httpClient.PutAsJsonAsync(url, user);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -109,15 +108,19 @@ namespace NicamicsApp.Service
             }
             catch (Exception ex)
             {
-              throw new Exception($"Error: {ex.Message}");
+                throw new Exception($"Error: {ex.Message}");
             }
         }
+
 
         public async Task<List<Comic>> ObtenerComicsFavoritos(string userId)
         {
             try
             {
                 var url = $"/api/User/ObtenerComicsFavoritos?userId={userId}";
+
+                // Agregar el token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
 
                 var response = await _httpClient.GetAsync(url);
 
@@ -133,16 +136,14 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 throw new Exception($"Error de solicitud HTTP: {ex.Message}");
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 throw new Exception($"Error: {ex.Message}");
             }
-
         }
+
 
         public async Task<bool> VerificarComicEnFavoritos(string userId, string comicId)
         {
@@ -150,12 +151,14 @@ namespace NicamicsApp.Service
             {
                 var url = $"/api/User/VerificarComicEnFavoritos?userId={userId}&comicId={comicId}";
 
+                // Agregar el token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
+
                 var response = await _httpClient.GetAsync(url);
 
                 Console.WriteLine($"Respuesta {response.StatusCode} {response.ReasonPhrase}");
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseData = await response.Content.ReadAsStringAsync();
                     return true;
                 }
                 else
@@ -165,13 +168,11 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -182,6 +183,9 @@ namespace NicamicsApp.Service
             try
             {
                 var url = "/api/User/agregarFavorito";
+
+                // Agregar el token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
 
                 var response = await _httpClient.PutAsJsonAsync(url, agregarFavoritoRequest);
 
@@ -197,14 +201,13 @@ namespace NicamicsApp.Service
             }
             catch (HttpRequestException ex)
             {
-                // Manejo de error de red
                 return $"Error: {ex.Message}";
             }
             catch (Exception ex)
             {
-                // Manejo de otros errores
                 return $"Error: {ex.Message}";
             }
         }
+
     }
 }

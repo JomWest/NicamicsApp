@@ -46,7 +46,7 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                var response = await _comicService.ObtenerComicPorId(comicId);
+                var response = await _comicService.ObtenerComicPorId(comicId, IpAddress.token);
 
                 if (response != null)
                 {

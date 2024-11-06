@@ -31,7 +31,7 @@ namespace NicamicsApp
             _userService = userService;
             _perfil = perfilUsuario;
 
-            mainPageViewModel.LoadUser();
+             mainPageViewModel.InitializeData();
             _mainPageViewModel = mainPageViewModel;
             BindingContext = mainPageViewModel;
 

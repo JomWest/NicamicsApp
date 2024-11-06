@@ -146,9 +146,8 @@ public partial class AddComicPage : ContentPage
                 capitulos = 10,
                 imagenes = new List<string> {} // Puedes añadir más imágenes si deseas
             };
-
             // Envía la solicitud POST a tu API
-            var response = await _comicService.CrearComic(comic);
+            var response = await _comicService.CrearComic(comic, IpAddress.token);
 
             if (!response.Contains("Error"))
             {

@@ -24,6 +24,7 @@ namespace NicamicsApp.ViewModels
             _userService = userService;
             LoadComics();
             ComicMasVendidoFunc();
+            LoadUser();
         }
 
 
@@ -44,6 +45,13 @@ namespace NicamicsApp.ViewModels
 
         [ObservableProperty]
         private string selectedComic;
+
+        public void InitializeData()
+        {
+             LoadUser();
+             LoadComics();
+             ComicMasVendidoFunc();
+        }
 
         public async void LoadUser()
         {
@@ -66,7 +74,7 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                var comicsList = await _comicService.Obtener20Comics();
+                var comicsList = await _comicService.Obtener20Comics(IpAddress.token);
                 Comics = new ObservableCollection<Comic>(comicsList);
             }
             catch (Exception ex)
@@ -77,9 +85,14 @@ namespace NicamicsApp.ViewModels
 
         private async void ComicMasVendidoFunc()
         {
+            if (string.IsNullOrEmpty(IpAddress.token))
+            {
+                Console.WriteLine("El token no está disponible");
+                return;
+            }
             try
             {
-                var response = await _comicService.ComicConMasVentas();
+                var response = await _comicService.ComicConMasVentas(IpAddress.token);
 
                 if(response != null)
                 {
