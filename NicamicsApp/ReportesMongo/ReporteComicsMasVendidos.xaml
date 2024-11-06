@@ -7,6 +7,20 @@
     <ScrollView>
         <VerticalStackLayout Padding="20">
 
+            <StackLayout>
+                <Label Text="Fecha Inicial" />
+                <DatePicker x:Name="fechaInicialPicker"
+                Date="2024-01-01"
+                Format="yyyy-MM-dd" 
+                            
+                            />
+
+                <Label Text="Fecha Final" />
+                <DatePicker x:Name="fechaFinalPicker"
+                Date="2024-12-31"
+                Format="yyyy-MM-dd" />
+            </StackLayout>
+
             <Frame Padding="15" CornerRadius="10" HasShadow="True" BackgroundColor="White" Margin="0,0,0,30">
                 <StackLayout>
                     <Label Text="Total de Ventas" FontSize="Title" HorizontalOptions="Center" />

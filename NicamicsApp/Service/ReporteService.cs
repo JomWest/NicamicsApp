@@ -49,7 +49,7 @@ namespace NicamicsApp.Service
         }
 
         public async Task<List<VentasDeComicPorMes>> GetTotalVentasComicPorMes(string comicId, int año)
-        {
+       {
             try
             {
                 var response = await _httpClient.GetFromJsonAsync<List<VentasDeComicPorMes>>(
