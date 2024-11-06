@@ -22,9 +22,6 @@ namespace NicamicsApp.ViewModels
         {
             _comicService = comicService;
             _userService = userService;
-            LoadComics();
-            ComicMasVendidoFunc();
-            LoadUser();
         }
 
 
