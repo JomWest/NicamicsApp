@@ -12,7 +12,6 @@
                 <DatePicker x:Name="fechaInicialPicker"
                 Date="2024-01-01"
                 Format="yyyy-MM-dd" 
-                            
                             />
 
                 <Label Text="Fecha Final" />

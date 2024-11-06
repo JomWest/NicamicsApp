@@ -71,8 +71,10 @@
                        BackgroundColor="Transparent"
                        />
 
-                <Label HorizontalOptions="End" Text="Olvidaste tu contraseña?" Background="Transparent" TextColor="White" BackgroundColor="Transparent" Margin="0,0,20,0"/>
+                <Button x:Name="btnRestablecer" Text="Olvidaste tu contraseña?" FontSize="16" Background="Transparent"  TextColor="White"  Margin="0,0,20,0" HorizontalOptions="End"
+                        Clicked="btnRestablecer_Clicked"/>
 
+               
                 <Button Text="Iniciar sesión"
                         FontSize="18"
                         BackgroundColor="#9D9D9D"

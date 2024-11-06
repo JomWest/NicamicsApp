@@ -29,5 +29,6 @@ namespace NicamicsApp.Models
         public List<string> favoritos { get; set; } = new List<string>();
 
         public List<string> orders { get; set; } = new List<string>();
+
     }
 }

@@ -7,6 +7,7 @@ using NicamicsApp.Service;
 using NicamicsApp.Models.AuthRequest;
 using NicamicsApp.ViewModels;
 using System.ComponentModel;
+using BackendlessAPI.Service;
 
 namespace NicamicsApp
 {
@@ -15,11 +16,13 @@ namespace NicamicsApp
         IServiceProvider _serviceProvider;
         AuthService _authService;
         MainPageFactory _mainPageFactory;
+        UserServices _userServices;
        
 
-        public LoginPage(IServiceProvider serviceProvider, AuthService authService, MainPageFactory mainPageFactory)
+        public LoginPage(IServiceProvider serviceProvider, AuthService authService, MainPageFactory mainPageFactory, UserServices userServices)
         {
             InitializeComponent();
+            _userServices = userServices;
             var navigation = this.Navigation;
             var viewModel = new LoginViewModel(serviceProvider, authService, mainPageFactory, navigation);
             BindingContext = viewModel;
@@ -39,6 +42,11 @@ namespace NicamicsApp
                     viewModel.Mensaje = string.Empty; // Limpiar el mensaje después de mostrarlo
                 }
             }
+        }
+
+        private async void btnRestablecer_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RestablecerContraseña(_userServices));
         }
     }
 }

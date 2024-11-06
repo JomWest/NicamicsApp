@@ -58,6 +58,61 @@ namespace NicamicsApp.Service
             }
         }
 
+        public async Task<User> ObtenerUsuarioPorCorreo(string correo)
+        {
+            try
+            {
+                // Construir la URL con los parámetros de consulta
+                var url = $"/api/User/{correo}";
+
+                // Realizar la solicitud POST sin contenido adicional en el cuerpo
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadFromJsonAsync<User>();
+                    return responseData;
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de error de red
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otros errores
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
+        public async Task<bool> ActualizarUsuario(User user)
+        {
+            try
+            {
+                var url = $"/api/User/{user.id}";
+                var response = await _httpClient.PutAsJsonAsync(url, user);
+
+                Console.WriteLine($"USER {user}");
+                Console.WriteLine($"CODIGO ${response.IsSuccessStatusCode}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+              throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
         public async Task<List<Comic>> ObtenerComicsFavoritos(string userId)
         {
             try
