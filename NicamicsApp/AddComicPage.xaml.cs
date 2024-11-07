@@ -141,7 +141,7 @@ public partial class AddComicPage : ContentPage
                 imagenPortada = imageUrl, // URL de la imagen subida
                 descripcion = entryDesc.Text,
                 categoria = "Aventura",
-                precio = double.Parse(entryPrecio.Text),
+                precio = decimal.Parse(entryPrecio.Text),
                 vendedorId = "670c05ca1c5dec5b0d11566e",
                 capitulos = 10,
                 imagenes = new List<string> {} // Puedes añadir más imágenes si deseas

@@ -25,6 +25,7 @@ namespace NicamicsApp
             builder.Services.AddSingleton<ComicService>();
             builder.Services.AddSingleton<UserServices>();
             builder.Services.AddSingleton<ReporteService>();
+            builder.Services.AddSingleton<CartService>();
 
 
             builder.Services.AddTransient<RegisterPage>();

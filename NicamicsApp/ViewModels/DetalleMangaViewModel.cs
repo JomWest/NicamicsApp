@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace NicamicsApp.ViewModels
 {
-    public partial class DetalleMangaViewModel: ObservableObject
+    public partial class DetalleMangaViewModel : ObservableObject
     {
         private readonly ComicService _comicService;
         private readonly UserServices _userServices;
         private readonly string _comicId;
 
-        public DetalleMangaViewModel(ComicService comicService, UserServices userServices,string comicId) 
+        public DetalleMangaViewModel(ComicService comicService, UserServices userServices, string comicId)
         {
             _comicService = comicService;
             _userServices = userServices;
@@ -28,17 +28,21 @@ namespace NicamicsApp.ViewModels
         private string _nombreComic = "";
 
         [ObservableProperty]
-        private string _DescripcionComic = "";
+        private string _descripcionComic = "";
 
+        // Propiedad decimal para el valor numérico del precio
         [ObservableProperty]
-        private string _precio = "";
+        private decimal _precio;
+
+        // Propiedad string para mostrar el precio con formato en la UI
+        public string PrecioFormatted => $"C$ {Precio}";
 
         [ObservableProperty]
         private string _imagenPortada = "";
 
         [ObservableProperty]
         private string _favImage = "favorito_blanco";
-        
+
         [ObservableProperty]
         private string _mensaje = "";
 
@@ -51,12 +55,15 @@ namespace NicamicsApp.ViewModels
                 if (response != null)
                 {
                     NombreComic = response.nombre;
-                    Precio = $"C$ {response.precio}";
+                    Precio = response.precio;
                     DescripcionComic = response.descripcion;
                     ImagenPortada = response.imagenPortada;
-                    CambiarImagenFavorito(IpAddress.userId,comicId);
+                    CambiarImagenFavorito(IpAddress.userId, comicId);
+
+                    // Notifica a la UI que PrecioFormatted ha cambiado
+                    OnPropertyChanged(nameof(PrecioFormatted));
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 Mensaje = ex.Message;
@@ -67,15 +74,8 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                var response = await _userServices.VerificarComicEnFavoritos(userId,comicId);
-                if (response)
-                {
-                    FavImage = "favorito_rojo";
-                }
-                else
-                {
-                    FavImage = "favorito_blanco";
-                }
+                var response = await _userServices.VerificarComicEnFavoritos(userId, comicId);
+                FavImage = response ? "favorito_rojo" : "favorito_blanco";
             }
             catch (Exception ex)
             {

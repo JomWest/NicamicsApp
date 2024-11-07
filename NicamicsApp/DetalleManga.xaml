@@ -37,15 +37,16 @@
                         <!-- Título y precio -->
                         <HorizontalStackLayout>
                             <VerticalStackLayout Margin="20">
-                                <Label x:Name="lblName" Text="{Binding NombreComic}" FontSize="22" TextColor="Black"/>
+                                <Label x:Name="lblName" Text="{Binding NombreComic}" WidthRequest="150" FontSize="22" TextColor="Black"/>
                                 <Label Text="Novela ligera re:zero" TextColor="Grey"/>
                             </VerticalStackLayout>
-                            <Frame BackgroundColor="#A2B2FC" Padding="10" Margin="80,0,0,0" CornerRadius="100" WidthRequest="125" HeightRequest="45">
-                                <Label x:Name="lblPrecio" Text="{Binding Precio}" FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0"/>
+                            <Frame BackgroundColor="#A2B2FC" Padding="10" Margin="0,0,0,35" CornerRadius="100" WidthRequest="125" HeightRequest="45" VerticalOptions="Center">
+                                <Label x:Name="lblPrecio" Text="{Binding PrecioFormatted}" FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0"/>
                             </Frame>
+                            <ImageButton x:Name="imgBtnFav" Source="{Binding FavImage}" WidthRequest="150" Margin="-40,-30,0,0" HeightRequest="150" Command="{Binding AgregarEliminarFavoritoComicCommand}"></ImageButton>
                         </HorizontalStackLayout>
 
-                        <ImageButton x:Name="imgBtnFav" Source="{Binding FavImage}" WidthRequest="150" HeightRequest="150" Command="{Binding AgregarEliminarFavoritoComicCommand}"></ImageButton>
+                       
 
                         <!-- Rating y capítulos -->
                         <HorizontalStackLayout>
@@ -113,13 +114,13 @@
                                         <GradientStop Color="#A2B2FC" Offset="1.0" />
                                     </LinearGradientBrush>
                                 </Frame.Background>
-                                <Button Text="Comprar Ahora" 
+                                <Button Text="Agregar al carrito" 
                                         FontSize="18" 
                                         TextColor="White" 
                                         BackgroundColor="Transparent" 
                                         HorizontalOptions="Center" 
                                         VerticalOptions="Center"
-                                        Clicked="carriticliked"/>
+                                       />
                             </Frame>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
