@@ -21,7 +21,10 @@ public partial class Perfil_Usuario : ContentPage
 
         BindingContext = perfilUsuarioViewModel;
         _perfilUsuarioViewModel = perfilUsuarioViewModel;
+        perfilUsuarioViewModel.InitializeData();
         _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
+
+
     }
 
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

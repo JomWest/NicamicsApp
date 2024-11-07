@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NicamicsApp.Models;
 using NicamicsApp.Models.UserRequest;
 using NicamicsApp.Service;
 using System;
@@ -14,12 +15,14 @@ namespace NicamicsApp.ViewModels
     {
         private readonly ComicService _comicService;
         private readonly UserServices _userServices;
+        private readonly CartService _cartService;
         private readonly string _comicId;
 
-        public DetalleMangaViewModel(ComicService comicService, UserServices userServices, string comicId)
+        public DetalleMangaViewModel(ComicService comicService, UserServices userServices, CartService cartService,string comicId)
         {
             _comicService = comicService;
             _userServices = userServices;
+            _cartService = cartService;
             _comicId = comicId;
             LoadComic(comicId);
         }
@@ -32,7 +35,7 @@ namespace NicamicsApp.ViewModels
 
         // Propiedad decimal para el valor numérico del precio
         [ObservableProperty]
-        private decimal _precio;
+        private double _precio;
 
         // Propiedad string para mostrar el precio con formato en la UI
         public string PrecioFormatted => $"C$ {Precio}";
@@ -45,6 +48,9 @@ namespace NicamicsApp.ViewModels
 
         [ObservableProperty]
         private string _mensaje = "";
+
+        [ObservableProperty]
+        public int _cantidad = 0;
 
         public async void LoadComic(string comicId)
         {
@@ -101,6 +107,51 @@ namespace NicamicsApp.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine($"Error {ex.Message}");
+            }
+        }
+
+        [RelayCommand]
+        public async void CrearCarrito()
+        {
+            try
+            {
+                Cart cart = new Cart
+                {
+                    Id = "",
+                   UserId = IpAddress.userId,
+                   TotalCart = 0,
+                   Items = new List<CartItem>(),
+                   CreatedAt = DateTime.Now,
+                };
+                var response = await _cartService.CrearCarrito(cart, cart.UserId, IpAddress.token);
+
+                Console.WriteLine($"Mensaje::: {response}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+
+        [RelayCommand]
+        public async void AgregarAlCarrito()
+        {
+            Cart cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
+
+            if ( cart == null)
+            {
+                CrearCarrito();
+            }
+            else
+            {
+                var item = new CartItem
+                {
+                    ComicId = _comicId,
+                    Cantidad = Cantidad,
+                    Precio = Precio
+                };
+
+                await _cartService.AgregarCarrito(item, cart.Id);
             }
         }
     }

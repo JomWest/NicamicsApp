@@ -15,11 +15,12 @@ public partial class DetalleManga : ContentPage
     private readonly UserServices _userServices;
     private readonly string _comicId;
 
+    private readonly DetalleMangaViewModel _viewModel;
+
     // Constructor
     public DetalleManga(IServiceProvider serviceProvider, ComicService comicService, UserServices userServices, CartService cartService, string comicId)
     {
         InitializeComponent();
-        UpdateCantidad();
         _serviceProvider = serviceProvider;
         _comicService = comicService;
         _cartService = cartService;
@@ -27,8 +28,11 @@ public partial class DetalleManga : ContentPage
         _comicId = comicId;
 
         // Vinculamos el ViewModel a la vista
-        var viewModel = new DetalleMangaViewModel(comicService, userServices, comicId);
+        var viewModel = new DetalleMangaViewModel(comicService, userServices, cartService, comicId);
         BindingContext = viewModel;
+        _viewModel = viewModel;
+        UpdateCantidad();
+
     }
 
     // Método para ir a la página principal
@@ -65,6 +69,7 @@ public partial class DetalleManga : ContentPage
     private void UpdateCantidad()
     {
         LabelCantidad.Text = cantidad.ToString();
+        _viewModel.Cantidad = cantidad;
     }
 
     // Método que se ejecuta cuando el valor del stepper cambia
@@ -94,8 +99,6 @@ public partial class DetalleManga : ContentPage
   
     private async void carriticliked(object sender, EventArgs e)
     {
-        
-     
         
     }
 

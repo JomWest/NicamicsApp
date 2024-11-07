@@ -31,7 +31,7 @@ namespace NicamicsApp.ViewModels
             {
                 
                 var cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
-                cartItems = new ObservableCollection<CartItem>(cart);
+                //cartItems = new ObservableCollection<CartItem>(cart);
                 Console.WriteLine("Carrito cargado con éxito"); 
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace NicamicsApp.ViewModels
         }
 
       
-        [RelayCommand]
+        /*[RelayCommand]
         public async void AddToCart(CartItem item)
         {
             try
@@ -56,7 +56,7 @@ namespace NicamicsApp.ViewModels
                 
                 Console.WriteLine($"Error al agregar al carrito: {ex.Message}");
             }
-        }
+        }*/
 
        
         [RelayCommand]

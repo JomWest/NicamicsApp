@@ -17,8 +17,6 @@ namespace NicamicsApp.ViewModels
         public PerfilUsuarioViewModel(UserServices userService)
         {
             _userServices = userService;
-            LoadUser();
-            LoadComics();
         }
 
         [ObservableProperty]
@@ -36,7 +34,13 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<Comic> comics = new();
 
-        public async void LoadUser()
+        public void InitializeData()
+        {
+            LoadUser();
+            LoadComics();
+        }
+
+        private async void LoadUser()
         {
             try
             {
@@ -56,7 +60,7 @@ namespace NicamicsApp.ViewModels
             }
         } 
 
-        public async void LoadComics()
+        private async void LoadComics()
         {
             try
             {

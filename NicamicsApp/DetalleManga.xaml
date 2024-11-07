@@ -120,6 +120,7 @@
                                         BackgroundColor="Transparent" 
                                         HorizontalOptions="Center" 
                                         VerticalOptions="Center"
+                                        Command="{Binding AgregarAlCarritoCommand}"
                                        />
                             </Frame>
                         </VerticalStackLayout>

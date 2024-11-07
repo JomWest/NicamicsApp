@@ -1,4 +1,5 @@
-﻿using NicamicsApp.Models;
+﻿using Microcharts;
+using NicamicsApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Json;
@@ -23,18 +24,18 @@ namespace NicamicsApp.Service
         }
 
         // Obtener carrito
-        public async Task<List<CartItem>> ObtenerCarrito(string userId, string token)
+        public async Task<Cart> ObtenerCarrito(string userId, string token)
         {
             try
             {
-                var url = $"/api/Carrito/{userId}";
+                var url = $"/api/Cart/usuario/{userId}";
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<List<CartItem>>();
+                    return await response.Content.ReadFromJsonAsync<Cart>();
                 }
                 else
                 {
@@ -52,15 +53,43 @@ namespace NicamicsApp.Service
         }
 
         // Agregar un ítem al carrito
-        public async Task<string> AgregarAlCarrito(CartItem item, string userId, string token)
+        public async Task<string> CrearCarrito(Cart cart, string userId, string token)
         {
             try
             {
-                var url = $"/api/Carrito/{userId}";
+                var url = $"/api/Cart";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var response = await _httpClient.PostAsJsonAsync(url, item);
+                var response = await _httpClient.PostAsJsonAsync(url, cart);
+                if (response.IsSuccessStatusCode)
+                {
+                    return "Carrito creado exitosamente.";
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode} - {response.ReasonPhrase}";
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                return $"Error de solicitud HTTP: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+
+        public async Task<string> AgregarCarrito(CartItem cartItem, string cartId)
+        {
+            try
+            {
+                var url = $"/api/Cart/{cartId}/items";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                var response = await _httpClient.PostAsJsonAsync(url, cartItem);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -86,7 +115,7 @@ namespace NicamicsApp.Service
         {
             try
             {
-                var url = $"/api/Carrito/{userId}/{comicId}";  
+                var url = $"/api/Cart/{userId}/{comicId}";  
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
