@@ -23,8 +23,6 @@ public partial class Perfil_Usuario : ContentPage
         _perfilUsuarioViewModel = perfilUsuarioViewModel;
         perfilUsuarioViewModel.InitializeData();
         _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
-
-
     }
 
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

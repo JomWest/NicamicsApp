@@ -72,12 +72,26 @@ namespace NicamicsApp.ReportesMongo
 
                 var totalVentas = await _reporteService.GetVentasTotalesPorFecha("670c05ca1c5dec5b0d11566e", fechaInicio, fechaFinal);
 
+                DateRangeLabelTotalVentas.Text = $"Período: {fechaInicio} - {fechaFinal}";
+
+                lblTotalVentas.Text = $"{Math.Round(totalVentas, 2)} C$";
+
+                if (reportData.Count == 0)
+                {
+                    lblComicsMasVendidos.Text = "No se encontraron datos";
+                    BarChartView.Chart = null;
+                    return;
+                }
+
+                lblComicsMasVendidos.Text = "Comics Más Vendidos";
+
                 var entries = reportData.Select(r => new ChartEntry((float)r.TotalVenta)
                 {
                     Label = r.NombreComic,
                     ValueLabel = $"{Math.Round(r.TotalVenta, 2)} C$",
                     Color = SKColor.Parse("#2c3e50") // Color de las barras
                 }).ToList();
+
 
                 var chart = new BarChart
                 {
@@ -91,7 +105,6 @@ namespace NicamicsApp.ReportesMongo
 
                 BarChartView.Chart = chart;
 
-                lblTotalVentas.Text = $"{Math.Round(totalVentas, 2)} C$";
             }
             catch (Exception ex)
             {
@@ -107,7 +120,16 @@ namespace NicamicsApp.ReportesMongo
 
                 var ventasData = await _reporteService.GetVentasPorCategoriaAsync(vendedorId, fechaInicio, fechaFinal);
 
-                var entries = ventasData.Select(v => new ChartEntry((float)v.TotalVenta)
+                if (ventasData.Count == 0)
+                {
+                    lblCategorias.Text = "No se encontraron datos";
+                    PieChartView.Chart = null;
+                    return;
+                }
+
+                lblCategorias.Text = "Categorias Más Vendidas";
+
+               var entries = ventasData.Select(v => new ChartEntry((float)v.TotalVenta)
                 {
                     Label = v.Categoria,
                     ValueLabel = $"{Math.Round(v.TotalVenta, 2)} C$",
@@ -140,6 +162,15 @@ namespace NicamicsApp.ReportesMongo
 
                 var ventasData = await _reporteService.GetTotalVentasComicPorMes(comidId, año);
 
+                if (ventasData.Count == 0)
+                {
+                    lblVentasMensualesComic.Text = "No se encontraron datos";
+                    lblComicName.Text = "No se encontraron datos";
+                    LineChartView.Chart = null;
+                    return;
+                }
+
+                lblVentasMensualesComic.Text = $"Ventas Mensuales del Cómic en {año}";
                 lblComicName.Text = ventasData.First().NombreComic;
 
                 var entries = ventasData.Select(v => new ChartEntry((float)v.TotalVentas)

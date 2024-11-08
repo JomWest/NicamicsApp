@@ -22,14 +22,22 @@
 
             <Frame Padding="15" CornerRadius="10" HasShadow="True" BackgroundColor="White" Margin="0,0,0,30">
                 <StackLayout>
-                    <Label Text="Total de Ventas" FontSize="Title" HorizontalOptions="Center" />
+                    <Label HorizontalTextAlignment="Center" Text="Total de Ventas" FontSize="Title" HorizontalOptions="Center" />
+                    <Label x:Name="DateRangeLabelTotalVentas"
+                          FontSize="18"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          Margin="0,0,0,20"/>
+                    
                     <Label x:Name="lblTotalVentas" FontSize="Large" HorizontalOptions="Center" TextColor="DarkGreen" />
                 </StackLayout>
             </Frame>
 
-            <Label Text="Ventas Mensuales del Cómic" 
+            <Label x:Name="lblVentasMensualesComic" Text="Ventas Mensuales del Cómic" 
             FontSize="24"
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            HorizontalTextAlignment="Center"
+                   />
 
             <Label x:Name="lblComicName" 
             FontSize="18"
@@ -42,7 +50,7 @@
             HorizontalOptions="FillAndExpand"
                 Margin="0,0,0,30"/>
 
-            <Label Text="Comics Más Vendidos" 
+            <Label x:Name="lblComicsMasVendidos"  Text="Comics Más Vendidos" 
        FontSize="24"
        HorizontalOptions="Center" />
 
@@ -61,7 +69,7 @@
             Margin="0,0,0,30"
             />
 
-            <Label Text="Categorias Más Vendidas" 
+            <Label x:Name="lblCategorias" Text="Categorias Más Vendidas" 
         FontSize="24"
         HorizontalOptions="Center" />
 
