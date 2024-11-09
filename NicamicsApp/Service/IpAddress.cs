@@ -8,7 +8,7 @@ namespace NicamicsApp.Service
 {
     public static class IpAddress
     {
-        public static string ip = "192.168.162.157";
+        public static string ip = "162.215.175.33:5001";
 
         public static string userId = "";
 

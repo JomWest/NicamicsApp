@@ -40,7 +40,7 @@ namespace NicamicsApp.ViewModels
             LoadComics();
         }
 
-        private async void LoadUser()
+        public async void LoadUser()
         {
             try
             {
@@ -60,7 +60,7 @@ namespace NicamicsApp.ViewModels
             }
         } 
 
-        private async void LoadComics()
+        public async void LoadComics()
         {
             try
             {

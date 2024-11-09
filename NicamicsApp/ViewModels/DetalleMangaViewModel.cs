@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Weborb.Client;
 
 namespace NicamicsApp.ViewModels
 {
@@ -111,7 +112,7 @@ namespace NicamicsApp.ViewModels
         }
 
         [RelayCommand]
-        public async void CrearCarrito()
+        public async Task<string> CrearCarrito()
         {
             try
             {
@@ -125,34 +126,61 @@ namespace NicamicsApp.ViewModels
                 };
                 var response = await _cartService.CrearCarrito(cart, cart.UserId, IpAddress.token);
 
-                Console.WriteLine($"Mensaje::: {response}");
+                return response;
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"{ex.Message}");
+                return ex.Message;
             }
         }
 
         [RelayCommand]
         public async void AgregarAlCarrito()
         {
-            Cart cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
+            try
+            {
+                Cart cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
 
-            if ( cart == null)
-            {
-                CrearCarrito();
-            }
-            else
-            {
-                var item = new CartItem
+                if (cart == null)
                 {
-                    ComicId = _comicId,
-                    Cantidad = Cantidad,
-                    Precio = Precio
-                };
+                    var message = await CrearCarrito();
 
-                await _cartService.AgregarCarrito(item, cart.Id);
+                    if (message.Contains("Carrito"))
+                    {
+                        Cart cart2 = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
+
+                        if (cart2 != null)
+                        {
+                            var item = new CartItem
+                            {
+                                ComicId = _comicId,
+                                Cantidad = Cantidad,
+                                Precio = Precio
+                            };
+                            await _cartService.AgregarCarrito(item, cart2.Id);
+                        }
+                    }
+                }
+                else
+                {
+                    var item = new CartItem
+                    {
+                        ComicId = _comicId,
+                        Cantidad = Cantidad,
+                        Precio = Precio
+                    };
+
+                    await _cartService.AgregarCarrito(item, cart.Id);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
     }
 }

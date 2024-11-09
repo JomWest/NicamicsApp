@@ -58,46 +58,39 @@
                            Margin="5"
                            HasShadow="True"
                            BackgroundColor="White">
-
                                 <!-- Agrega un gesto de tap para navegar al detalle -->
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
                                                   CommandParameter="{Binding comicId}" />
                                 </Frame.GestureRecognizers>
-
                                 <!-- Layout para organizar la imagen y el nombre -->
                                 <HorizontalStackLayout Spacing="10">
-
                                     <!-- Contenedor de la imagen -->
                                     <Frame WidthRequest="80"
                                             HeightRequest="100"
                                             CornerRadius="10"
                                             Padding="0"
                                             IsClippedToBounds="True">
-
                                         <!-- Usamos un Grid para superponer el fondo azul y la imagen -->
                                         <Grid>
                                             <!-- Fondo azul (visible si no hay imagen) -->
                                             <BoxView Color="#005AE1"  
                                                 WidthRequest="80"
                                                 HeightRequest="100"
-                                                IsVisible="{Binding imagenPortada, Converter={StaticResource NullOrEmptyToBooleanConverter}}" />
-
-                                                <!-- Imagen de portada -->
-                                                <Image Source="{Binding imagenPortada}"
+                                                 />
+                                            <!-- Imagen de portada -->
+                                            <Image Source="{Binding imagenPortada}"
                                                 Aspect="AspectFill"
                                                 WidthRequest="80"
                                                 HeightRequest="100"
-                                                IsVisible="{Binding imagenPortada, Converter={StaticResource NotNullOrEmptyToBooleanConverter}}" />
+                                                />
                                         </Grid>
                                     </Frame>
-
                                     <!-- Nombre del cómic -->
                                     <Label Text="{Binding nombre}"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    VerticalOptions="Start" />
-
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>

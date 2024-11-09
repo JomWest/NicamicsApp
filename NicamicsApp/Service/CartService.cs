@@ -19,12 +19,12 @@ namespace NicamicsApp.Service
             };
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri($"https://{IpAddress.ip}:7077")
+                BaseAddress = new Uri($"http://{IpAddress.ip}")
             };
         }
 
         // Obtener carrito
-        public async Task<Cart> ObtenerCarrito(string userId, string token)
+        public async Task<Cart?> ObtenerCarrito(string userId, string token)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace NicamicsApp.Service
                 }
                 else
                 {
-                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    return null;
                 }
             }
             catch (HttpRequestException ex)
