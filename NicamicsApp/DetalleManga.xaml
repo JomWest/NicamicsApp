@@ -53,7 +53,7 @@
                             <Frame Margin="45,10,0,0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="20" WidthRequest="305" HeightRequest="110" HasShadow="True" BorderColor="White">
                                 <HorizontalStackLayout Spacing="40">
                                     <VerticalStackLayout Margin="0,0,0,0">
-                                        <Label Text="4.5/5" FontSize="22" HorizontalOptions="Center" Margin="25,0,0,0"/>
+                                        <Label Text="{Binding Rating}" FontSize="22" HorizontalOptions="Center" Margin="25,0,0,0"/>
                                         <Label Text="Rating" FontSize="22" HorizontalOptions="End" Margin="25,0,0,0"/>
                                     </VerticalStackLayout>
                                     <Label Text="|" FontSize="40" TextColor="Grey" Margin="-15,0,0,0"/>

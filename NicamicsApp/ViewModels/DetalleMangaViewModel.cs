@@ -45,6 +45,9 @@ namespace NicamicsApp.ViewModels
         private string _imagenPortada = "";
 
         [ObservableProperty]
+        private string _rating = "1/5";
+
+        [ObservableProperty]
         private string _favImage = "favorito_blanco";
 
         [ObservableProperty]
@@ -65,6 +68,7 @@ namespace NicamicsApp.ViewModels
                     Precio = response.precio;
                     DescripcionComic = response.descripcion;
                     ImagenPortada = response.imagenPortada;
+                    Rating = $"{response.ratingPromedio.ToString()}/5";
                     CambiarImagenFavorito(IpAddress.userId, comicId);
 
                     // Notifica a la UI que PrecioFormatted ha cambiado

@@ -79,6 +79,17 @@
          VerticalOptions="CenterAndExpand"
          HorizontalOptions="FillAndExpand" />
 
+            <Label x:Name="lblComicsValorados" Text="Categorias Más Vendidas" 
+            FontSize="24"
+            HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+
+            <microcharts:ChartView 
+            x:Name="BarChartComicsValorados"
+            HeightRequest="400" 
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

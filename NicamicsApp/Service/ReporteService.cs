@@ -117,5 +117,30 @@ namespace NicamicsApp.Service
                 return 0;
             }
         }
+
+        public async Task<List<ComicsMejorValorados>> GetComicsMejorValoradosAsync(string vendedorId)
+        {
+            try
+            {
+                var response = await _httpClient.GetFromJsonAsync<List<ComicsMejorValorados>>(
+                    $"/api/Reportes/productos-mejor-valorados?idVendedor={vendedorId}"
+                );
+
+                return response ?? new List<ComicsMejorValorados>();
+            }
+            catch (HttpRequestException ex)
+            {
+                // Aquí puedes registrar el error y manejarlo de forma más específica si es necesario
+                Console.WriteLine($"Error al conectar con la API: {ex.Message}");
+                return new List<ComicsMejorValorados>(); // Devuelve una lista vacía como respuesta por defecto
+            }
+            catch (Exception ex)
+            {
+                // Manejar otros tipos de excepciones inesperadas
+                Console.WriteLine($"Error inesperado: {ex.Message}");
+                return new List<ComicsMejorValorados>();
+            }
+        }
+
     }
 }

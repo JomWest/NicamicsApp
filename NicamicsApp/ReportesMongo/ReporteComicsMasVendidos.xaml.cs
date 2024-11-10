@@ -39,7 +39,7 @@ namespace NicamicsApp.ReportesMongo
             await LoadBarChart(_fechaInicio, _fechaFinal);
             await LoadPieChart(_fechaInicio, _fechaFinal);
             await LoadLineChart();
-
+            await LoadBarChartComicsValorados(IpAddress.userId);
         }
 
         private async void OnDateChanged(object sender, DateChangedEventArgs e)
@@ -61,6 +61,55 @@ namespace NicamicsApp.ReportesMongo
             await LoadPieChart(_fechaInicio, _fechaFinal);
             await LoadLineChart();
         }
+
+        private async Task LoadBarChartComicsValorados(string userId)
+        {
+            try
+            {
+
+                // Llamar al servicio para obtener los cómics mejor valorados del usuario
+                var reportData = await _reporteService.GetComicsMejorValoradosAsync("670c05ca1c5dec5b0d11566e");
+
+                // Verificar si no se encontraron datos
+                if (reportData.Count == 0)
+                {
+                    lblComicsValorados.Text = "No se encontraron datos";
+                    BarChartComicsValorados.Chart = null;
+                    return;
+                }
+
+                lblComicsValorados.Text = "Cómics Mejor Valorados";
+
+                // Preparar los datos para el gráfico de barras
+                var entries = reportData.Select(r => new ChartEntry((float)r.RatingPromedio) 
+                {
+                    Label = r.NombreComic,
+                    ValueLabel = $"{Math.Round(r.RatingPromedio, 2)}", // Mostrar la calificación con dos decimales
+                    Color = SKColor.Parse("#16a085"),
+                    
+                }).ToList();
+
+                // Crear y configurar el gráfico de barras
+                var chart = new BarChart
+                {
+                    Entries = entries,
+                    LabelTextSize = 30,
+                    ValueLabelTextSize = 40,
+                    LabelOrientation = Orientation.Vertical,
+                    ValueLabelOrientation = Orientation.Horizontal,
+                    Margin = 50,
+                };
+
+                // Asignar el gráfico a la vista
+                BarChartComicsValorados.Chart = chart;
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores y mostrar un mensaje
+                await DisplayAlert("Mensaje", "No se encontraron datos para el gráfico de cómics valorados", "OK");
+            }
+        }
+
 
         private async Task LoadBarChart(string fechaInicio, string fechaFinal)
         {

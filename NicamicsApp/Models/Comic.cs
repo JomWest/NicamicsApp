@@ -19,6 +19,7 @@ namespace NicamicsApp.Models
         public string vendedorId { get; set; } = null!;
         public int capitulos { get; set; }
         public List<string> imagenes { get; set; } = new List<string>();
-
+        public List<UserRating> ratings { get; set; } = new List<UserRating>();
+        public double ratingPromedio { get; set; } = 0.0;
     }
 }
