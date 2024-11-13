@@ -1,114 +1,208 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+             x:DataType="viewModels:CartViewModel"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
+             xmlns:local="clr-namespace:NicamicsApp"
              x:Class="NicamicsApp.CompraDetalle"
              Title=""
              NavigationPage.HasNavigationBar="False">
 
-    <StackLayout Padding="20" Spacing="15">
-        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
-            <Image Source="arrow.png"/>
-            <Label Text="Confirmación del pedido" 
-                   FontSize="Title"
-                   FontAttributes="Bold"
-                   VerticalOptions="Center"
-                   Margin="10,0,0,0" />
+    <ScrollView>
+        <StackLayout Padding="15">
+            <VerticalStackLayout x:Name="MainContent">
+                <!-- Encabezado -->
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="10">
+                    <Image Source="arrow.png" />
+                    <Label Text="Confirmación del pedido" 
+            FontSize="Title"
+            FontAttributes="Bold"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Dirección de entrega -->
+                <Frame BackgroundColor="#F5F9FF" CornerRadius="10" Padding="15" Margin="0,15,0,0">
+                    <StackLayout>
+                        <Label Text="Seleccione la dirección de entrega" 
+                FontAttributes="Bold" 
+                FontSize="18" />
+
+                        <CollectionView ItemsSource="{Binding Addresses}" Margin="10" SelectionMode="Single" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Address">
+                                    <Grid Padding="10" RowDefinitions="auto, auto" ColumnDefinitions="auto, *" Margin="5">
+                                        <!-- Cambia el borde de Frame si es la dirección seleccionada -->
+                                        <Frame Grid.Column="1" CornerRadius="10"  BorderColor="{Binding Source={x:Reference this}, Path=BindingContext.SelectedAddress, Converter={StaticResource AddressBorderConverter}}"   HasShadow="True" Padding="10" Margin="0">
+                                            <VerticalStackLayout Spacing="5">
+                                                <HorizontalStackLayout>
+                                                    <Image Source="location_icon.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                                    <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold" TextColor="Black" />
+                                                </HorizontalStackLayout>
+
+
+                                                <HorizontalStackLayout Spacing="2">
+                                                    <Label Text="{Binding Departamento}" FontSize="14" TextColor="Gray" />
+                                                    <Label Text="," FontSize="14" TextColor="Gray" />
+                                                    <Label Text="{Binding City}" FontSize="14" TextColor="Gray" />
+                                                    <Label Text="{Binding Nombre}" IsVisible="False"/>
+                                                    <Label Text="{Binding Street}" IsVisible="False"/>
+                                                </HorizontalStackLayout>
+
+                                                <Label Text="{Binding Numero}" FontSize="12" TextColor="DarkGray" />
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Label Text="+ Añadir dirección de envío"
+                TextColor="DodgerBlue" 
+                FontSize="16" 
+                Margin="10,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="DireccionesTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Método de pago -->
+                <Frame BackgroundColor="#F5F9FF" CornerRadius="10" Padding="15" Margin="0,15,0,0">
+                    <StackLayout>
+                        <Label Text="Método de pago" 
+                FontAttributes="Bold" 
+                FontSize="18" />
+                        <HorizontalStackLayout Spacing="15">
+                            <RadioButton WidthRequest="20" VerticalOptions="Center" />
+                            <Label Text="Tarjeta de credito"
+                    TextColor="DodgerBlue" 
+                    FontSize="16" 
+                    VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Detalle del artículo -->
+                <CollectionView ItemsSource="{Binding CartItems}" Margin="0,20,0,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CartItem">
+                            <Frame BackgroundColor="#F5F9FF" CornerRadius="10" Padding="10" Margin="0,10,0,0">
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Image Source="{Binding imagenPortada}" WidthRequest="80" HeightRequest="110" />
+                                    <StackLayout Spacing="5">
+                                        <Label Text="{Binding nombreComic}" FontSize="16" FontAttributes="Bold" />
+                                        <HorizontalStackLayout>
+                                            <Label Text="C$" FontSize="14" FontAttributes="Bold" />
+                                            <Label Text="{Binding Precio}" FontSize="14" FontAttributes="Bold" />
+                                            <Label Text="{Binding ComicId}" IsVisible="False"/>
+                                            <Label Text="{Binding VendedorID}" IsVisible="False"/>
+                                        </HorizontalStackLayout>
+                                        <Label Text="Envío : C$0.00" FontSize="14" TextColor="Gray" />
+                                        <HorizontalStackLayout VerticalOptions="End" Spacing="5">
+                                            <Label Text="cant:" />
+                                            <Label Text="{Binding Cantidad}" FontSize="14" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                        </HorizontalStackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Resumen de pago -->
+                <Frame BackgroundColor="#F5F9FF" CornerRadius="10" Padding="15" Margin="0,15,0,0">
+                    <StackLayout>
+                        <Label Text="Resumen" FontSize="18" FontAttributes="Bold" />
+                        <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Gastos de envío" FontSize="16" />
+                            <Label Text="C$0.00" FontSize="16" HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Total -->
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Text="Total" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="{Binding TotalCart ,StringFormat='C$ {0:C}'}" FontSize="18" FontAttributes="Bold" 
+            HorizontalOptions="EndAndExpand" TextColor="#005AE1" />
+                </StackLayout>
+
+                <!-- Botón de realizar pedido -->
+                <Button Text="Proceder al Pago" 
+         BackgroundColor="#005AE1" 
+         TextColor="White" 
+         CornerRadius="10" 
+         HeightRequest="50"
+         FontSize="18"
+         Margin="0,15,0,0" 
+         Clicked="PagoBtn"/>
+
+
+            </VerticalStackLayout>
+           
+
+
+            <!-- Menú inferior deslizable -->
+            <Frame x:Name="BottomMenu"
+         CornerRadius="78"
+         Padding="10"
+         IsVisible="False"
+         BackgroundColor="White"
+         TranslationY="100"
+         HeightRequest="700"
+         WidthRequest="450"
+         HorizontalOptions="FillAndExpand"
+         VerticalOptions="End"
+         Margin="0,0,0,-60"
+         BorderColor="#005AE1">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#F2F2F2" Offset="0.0" />
+                        <GradientStop Color="#F5F9FF" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <StackLayout Spacing="20">
+                    <Image Source="menos.png" HorizontalOptions="Center" HeightRequest="120" WidthRequest="70" Margin="0,-40,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTappedSalidaMenu"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="Checkout" HorizontalOptions="Center" FontSize="38" FontAttributes="Bold" Margin="0,-45,0,0"/>
+                    <Frame CornerRadius="12" Padding="20"  BackgroundColor="#005AE1" HeightRequest="230" WidthRequest="350" HorizontalOptions="Center" Margin="0,45,0,0">
+                        <StackLayout Margin="0,-20,0,0">
+                            <Image Source="chip.png" WidthRequest="80" HeightRequest="80" HorizontalOptions="Start"/>
+                            <Entry Placeholder="0000 0000 0000 0000" Keyboard="Numeric" WidthRequest="285" HeightRequest="50" HorizontalOptions="Center"  FontSize="26" TextColor="White" Margin="0,0,0,0" Text="{Binding CardNumber, Mode=TwoWay}">
+                                <Entry.Behaviors>
+                                    <local:MaskedBehavior />
+                                </Entry.Behaviors>
+                            </Entry>
+                            <HorizontalStackLayout>
+                                <Entry Placeholder="Nombre" WidthRequest="150" HorizontalTextAlignment="Center" HeightRequest="40" TextColor="White" FontSize="18" FontAttributes="Bold" Text="{Binding CardHolder, Mode=TwoWay}">
+                                </Entry>
+                                <Entry Placeholder="MM" Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" HeightRequest="40" FontAttributes="Bold" FontSize="18" TextColor="White" Text="{Binding ExpiryMonth, Mode=TwoWay}"/>
+                                <Entry Placeholder="YY" Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" HeightRequest="40" FontAttributes="Bold" FontSize="18" TextColor="White" Text="{Binding ExpiryYear, Mode=TwoWay}"/>
+                            </HorizontalStackLayout>
+                      
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" >
+
+                                <Entry Placeholder="CVV"  Keyboard="Numeric" WidthRequest="60" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White" FontSize="18" HeightRequest="40"/>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Buttons -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,90,0,0">
+                        <Button Text="Pagar Ahora" BackgroundColor="#005AE1" WidthRequest="120" HeightRequest="50" Command="{Binding CrearOrdenCommand}"/>
+                        <Button Text="cancelar" BackgroundColor="White" TextColor="#005AE1" WidthRequest="120" HeightRequest="50" BorderColor="LightBlue" BorderWidth="1"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
 
-        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
-            <StackLayout>
-                <Label Text="Dirección de entrega" 
-                       FontAttributes="Bold" 
-                       FontSize="16" />
-                <Label Text="+ Añadir dirección de envío"
-                       TextColor="DodgerBlue" 
-                       FontSize="14" />
-            </StackLayout>
-        </Frame>
-
-
-        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
-            <StackLayout>
-                <Label Text="Método de pago" 
-                       FontAttributes="Bold" 
-                       FontSize="16" />
-                <StackLayout Orientation="Horizontal">
-                    <RadioButton WidthRequest="5"/>
-                    <Label Text="+ Añadir una tarjeta nueva"
-                           TextColor="DodgerBlue" 
-                           FontSize="14" 
-                           VerticalOptions="Center" />
-                </StackLayout>
-            </StackLayout>
-        </Frame>
-
-        <!-- Detalle del artículo -->
-        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
-            <StackLayout Orientation="Horizontal">
-                <Image Source="poster.png" 
-                       WidthRequest="80" HeightRequest="80" />
-                <StackLayout Spacing="5">
-                    <Label Text="Takashi Store" FontSize="14" FontAttributes="Bold" />
-                    <Label Text="Re-zero" FontSize="14" />
-                    <Label Text="C$ 400.00" FontSize="14" FontAttributes="Bold" />
-                    <Label Text="Envío : C$70.00" FontSize="12" TextColor="Gray" />
-                    <StackLayout Orientation="Horizontal" VerticalOptions="End">
-                        <Frame Padding="0" HeightRequest="30" WidthRequest="30">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnDecrementClicked"/>
-                            </Frame.GestureRecognizers>
-                            <Label Text="-" FontSize="22" BackgroundColor="#E0E0E0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-        </Frame>
-        <Frame Padding="0" 
-              BackgroundColor="#E0E0E0"
-              CornerRadius="-10" 
-              WidthRequest="30" 
-              HeightRequest="30"
-              HorizontalOptions="Center">
-            <Label x:Name="LabelCantidad" 
-                  Text="1" 
-                  FontSize="14" 
-                  HorizontalTextAlignment="Center" 
-                 VerticalTextAlignment="Center" />
-        </Frame>
-        <Frame HeightRequest="30" WidthRequest="30" Padding="0" BackgroundColor="#E0E0E0">
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnIncrementClicked"/>
-            </Frame.GestureRecognizers>
-            <Label Text="+" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-        </Frame>
-    </StackLayout>
-                </StackLayout>
-            </StackLayout>
-        </Frame>
-
-        <!-- Resumen de pago -->
-        <Frame BackgroundColor="#E7F3FF" CornerRadius="10" Padding="10">
-            <StackLayout>
-                <Label Text="Resumen" FontSize="16" FontAttributes="Bold" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Subtotal" FontSize="14" />
-                    <Label Text="C$400.00" FontSize="14" HorizontalOptions="EndAndExpand" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Gastos de envío" FontSize="14" />
-                    <Label Text="C$70.00" FontSize="14" HorizontalOptions="EndAndExpand" />
-                </StackLayout>
-            </StackLayout>
-        </Frame>
-
-        <!-- Total -->
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Total" FontSize="16" FontAttributes="Bold" />
-            <Label Text="C$470.00" FontSize="16" FontAttributes="Bold" 
-                   HorizontalOptions="EndAndExpand" TextColor="#1D94AB" />
-        </StackLayout>
-
-        <!-- Botón de realizar pedido -->
-        <Button Text="Realizar Pedido" 
-                BackgroundColor="#1D94AB" 
-                TextColor="White" 
-                CornerRadius="10" 
-                HeightRequest="50" />
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

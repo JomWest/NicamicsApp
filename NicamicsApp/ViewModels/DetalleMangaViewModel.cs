@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Weborb.Client;
+using static NicamicsApp.Models.Cart;
 
 namespace NicamicsApp.ViewModels
 {
@@ -56,6 +57,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         public int _cantidad = 0;
 
+        [ObservableProperty]
+        public string _idVendedor = "";
+
         public async void LoadComic(string comicId)
         {
             try
@@ -64,6 +68,7 @@ namespace NicamicsApp.ViewModels
 
                 if (response != null)
                 {
+                    IdVendedor = response.vendedorId;
                     NombreComic = response.nombre;
                     Precio = response.precio;
                     DescripcionComic = response.descripcion;
@@ -115,6 +120,7 @@ namespace NicamicsApp.ViewModels
             }
         }
 
+
         [RelayCommand]
         public async Task<string> CrearCarrito()
         {
@@ -123,15 +129,14 @@ namespace NicamicsApp.ViewModels
                 Cart cart = new Cart
                 {
                     Id = "",
-                   UserId = IpAddress.userId,
-                   TotalCart = 0,
-                   Items = new List<CartItem>(),
-                   CreatedAt = DateTime.Now,
+                    UserId = IpAddress.userId,
+                    Items = new List<CartItem>(),
+                    CreatedAt = DateTime.Now,
                 };
                 var response = await _cartService.CrearCarrito(cart, cart.UserId, IpAddress.token);
 
                 return response;
-                
+
             }
             catch (Exception ex)
             {
@@ -160,8 +165,12 @@ namespace NicamicsApp.ViewModels
                             var item = new CartItem
                             {
                                 ComicId = _comicId,
+                                VendedorID = IdVendedor,
+                                imagenPortada = ImagenPortada,
+                                nombreComic = NombreComic,
                                 Cantidad = Cantidad,
                                 Precio = Precio
+
                             };
                             await _cartService.AgregarCarrito(item, cart2.Id);
                         }
@@ -172,6 +181,9 @@ namespace NicamicsApp.ViewModels
                     var item = new CartItem
                     {
                         ComicId = _comicId,
+                        VendedorID = IdVendedor,
+                        imagenPortada = ImagenPortada,
+                        nombreComic = NombreComic,
                         Cantidad = Cantidad,
                         Precio = Precio
                     };
@@ -188,3 +200,5 @@ namespace NicamicsApp.ViewModels
         }
     }
 }
+    
+

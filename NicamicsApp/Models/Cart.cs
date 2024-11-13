@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NicamicsApp.Models
 {
@@ -14,14 +12,25 @@ namespace NicamicsApp.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public double TotalCart { get; set; } = 0;
+        public decimal TotalCart
+        {
+            get
+            {
+                return Items.Sum(item => item.Cantidad * (decimal)item.Precio);
+            }
+        }
     }
 
     public class CartItem
     {
         public string ComicId { get; set; }
-        public int Cantidad { get; set; }
-        public double Precio {  get; set; }
-    }
 
+        public string VendedorID { get; set; }
+
+        public string imagenPortada { get; set; }
+        public string nombreComic { get; set; }
+        public int Cantidad { get; set; }
+        public double Precio { get; set; }
+    }
 }
+

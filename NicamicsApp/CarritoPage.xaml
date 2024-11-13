@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+            x:DataType="viewModels:CartViewModel"
+            xmlns:models="clr-namespace:NicamicsApp.Models"
              x:Class="NicamicsApp.CarritoPage"
              NavigationPage.HasNavigationBar="False">
 
@@ -26,73 +29,62 @@
                         </Image>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout>
-                        <Frame Margin="-90,40,80,0" WidthRequest="600">
-                            <HorizontalStackLayout>
-                                <Image Source="poster.png" WidthRequest="160" HeightRequest="160" HorizontalOptions="Start" Margin="160,0,0,0"/>
-                                <VerticalStackLayout>
-                                    <Label Text="Re:zero" FontSize="25"/>
-                                    <HorizontalStackLayout>
+                    <!-- CollectionView para mostrar los elementos del carrito -->
+                    <CollectionView ItemsSource="{Binding CartItems}" Margin="0,20,0,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CartItem">
+                                <Frame Margin="10" Padding="10" BackgroundColor="White" CornerRadius="10">
+                                    <HorizontalStackLayout Spacing="15">
+                                        <Grid>
+                                            <!-- Fondo azul (visible si no hay imagen) -->
+                                            <BoxView Color="#005AE1"  
+                                               WidthRequest="80"
+                                            HeightRequest="100" 
+                                                     HorizontalOptions="Start"/>
+                                            <Image Source="{Binding imagenPortada }" WidthRequest="80" HeightRequest="120" HorizontalOptions="Start"/>
+                                        </Grid>
+                                       
                                         <VerticalStackLayout>
-                                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="0" Margin="0,70,0,0">
-                                                <Frame Padding="0" HeightRequest="30" WidthRequest="30">
-                                                    <Frame.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="OnDecrementClicked"/>
-                                                    </Frame.GestureRecognizers>
-                                                    <Label Text="-" FontSize="22" BackgroundColor="#E0E0E0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                                </Frame>
-                                                <Frame Padding="0" 
-                                                    BackgroundColor="#E0E0E0"
-                                                    CornerRadius="-10" 
-                                                    WidthRequest="30" 
-                                                    HeightRequest="30"
-                                                    HorizontalOptions="Center">
-                                                    <Label x:Name="LabelCantidad" 
-                                                        Text="1" 
-                                                        FontSize="18" 
-                                                        HorizontalTextAlignment="Center" 
-                                                       VerticalTextAlignment="Center" />
-                                                </Frame>
-                                                <Frame HeightRequest="30" WidthRequest="30" Padding="0" BackgroundColor="#E0E0E0">
-                                                    <Frame.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="OnIncrementClicked"/>
-                                                    </Frame.GestureRecognizers>
-                                                    <Label Text="+" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                                </Frame>
+                                            <Label Text="{Binding nombreComic}" FontSize="18" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" FontSize="16"/>
+
+                                            <!-- Controles para ajustar la cantidad y eliminar el producto -->
+                                            <HorizontalStackLayout>
+                                                <Label Text="Cantidad:" FontSize="16"/>
+                                                <Label Text="{Binding Cantidad}" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="30" Margin="-5,0,0,0"/>
                                             </HorizontalStackLayout>
-                                            <Label Text="$ 8.70" FontSize="22" FontAttributes="Bold" Margin="10,0,0,0"/>
+                                            <Image Source="eliminarr.png" WidthRequest="30" HeightRequest="30" Margin="220,0,0,0" HorizontalOptions="End">
+                                                <!--<Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CartViewModel}}, Path=RemoveFromCartCommand}" CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>-->
+                                            </Image>
                                         </VerticalStackLayout>
-                                        <Image Source="eliminarr.png" WidthRequest="30" HeightRequest="30" Margin="100,80,0,0"/>
                                     </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                            </HorizontalStackLayout>
-                        </Frame>
-                        <Frame HeightRequest="60" WidthRequest="350" CornerRadius="50" Padding="0" BackgroundColor="#E0E0E0" Margin="0,310,0,0">
-                            <HorizontalStackLayout Spacing="180" VerticalOptions="Center" HorizontalOptions="Center">
-                                <Label Text="Total" FontSize="22" FontAttributes="Bold"/>
-                                <Label Text="$8.70" FontSize="22" FontAttributes="Bold"/>
-                            </HorizontalStackLayout>
-                        </Frame>
-                        <Frame CornerRadius="30" 
-                           Padding="0" 
-                           WidthRequest="300" 
-                           HeightRequest="60" 
-                            Margin="0,20,0,0"
-                           HasShadow="True">
-                            <Frame.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#1234C9" Offset="0.0" />
-                                    <GradientStop Color="#1234C9" Offset="1.0" />
-                                </LinearGradientBrush>
-                            </Frame.Background>
-                            <Button Text="Comprar Ahora" 
-                                                  FontSize="18" 
-                                TextColor="White" 
-                                BackgroundColor="Transparent" 
-                                HorizontalOptions="Center" 
-                                VerticalOptions="Center"/>
-                        </Frame>
-                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Resumen del total y botón de comprar -->
+                    <Frame HeightRequest="60" WidthRequest="350" CornerRadius="50" Padding="0" BackgroundColor="#E0E0E0" Margin="0,20,0,0">
+                        <HorizontalStackLayout Spacing="100" VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Text="Total" FontSize="22" FontAttributes="Bold"/>
+                            <Label Text="{Binding TotalCart, StringFormat='Total: {0:C}'}" FontSize="22" FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="30" Padding="0" WidthRequest="300" HeightRequest="60" Margin="0,20,0,0" HasShadow="True" >
+                        <Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#1234C9" Offset="0.0" />
+                                <GradientStop Color="#1234C9" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="DetalleCompra"/>
+                        </Frame.GestureRecognizers>
+                        <Button Text="Comprar Ahora" FontSize="18" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center"  />
+                    </Frame>
                 </VerticalStackLayout>
             </Frame>
         </ScrollView>

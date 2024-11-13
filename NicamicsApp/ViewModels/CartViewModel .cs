@@ -1,64 +1,226 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NicamicsApp.Models;
+using System.Text.Json;
 using NicamicsApp.Service;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace NicamicsApp.ViewModels
 {
     public partial class CartViewModel : ObservableObject
     {
         private readonly CartService _cartService;
+        private readonly AddressService _addressService;
+        private readonly OrderService _orderService;
 
-        public CartViewModel(CartService cartService)
+        public CartViewModel(CartService cartService, AddressService addressService, OrderService orderService)
         {
             _cartService = cartService;
-            LoadCart();
+            _addressService = addressService;
+            _orderService = orderService;
         }
 
+
+
+
+
+
+
+
+
         [ObservableProperty]
+        private string _cardNumber = "";
+
+        [ObservableProperty]
+        private string _cardHolder = "";
+
+
+        [ObservableProperty]
+        private string _expiryMonth = "";
+   
+        [ObservableProperty]
+        private string _expiryYear = "";
+
+
+      
+
+    
+
+
+    [ObservableProperty]
         private ObservableCollection<CartItem> cartItems = new();
 
         [ObservableProperty]
-        private string mensaje = ""; 
+        private double totalCart;
 
-       
+        [ObservableProperty]
+        private Address selectedAddress;
+
+        [ObservableProperty]
+        private ObservableCollection<Address> addresses = new();
+
+        [ObservableProperty]
+        private string _addressName = "";
+
+        [ObservableProperty]
+        private string _city = "";
+
+        [ObservableProperty]
+        private string _state = "";
+
+        [ObservableProperty]
+        private int _numero = 0;
+
+        [ObservableProperty]
+        private string _nombre = "";
+
+        [ObservableProperty]
+        private double _precio ;
+
+
+        [ObservableProperty]
+        private string _comicId = "";
+
+        [ObservableProperty]
+        private string _vendedorId = "";
+
+
+        [ObservableProperty]
+        private string mensaje = "";
+
+
+        [ObservableProperty]
+        private string _errorMessage = "";
+
+
+        public async void LoadAddresses()
+        {
+            try
+            {
+                var response = await _addressService.ObtenerDireccionesUsuarioTodas(IpAddress.userId, IpAddress.token);
+
+                if (response != null)
+                {
+                    Addresses = new ObservableCollection<Address>(response);
+
+                    // Opcional: Verificar los datos
+                    foreach (var address in Addresses)
+                    {
+                        Console.WriteLine(response);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar direcciones: {ex.Message}");
+            }
+        }
+
+
+
+
         public async void LoadCart()
         {
             try
             {
-                
                 var cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
-                //cartItems = new ObservableCollection<CartItem>(cart);
-                Console.WriteLine("Carrito cargado con éxito"); 
+                CartItems = new ObservableCollection<CartItem>(cart.Items);
+                TotalCart = CalculateTotalCart();
+                foreach (var item in cart.Items)
+                {
+                    Console.WriteLine($"ImagenPortada{item.imagenPortada}  ,NombreComic: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
+                }
+
             }
             catch (Exception ex)
             {
-                
                 Console.WriteLine($"Error al cargar el carrito: {ex.Message}");
             }
         }
 
-      
-        /*[RelayCommand]
-        public async void AddToCart(CartItem item)
+
+        [RelayCommand]
+        public async Task<string> CrearOrden()
         {
             try
             {
-                var response = await _cartService.AgregarAlCarrito(item, IpAddress.userId, IpAddress.token);
-                Console.WriteLine(response); 
-                LoadCart();  
+
+                Console.WriteLine($"Total del carrito: {TotalCart}");
+                Console.WriteLine($"Número de items en el carrito: {CartItems.Count}");
+
+
+                if (SelectedAddress == null)
+                {
+                    throw new Exception("Por favor seleccione una dirección de envío.");
+                }
+                Console.WriteLine($"Dirección seleccionada: {SelectedAddress.Nombre}, {SelectedAddress.City}, {selectedAddress.Numero}");
+
+
+                Order order = new Order
+                {
+                    OrderId = "", 
+                    usuarioId = IpAddress.userId,
+                    Fecha = DateOnly.FromDateTime(DateTime.Now),
+                    Total = TotalCart,
+                    direccion = new direccion
+                    {
+                        nombre = SelectedAddress.Nombre,
+                        departamento = SelectedAddress.Departamento,
+                        municipio = SelectedAddress.City,
+                        direccionn = SelectedAddress.Street,
+                        numero = SelectedAddress.Numero
+                    },
+                    tarjetaCredito = new tarjetaCredito
+                    {
+                        Cardnumbre = CardNumber,
+                        FechaExpiracion = ExpiryMonth + "/" + ExpiryYear,
+                        CardHolder = CardHolder
+                    },
+                    orderDetail = new List<orderDetail>()
+                };
+
+                // Agregar detalles de la orden para cada item en el carrito
+                foreach (var item in CartItems)
+                {
+                    Console.WriteLine($"Agregando item al detalle: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
+                    var orderDetail = new orderDetail
+                    {
+                        orderDetailId = "", 
+                        precio = item.Precio,
+                        comicId = item.ComicId,
+                        vendedorId = item.VendedorID
+                    };
+                    order.orderDetail.Add(orderDetail);
+                }
+
+                // Crear la orden
+                var response = await _orderService.CrearOrden(order, IpAddress.token);
+                Console.WriteLine($"Respuesta de creación de orden: {response}");
+                return response;
             }
             catch (Exception ex)
             {
-                
-                Console.WriteLine($"Error al agregar al carrito: {ex.Message}");
+                Console.WriteLine($"Error al crear la orden: {ex.Message}");
+                return ex.Message;
             }
-        }*/
+        }
 
-       
+
+        private double CalculateTotalCart()
+        {
+            double total = 0;
+            foreach (var item in CartItems)
+            {
+                total += item.Cantidad * item.Precio;
+            }
+            return total;
+        }
+
         [RelayCommand]
         public async void RemoveFromCart(CartItem item)
         {
@@ -66,11 +228,12 @@ namespace NicamicsApp.ViewModels
             {
                 var response = await _cartService.EliminarDelCarrito(item.ComicId, IpAddress.userId, IpAddress.token);
                 Console.WriteLine(response);
-                LoadCart();  
+
+                CartItems.Remove(item);
+                TotalCart = CalculateTotalCart();
             }
             catch (Exception ex)
             {
-                
                 Console.WriteLine($"Error al eliminar del carrito: {ex.Message}");
             }
         }

@@ -63,6 +63,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\arrow.png" />
 	  <None Remove="Resources\Images\carrito.png" />
+	  <None Remove="Resources\Images\chip.png" />
 	  <None Remove="Resources\Images\comic.png" />
 	  <None Remove="Resources\Images\comic_arana.jpeg" />
 	  <None Remove="Resources\Images\comic_nica.jpeg" />
@@ -82,6 +83,7 @@
 	  <None Remove="Resources\Images\inicioo.png" />
 	  <None Remove="Resources\Images\kanye.jpeg" />
 	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\location_icon.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\lupa.png" />
 	  <None Remove="Resources\Images\mano.png" />

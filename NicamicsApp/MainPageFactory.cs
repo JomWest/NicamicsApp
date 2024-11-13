@@ -10,16 +10,17 @@ namespace NicamicsApp
 {
    public class MainPageFactory
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly UserServices _userService;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly UserServices _userService;
     private readonly ComicService _comicService;
     private readonly CartService _cartService;
     private readonly MainPageViewModel _mainPageViewModel;
     private readonly Perfil_Usuario _perfilUsuario;
     private readonly CarritoPage _carritoPage;
+
     private readonly DetalleMangaFactory _detalleMangaFactory;
 
-    public MainPageFactory(IServiceProvider serviceProvider, UserServices userService, CartService cartService, ComicService comicService, MainPageViewModel mainPageViewModel, Perfil_Usuario perfilUsuario, CarritoPage carritoPage, DetalleMangaFactory detalleMangaFactory)
+    public MainPageFactory(IServiceProvider serviceProvider,UserServices userService ,CartService cartService, ComicService comicService, MainPageViewModel mainPageViewModel, Perfil_Usuario perfilUsuario, CarritoPage carritoPage ,DetalleMangaFactory detalleMangaFactory)
     {
             _serviceProvider = serviceProvider;
         _userService = userService;
@@ -36,7 +37,7 @@ namespace NicamicsApp
             var perfilUsuario = _serviceProvider.GetService<Perfil_Usuario>();
             var carritoPage = _serviceProvider.GetService<CarritoPage>();
             var detalleManga = new DetalleMangaFactory(_serviceProvider, _cartService, _comicService, _userService);
-            return new MainPage(_comicService, _userService, _perfilUsuario, _carritoPage, _detalleMangaFactory, _mainPageViewModel);
+            return new MainPage(_comicService, _userService ,_perfilUsuario, _carritoPage, _detalleMangaFactory, _mainPageViewModel);
     }
 }
 

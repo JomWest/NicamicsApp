@@ -17,11 +17,12 @@ namespace NicamicsApp
         CarritoPage _carritoPage;
         DetalleMangaFactory _detalleManga;
 
+
         MainPageViewModel _mainPageViewModel;
 
         public MainPage(ComicService comicService, UserServices userService,
             Perfil_Usuario perfilUsuario,CarritoPage carritoPage,
-            DetalleMangaFactory detalleMangaFactory, MainPageViewModel mainPageViewModel)
+            DetalleMangaFactory detalleMangaFactory,MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
             _comicService = comicService;
@@ -30,7 +31,6 @@ namespace NicamicsApp
             _detalleManga = detalleMangaFactory;
             _userService = userService;
             _perfil = perfilUsuario;
-
              mainPageViewModel.InitializeData();
             _mainPageViewModel = mainPageViewModel;
             BindingContext = mainPageViewModel;

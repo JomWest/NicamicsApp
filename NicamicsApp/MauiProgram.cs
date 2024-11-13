@@ -26,6 +26,8 @@ namespace NicamicsApp
             builder.Services.AddSingleton<UserServices>();
             builder.Services.AddSingleton<ReporteService>();
             builder.Services.AddSingleton<CartService>();
+            builder.Services.AddSingleton<AddressService>();
+            builder.Services.AddSingleton<OrderService>();
 
 
             builder.Services.AddTransient<RegisterPage>();
@@ -54,6 +56,9 @@ namespace NicamicsApp
 
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<PerfilUsuarioViewModel>();
+            builder.Services.AddSingleton<CartViewModel>();
+            builder.Services.AddSingleton<AddressViewModel>();
+            
 
 #if DEBUG
             builder.Logging.AddDebug();
