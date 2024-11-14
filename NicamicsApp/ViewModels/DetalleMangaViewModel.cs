@@ -175,10 +175,15 @@ namespace NicamicsApp.ViewModels
 
                             };
 
-                            Mensaje = "Comic se agrego al carrito con exito";
-
-
-
+                            var response = await _cartService.AgregarCarrito(item, cart2.Id);
+                            if (response.Contains("Item"))
+                            {
+                                Mensaje = "Comic se agrego al carrito con exito";
+                            }
+                            else
+                            {
+                                Mensaje = response;
+                            }
 
                         }
                     }
@@ -196,7 +201,7 @@ namespace NicamicsApp.ViewModels
                     };
 
                     var response =  await _cartService.AgregarCarrito(item, cart.Id);
-                    if (response.Contains("Id"))
+                    if (response.Contains("Item"))
                     {
                         Mensaje = "Comic se agrego al carrito con exito";
                     }

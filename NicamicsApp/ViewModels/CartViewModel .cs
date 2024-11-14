@@ -180,7 +180,7 @@ namespace NicamicsApp.ViewModels
                     },
                     tarjetaCredito = new tarjetaCredito
                     {
-                        cardnumbre = CardNumber,
+                        Cardnumbre = CardNumber,
                         FechaExpiracion = ExpiryMonth + "/" + ExpiryYear,
                         CardHolder = CardHolder
                     },

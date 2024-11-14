@@ -21,7 +21,7 @@ namespace NicamicsApp.Models
 
     public class tarjetaCredito
     {
-        public string cardnumbre { get; set; }
+        public string Cardnumbre { get; set; }
         public string FechaExpiracion { get; set; }
         public string CardHolder { get; set; }
     }
