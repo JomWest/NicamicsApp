@@ -147,7 +147,7 @@ namespace NicamicsApp.ReportesMongo
                     Entries = entries,
                     LabelTextSize = 40,
                     ValueLabelTextSize = 40,
-                    LabelOrientation = Orientation.Horizontal,
+                    LabelOrientation = Orientation.Vertical,
                     ValueLabelOrientation = Orientation.Horizontal,
                     Margin = 50,
                 };

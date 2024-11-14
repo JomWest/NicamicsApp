@@ -51,6 +51,7 @@ namespace NicamicsApp.ViewModels
                     FotoUsuario = user.foto;
                     NombreUsuario = user.nombre;
                     NombreCompleto = user.nombreCompleto;
+                    IpAddress.tipouser = user.tipoUsuario;
                 }
 
             }

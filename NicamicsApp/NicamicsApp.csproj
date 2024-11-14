@@ -61,6 +61,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\addcom.webp" />
 	  <None Remove="Resources\Images\arrow.png" />
 	  <None Remove="Resources\Images\carrito.png" />
 	  <None Remove="Resources\Images\chip.png" />
@@ -79,6 +80,7 @@
 	  <None Remove="Resources\Images\favorito_rojo.png" />
 	  <None Remove="Resources\Images\filtrar.png" />
 	  <None Remove="Resources\Images\google.png" />
+	  <None Remove="Resources\Images\graf.png" />
 	  <None Remove="Resources\Images\hada.png" />
 	  <None Remove="Resources\Images\inicioo.png" />
 	  <None Remove="Resources\Images\kanye.jpeg" />

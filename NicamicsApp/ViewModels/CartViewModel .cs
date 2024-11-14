@@ -195,7 +195,7 @@ namespace NicamicsApp.ViewModels
                         precio = item.Precio,
                         cantidad = item.Cantidad,
                         nombrecomic = item.nombreComic,
-                        imgurl = item.imagenPortada,
+                        imgurl = item.imagenPortada,    
                         comicId = item.ComicId,
                         vendedorId = item.VendedorID
                     };
@@ -207,8 +207,9 @@ namespace NicamicsApp.ViewModels
                 var response = await _orderService.CrearOrden(order, IpAddress.token);
                 if (!response.Contains("Error"))
                 {
+                    Mensaje = "Has hecho tu compra con exito!, Gracias por confiar en NiCamics!";
                     var lastMessage = await _cartService.EliminarCarrito(IpAddress.userId);
-                    mensaje = "Has hecho tu compra con exito!, Gracias por confiar en NiCamics!";
+                
                     return response;
                 }
                 return response;

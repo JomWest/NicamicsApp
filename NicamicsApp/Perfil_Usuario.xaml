@@ -29,14 +29,40 @@
                 </VerticalStackLayout>
 
                 <Grid Margin="22,50,0,0">
-                    <Frame Padding="10" CornerRadius="100" WidthRequest="75" HeightRequest="75" HorizontalOptions="Start" Margin="20" HasShadow="True" BorderColor="LightBlue">
-                        <Image x:Name="imgFoto" Source="{Binding FotoUsuario}" HeightRequest="75" WidthRequest="130" />
-                    </Frame>
-                    <VerticalStackLayout HorizontalOptions="Center" Margin="11,29,50,0">
-                        <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
-                        <Label Text="{Binding NombreCompleto}" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
-                    </VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Frame Padding="10" CornerRadius="100" WidthRequest="75" HeightRequest="75" HorizontalOptions="Start" Margin="20" HasShadow="True" BorderColor="LightBlue">
+                            <Image x:Name="imgFoto" Source="{Binding FotoUsuario}" HeightRequest="75" WidthRequest="130" />
+                        </Frame>
+                        <VerticalStackLayout HorizontalOptions="Center" Margin="0,30,50,0">
+                            <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
+                            <Label Text="{Binding NombreCompleto}" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
+                        </VerticalStackLayout>
+                       
+                    </HorizontalStackLayout>
+             
                 </Grid>
+
+                <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="50"  Margin="90,30,0,0" IsVisible="False" >
+                    <VerticalStackLayout>
+                        <Label Text="Reportes"  VerticalOptions="Center"/>
+                        <Frame CornerRadius="100" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Reportestapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image Source="graf.png" WidthRequest="25" HeightRequest="25"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Agg Comic"  VerticalOptions="Center"/>
+                        <Frame CornerRadius="100">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AgregarComicTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image Source="addcom.png" WidthRequest="25" HeightRequest="25"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                 
+                </HorizontalStackLayout>
 
                 <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
 
@@ -53,44 +79,38 @@
                     <!-- Definición de la plantilla de datos -->
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Comic">
-                            <Frame CornerRadius="10"
-                           Padding="10"
-                           Margin="5"
-                           HasShadow="True"
-                           BackgroundColor="White">
-                                <!-- Agrega un gesto de tap para navegar al detalle -->
+                            <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Grey" HasShadow="True" Margin="0,30,0,0">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
-                                                  CommandParameter="{Binding comicId}" />
+                                      CommandParameter="{Binding comicId}" />
                                 </Frame.GestureRecognizers>
-                                <!-- Layout para organizar la imagen y el nombre -->
-                                <HorizontalStackLayout Spacing="10">
-                                    <!-- Contenedor de la imagen -->
-                                    <Frame WidthRequest="80"
-                                            HeightRequest="100"
-                                            CornerRadius="10"
-                                            Padding="0"
-                                            IsClippedToBounds="True">
-                                        <!-- Usamos un Grid para superponer el fondo azul y la imagen -->
-                                        <Grid>
-                                            <!-- Fondo azul (visible si no hay imagen) -->
-                                            <BoxView Color="#005AE1"  
-                                                WidthRequest="80"
-                                                HeightRequest="100"
-                                                 />
-                                            <!-- Imagen de portada -->
-                                            <Image Source="{Binding imagenPortada}"
-                                                Aspect="AspectFill"
-                                                WidthRequest="80"
-                                                HeightRequest="100"
-                                                />
-                                        </Grid>
+                                <Frame.Shadow>
+                                    <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="100"/>
+                                </Frame.Shadow>
+                                <HorizontalStackLayout>
+                                    <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
+                                        <Image Source="{Binding imagenPortada}" HeightRequest="110" WidthRequest="75"/>
                                     </Frame>
-                                    <!-- Nombre del cómic -->
-                                    <Label Text="{Binding nombre}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   VerticalOptions="Start" />
+                                    <VerticalStackLayout Margin="10,0,0,0">
+                                        <Label Text="{Binding nombre}" FontSize="15" WidthRequest="130" Margin="0,0,0,0"/>
+                                        <Label Text="{Binding nombrevendedor}" FontSize="12" Margin="0,0,0,0" TextColor="Grey"/>
+                                        <Label Text="{Binding precio, StringFormat='C {0:C}'}"/>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="End" Margin="20,0,0,0">
+                                        <Frame CornerRadius="100" HasShadow="True" BorderColor="Transparent" HeightRequest="40" WidthRequest="40">
+                                            <Frame.Shadow>
+                                                <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="10"/>
+                                            </Frame.Shadow>
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#F2F2F2" Offset="0.0" />
+                                                    <GradientStop Color="#A2B2FC" Offset="1.0" />
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            <Image Source="favorito_rojo.png"  HeightRequest="125" WidthRequest="125" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                        </Frame>
+                                        <Label Text="Marca 9.9" Margin="0,35,0,0" HorizontalOptions="Center" FontSize="12"/>
+                                    </VerticalStackLayout>
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
@@ -98,36 +118,7 @@
                 </CollectionView>
 
                 <VerticalStackLayout>
-                    <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Transparent" HasShadow="True" Margin="0,30,0,0">
-                        <Frame.Shadow>
-                            <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="100"/>
-                        </Frame.Shadow>
-                        <HorizontalStackLayout>
-                            <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
-                                <Image Source="poster.jpeg"/>
-                            </Frame>
-                            <VerticalStackLayout Margin="10,0,0,0">
-                                <Label Text="Re:zero" FontSize="20" Margin="0,0,0,0"/>
-                                <Label Text="From Tyler the Creator" Margin="0,0,0,0" TextColor="Grey"/>
-                                <Label Text="Baratito comprenlo" Margin="0,25,0,0"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="End" Margin="20,0,0,0">
-                                <Frame CornerRadius="100" HasShadow="True" BorderColor="Transparent" HeightRequest="40" WidthRequest="40">
-                                    <Frame.Shadow>
-                                        <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="10"/>
-                                    </Frame.Shadow>
-                                    <Frame.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#F2F2F2" Offset="0.0" />
-                                            <GradientStop Color="#A2B2FC" Offset="1.0" />
-                                        </LinearGradientBrush>
-                                    </Frame.Background>
-                                    <Image Source="corazon.png" HeightRequest="15" WidthRequest="15" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                </Frame>
-                                <Label Text="Marca 9.9" Margin="0,35,0,0" HorizontalOptions="Center" FontSize="12"/>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-                    </Frame>
+          
                 </VerticalStackLayout>
             </VerticalStackLayout>
 

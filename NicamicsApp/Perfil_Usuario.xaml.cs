@@ -1,3 +1,4 @@
+using NicamicsApp.ReportesMongo;
 using NicamicsApp.Service;
 using NicamicsApp.ViewModels;
 using System.ComponentModel;
@@ -18,11 +19,11 @@ public partial class Perfil_Usuario : ContentPage
         _serviceProvider = serviceProvider;
         _userServices = userService;
         _detalleManga = detalleMangaFactory;
-
         BindingContext = perfilUsuarioViewModel;
         _perfilUsuarioViewModel = perfilUsuarioViewModel;
         _perfilUsuarioViewModel.InitializeData();
         _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        comprobaruser();
     }
 
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -40,6 +41,26 @@ public partial class Perfil_Usuario : ContentPage
         }
     }
 
+    private async void comprobaruser()
+    {
+        await DisplayAlert("ola", IpAddress.tipouser, "OK");
+        if(IpAddress.tipouser == "Vendedor")
+        {
+            BotonesVendedor.IsVisible = true;
+        }
+    }
+
+    private async void Reportestapped(object sender, EventArgs e)
+    {
+        var _reportes = _serviceProvider.GetService<ReporteComicsMasVendidos>();
+        await Navigation.PushAsync(_reportes);
+    }
+
+    private async void AgregarComicTapped(object sender, EventArgs e)
+    {
+        var _addcomic = _serviceProvider.GetService<AddComicPage>();
+        await Navigation.PushAsync(_addcomic);
+    }
     private async void NavegarAlDetalle(string comicId)
     {
         var detalleComic = _detalleManga.Create(comicId);

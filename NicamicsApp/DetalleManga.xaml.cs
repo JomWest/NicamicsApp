@@ -9,7 +9,7 @@ namespace NicamicsApp;
 
 public partial class DetalleManga : ContentPage
 {
-    private int cantidad;
+    private int cantidad = 1;
     private readonly IServiceProvider _serviceProvider;
     private readonly ComicService _comicService;
     private readonly CartService _cartService;
