@@ -19,7 +19,7 @@ namespace NicamicsApp.Service
             };
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri($"http://{IpAddress.ip}")
+                BaseAddress = new Uri($"{IpAddress.ip}")
             };
         }
 
@@ -124,6 +124,35 @@ namespace NicamicsApp.Service
                 if (response.IsSuccessStatusCode)
                 {
                     return "Item eliminado del carrito exitosamente.";
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode} - {response.ReasonPhrase}";
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                return $"Error de solicitud HTTP: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+
+        public async Task<string> EliminarCarrito(string userId)
+        {
+            try
+            {
+                var url = $"/api/Cart/{userId}";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                var response = await _httpClient.DeleteAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return "Carrito eliminado exitosamente.";
                 }
                 else
                 {

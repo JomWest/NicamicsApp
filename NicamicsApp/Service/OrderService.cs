@@ -18,7 +18,7 @@ namespace NicamicsApp.Service
             };
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri($"http://{IpAddress.ip}") 
+                BaseAddress = new Uri($"{IpAddress.ip}") 
             };
         }
 

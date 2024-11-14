@@ -20,7 +20,7 @@ namespace NicamicsApp.Service
             };
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri($"http://{IpAddress.ip}") // Usa la IP de tu máquina o dirección correcta
+                BaseAddress = new Uri($"{IpAddress.ip}") // Usa la IP de tu máquina o dirección correcta
             };
         }
 

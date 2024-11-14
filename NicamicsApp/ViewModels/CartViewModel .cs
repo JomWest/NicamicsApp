@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace NicamicsApp.ViewModels
 {
@@ -25,14 +26,6 @@ namespace NicamicsApp.ViewModels
             _orderService = orderService;
         }
 
-
-
-
-
-
-
-
-
         [ObservableProperty]
         private string _cardNumber = "";
 
@@ -47,9 +40,6 @@ namespace NicamicsApp.ViewModels
         private string _expiryYear = "";
 
 
-      
-
-    
 
 
     [ObservableProperty]
@@ -163,16 +153,16 @@ namespace NicamicsApp.ViewModels
 
                 Order order = new Order
                 {
-                    OrderId = "", 
-                    usuarioId = IpAddress.userId,
+                    OrderId = "",
+                    userId = IpAddress.userId,
                     Fecha = DateOnly.FromDateTime(DateTime.Now),
                     Total = TotalCart,
-                    direccion = new direccion
+                    direccion = new Direccion
                     {
                         nombre = SelectedAddress.Nombre,
                         departamento = SelectedAddress.Departamento,
                         municipio = SelectedAddress.City,
-                        direccionn = SelectedAddress.Street,
+                        direccion = SelectedAddress.Street,
                         numero = SelectedAddress.Numero
                     },
                     tarjetaCredito = new tarjetaCredito
@@ -190,17 +180,22 @@ namespace NicamicsApp.ViewModels
                     Console.WriteLine($"Agregando item al detalle: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
                     var orderDetail = new orderDetail
                     {
-                        orderDetailId = "", 
                         precio = item.Precio,
                         comicId = item.ComicId,
                         vendedorId = item.VendedorID
                     };
                     order.orderDetail.Add(orderDetail);
                 }
+                Console.WriteLine($"Order: {JsonConvert.SerializeObject(order, Formatting.Indented)}");
 
                 // Crear la orden
                 var response = await _orderService.CrearOrden(order, IpAddress.token);
-                Console.WriteLine($"Respuesta de creación de orden: {response}");
+                if (!response.Contains("Error"))
+                {
+                    var lastMessage = await _cartService.EliminarCarrito(IpAddress.userId);
+                    Console.WriteLine(lastMessage);
+                    return response;
+                }
                 return response;
             }
             catch (Exception ex)
