@@ -1,4 +1,5 @@
 using NicamicsApp.ViewModels;
+using System.ComponentModel;
 
 namespace NicamicsApp;
 
@@ -15,7 +16,26 @@ public partial class CompraDetalle : ContentPage
         _cartviewmodel.LoadCart();
         _cartviewmodel.LoadAddresses();
         InitializeComponent();
-	}
+
+        _cartviewmodel.PropertyChanged += OnViewModelPropertyChanged;
+    }
+
+    private async void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(CartViewModel.Mensaje))
+        {
+            var viewModel = (CartViewModel)BindingContext;
+            if (!string.IsNullOrEmpty(viewModel.Mensaje))
+            {
+                await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                viewModel.Mensaje = string.Empty;
+                var _compradetalle = _serviceProvider.GetService<MainPage>();
+                Navigation.InsertPageBefore(_compradetalle, this);
+                await Navigation.PopAsync();
+
+            }
+        }
+    }
 
     private async void DireccionesTapped(object sender, EventArgs e)
     {

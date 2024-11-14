@@ -70,6 +70,18 @@ namespace NicamicsApp.ViewModels
         private string _nombre = "";
 
         [ObservableProperty]
+        private string _nombreComic = "";
+
+  
+
+        [ObservableProperty]
+        private string portada = "";
+
+
+
+
+
+        [ObservableProperty]
         private double _precio ;
 
 
@@ -155,6 +167,7 @@ namespace NicamicsApp.ViewModels
                 {
                     OrderId = "",
                     userId = IpAddress.userId,
+                    comprador = IpAddress.nombreusuario,
                     Fecha = DateOnly.FromDateTime(DateTime.Now),
                     Total = TotalCart,
                     direccion = new Direccion
@@ -167,20 +180,22 @@ namespace NicamicsApp.ViewModels
                     },
                     tarjetaCredito = new tarjetaCredito
                     {
-                        Cardnumbre = CardNumber,
+                        cardnumbre = CardNumber,
                         FechaExpiracion = ExpiryMonth + "/" + ExpiryYear,
                         CardHolder = CardHolder
                     },
                     orderDetail = new List<orderDetail>()
                 };
 
-                // Agregar detalles de la orden para cada item en el carrito
                 foreach (var item in CartItems)
                 {
                     Console.WriteLine($"Agregando item al detalle: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
                     var orderDetail = new orderDetail
                     {
                         precio = item.Precio,
+                        cantidad = item.Cantidad,
+                        nombrecomic = item.nombreComic,
+                        imgurl = item.imagenPortada,
                         comicId = item.ComicId,
                         vendedorId = item.VendedorID
                     };
@@ -193,7 +208,7 @@ namespace NicamicsApp.ViewModels
                 if (!response.Contains("Error"))
                 {
                     var lastMessage = await _cartService.EliminarCarrito(IpAddress.userId);
-                    Console.WriteLine(lastMessage);
+                    mensaje = "Has hecho tu compra con exito!, Gracias por confiar en NiCamics!";
                     return response;
                 }
                 return response;

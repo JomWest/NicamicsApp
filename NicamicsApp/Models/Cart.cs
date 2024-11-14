@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,9 +25,7 @@ namespace NicamicsApp.Models
     public class CartItem
     {
         public string ComicId { get; set; }
-
         public string VendedorID { get; set; }
-
         public string imagenPortada { get; set; }
         public string nombreComic { get; set; }
         public int Cantidad { get; set; }

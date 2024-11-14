@@ -16,6 +16,9 @@ namespace NicamicsApp.Models
         public string descripcion { get; set; } = null!;
         public string categoria { get; set; } = null!;
         public double precio { get; set; }
+
+        public string nombrevendedor { get; set; } 
+
         public string vendedorId { get; set; } = null!;
         public int capitulos { get; set; }
         public List<string> imagenes { get; set; } = new List<string>();

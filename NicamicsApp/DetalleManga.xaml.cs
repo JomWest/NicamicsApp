@@ -3,6 +3,7 @@ using NicamicsApp.Models;
 using NicamicsApp.Models.UserRequest;
 using NicamicsApp.Service;
 using NicamicsApp.ViewModels;
+using System.ComponentModel;
 
 namespace NicamicsApp;
 
@@ -33,6 +34,25 @@ public partial class DetalleManga : ContentPage
         _viewModel = viewModel;
         UpdateCantidad();
 
+        _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+
+    }
+
+    private async void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(DetalleMangaViewModel.Mensaje))
+        {
+            var viewModel = (DetalleMangaViewModel)BindingContext;
+            if (!string.IsNullOrEmpty(viewModel.Mensaje))
+            {
+                await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                viewModel.Mensaje = string.Empty;
+                var _compradetalle = _serviceProvider.GetService<CarritoPage>();
+                Navigation.InsertPageBefore(_compradetalle, this);
+                await Navigation.PopAsync();
+
+            }
+        }
     }
 
     // Método para ir a la página principal

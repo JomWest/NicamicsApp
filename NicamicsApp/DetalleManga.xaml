@@ -38,6 +38,7 @@
                         <HorizontalStackLayout>
                             <VerticalStackLayout Margin="20">
                                 <Label x:Name="lblName" Text="{Binding NombreComic}" WidthRequest="150" FontSize="22" TextColor="Black"/>
+                                <Label x:Name="lblnombrevendedor" Text="{Binding Nombrevendedor}" IsVisible="False"/>
                                 <Label x:Name="lbidvendedor" Text="{Binding IdVendedor}" IsVisible="False"/>
                                 <Label Text="Novela ligera re:zero" TextColor="Grey"/>
                             </VerticalStackLayout>

@@ -35,11 +35,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private string _descripcionComic = "";
 
-        // Propiedad decimal para el valor numérico del precio
         [ObservableProperty]
         private double _precio;
 
-        // Propiedad string para mostrar el precio con formato en la UI
         public string PrecioFormatted => $"C$ {Precio}";
 
         [ObservableProperty]
@@ -60,6 +58,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         public string _idVendedor = "";
 
+        [ObservableProperty]
+        public string _nombrevendedor = "";
+
         public async void LoadComic(string comicId)
         {
             try
@@ -71,12 +72,12 @@ namespace NicamicsApp.ViewModels
                     IdVendedor = response.vendedorId;
                     NombreComic = response.nombre;
                     Precio = response.precio;
+                    Nombrevendedor = response.nombrevendedor;
                     DescripcionComic = response.descripcion;
                     ImagenPortada = response.imagenPortada;
                     Rating = $"{response.ratingPromedio.ToString()}/5";
                     CambiarImagenFavorito(IpAddress.userId, comicId);
 
-                    // Notifica a la UI que PrecioFormatted ha cambiado
                     OnPropertyChanged(nameof(PrecioFormatted));
                 }
             }
@@ -169,10 +170,16 @@ namespace NicamicsApp.ViewModels
                                 imagenPortada = ImagenPortada,
                                 nombreComic = NombreComic,
                                 Cantidad = Cantidad,
-                                Precio = Precio
+                                Precio = Precio,
+                               
 
                             };
-                            await _cartService.AgregarCarrito(item, cart2.Id);
+
+                            Mensaje = "Comic se agrego al carrito con exito";
+
+
+
+
                         }
                     }
                 }
@@ -188,7 +195,15 @@ namespace NicamicsApp.ViewModels
                         Precio = Precio
                     };
 
-                    await _cartService.AgregarCarrito(item, cart.Id);
+                    var response =  await _cartService.AgregarCarrito(item, cart.Id);
+                    if (response.Contains("Id"))
+                    {
+                        Mensaje = "Comic se agrego al carrito con exito";
+                    }
+                    else
+                    {
+                        Mensaje = response;
+                    }
                 }
             }
             catch (Exception ex)

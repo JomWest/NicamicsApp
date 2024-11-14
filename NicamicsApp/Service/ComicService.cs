@@ -60,7 +60,6 @@ namespace NicamicsApp.Service
             {
                 var url = "/api/Comic";
 
-                // Agregar el encabezado de autenticación Bearer
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.PostAsJsonAsync(url, comic);
@@ -91,7 +90,6 @@ namespace NicamicsApp.Service
             {
                 var url = $"/api/Comic/{comicId}";
 
-                // Agregar el encabezado de autenticación Bearer
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
@@ -122,7 +120,6 @@ namespace NicamicsApp.Service
             {
                 var url = "/api/Comic/ComicMasVendido";
 
-                // Agregar el encabezado de autenticación Bearer
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);

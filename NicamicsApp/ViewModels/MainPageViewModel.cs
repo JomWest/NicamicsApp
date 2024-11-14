@@ -58,6 +58,8 @@ namespace NicamicsApp.ViewModels
                 if (user != null){
                     FotoUsuario = user.foto;
                     NombreUsuario = user.nombre;
+                    IpAddress.nombreusuario = user.nombre;
+                    IpAddress.tipouser = user.tipoUsuario;
                 }
                 
             }

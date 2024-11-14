@@ -138,13 +138,14 @@ public partial class AddComicPage : ContentPage
                 comicId = "",
                 nombre = entryNombre.Text,
                 stock = stock,
-                imagenPortada = imageUrl, // URL de la imagen subida
+                imagenPortada = imageUrl, 
                 descripcion = entryDesc.Text,
                 categoria = "Aventura",
+                nombrevendedor = IpAddress.nombreusuario,
                 precio = double.Parse(entryPrecio.Text),
                 vendedorId = "670c05ca1c5dec5b0d11566e",
                 capitulos = 10,
-                imagenes = new List<string> {} // Puedes añadir más imágenes si deseas
+                imagenes = new List<string> {} 
             };
             // Envía la solicitud POST a tu API
             var response = await _comicService.CrearComic(comic, IpAddress.token);

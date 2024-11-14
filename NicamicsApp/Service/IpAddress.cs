@@ -12,6 +12,10 @@ namespace NicamicsApp.Service
 
         public static string userId = "";
 
+        public static string nombreusuario = "";
+
+        public static string tipouser = "";
+
         public static string token = "";
     }
 }
