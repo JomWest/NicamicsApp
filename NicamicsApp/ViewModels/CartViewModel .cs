@@ -131,13 +131,21 @@ namespace NicamicsApp.ViewModels
             try
             {
                 var cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
-                CartItems = new ObservableCollection<CartItem>(cart.Items);
-                TotalCart = CalculateTotalCart();
-                foreach (var item in cart.Items)
-                {
-                    Console.WriteLine($"ImagenPortada{item.imagenPortada}  ,NombreComic: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
-                }
 
+                if(cart != null)
+                {
+                    CartItems = new ObservableCollection<CartItem>(cart.Items);
+                    TotalCart = CalculateTotalCart();
+                    foreach (var item in cart.Items)
+                    {
+                        Console.WriteLine($"ImagenPortada{item.imagenPortada}  ,NombreComic: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
+                    }
+                }
+                else
+                {
+                    CartItems = new ObservableCollection<CartItem>();
+                    TotalCart = 0;
+                }
             }
             catch (Exception ex)
             {

@@ -7,19 +7,18 @@ public partial class CarritoPage : ContentPage
     private int cantidad = 1;
     IServiceProvider _serviceProvider;
     CartViewModel _cartviewmodel;
-    public CarritoPage(IServiceProvider serviceProvider)
+    public CarritoPage(IServiceProvider serviceProvider, CartViewModel cartViewModel)
     {
         InitializeComponent();
         _serviceProvider = serviceProvider;
-        _cartviewmodel = _serviceProvider.GetService<CartViewModel>();
+        _cartviewmodel = cartViewModel;
         BindingContext = _cartviewmodel;
-        _cartviewmodel.LoadCart(); // No se porque pasa pero bueno
     }
-    private async void OnImageTapped(object sender, EventArgs e)
-    {
-        var _mainPage = _serviceProvider.GetService<MainPage>();
 
-        await Navigation.PushAsync(_mainPage);
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _cartviewmodel.LoadCart();
     }
 
     private async void OnImageTappedMenu(object sender, EventArgs e)
@@ -51,6 +50,12 @@ public partial class CarritoPage : ContentPage
         Overlay.IsVisible = false;
         MainContent.IsVisible = true;
     }
+
+    private async void imgArrowBack_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
     //private void OnStepperValueChanged(object sender, ValueChangedEventArgs e)
     //{
     //    double newValue = e.NewValue;
