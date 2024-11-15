@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.AddComicPage"
             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView HorizontalOptions="CenterAndExpand">
     <VerticalStackLayout  HorizontalOptions="CenterAndExpand">
  
-            <Image Source="arrow.png" WidthRequest="35" Margin="0,10,330,-40"/>
+            <ImageButton x:Name="imgArrowBack" Source="arrow.png" WidthRequest="35" Margin="0,10,330,-40" Clicked="imgArrowBack_Clicked"/>
             <Image Source="logo.png" WidthRequest="250"/>
 
      
@@ -38,7 +40,22 @@
             <Entry x:Name="entryDesc" Text=""  FontAttributes="Bold" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  VerticalOptions="Start" Margin="0,0,0,-15" WidthRequest="250"></Entry>
           </Frame>
 
-        <Label HorizontalOptions="Center" Text="Cantidad en stock" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"></Label>
+        <Label HorizontalOptions="Center" Text="Género" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"></Label>
+            <Frame HeightRequest="40" Margin="0,20,0,0" Padding="4" CornerRadius="50" >
+                <Picker x:Name="comboBox" 
+                Title="Género" 
+                 FontSize="18"
+                 HeightRequest="50"
+                 WidthRequest="320"
+                 TextColor="#000"
+                 TitleColor="#000"
+                 BackgroundColor="Transparent"
+                 HorizontalTextAlignment="Center"
+                        >
+        </Picker>
+            </Frame>
+
+            <Label HorizontalOptions="Center" Text="Cantidad en stock" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0"></Label>
 
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="2">
             <Button x:Name="btnLess" Text="-" FontSize="16" Clicked="btnLess_Clicked"></Button>
@@ -68,5 +85,5 @@
 
         <Button x:Name="btnSubir" Text="Subir" FontSize="16" WidthRequest="200" Margin="0,10,0,0" BackgroundColor="#1335D0" Clicked="btnSubir_Clicked"></Button>
     </VerticalStackLayout>
-
+    </ScrollView>
 </ContentPage>

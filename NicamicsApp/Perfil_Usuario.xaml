@@ -11,11 +11,7 @@
         <Frame x:Name="MainContent" BackgroundColor="Transparent" Padding="0" HasShadow="True" CornerRadius="0">
             <VerticalStackLayout VerticalOptions="FillAndExpand">
                 <VerticalStackLayout>
-                    <Image Source="arrow.png" HorizontalOptions="Start" Margin="30" HeightRequest="25" WidthRequest="25">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnImageTapped"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                    <ImageButton x:Name="imgArrowBack" Source="arrow.png" HorizontalOptions="Start" Margin="30" HeightRequest="25" WidthRequest="25" Clicked="imgArrowBack_Clicked"></ImageButton>
                     <Label Text="Mi Perfil" CharacterSpacing="0.5" HorizontalOptions="Center" Margin="0,-55,0,0" FontSize="20" FontAttributes="Bold"/>
                     <Image Source="configuracion.png"
                            HorizontalOptions="End"

@@ -21,9 +21,14 @@ public partial class Perfil_Usuario : ContentPage
         _detalleManga = detalleMangaFactory;
         BindingContext = perfilUsuarioViewModel;
         _perfilUsuarioViewModel = perfilUsuarioViewModel;
-        _perfilUsuarioViewModel.InitializeData();
-        _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
         comprobaruser();
+        _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _perfilUsuarioViewModel.InitializeData();
     }
 
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -43,8 +48,7 @@ public partial class Perfil_Usuario : ContentPage
 
     private async void comprobaruser()
     {
-        await DisplayAlert("ola", IpAddress.tipouser, "OK");
-        if(IpAddress.tipouser == "Vendedor")
+        if(IpAddress.tipouser.ToLower() == "vendedor")
         {
             BotonesVendedor.IsVisible = true;
         }
@@ -67,12 +71,6 @@ public partial class Perfil_Usuario : ContentPage
         await Navigation.PushAsync(detalleComic);
     }
 
-    private async void OnImageTapped(object sender, EventArgs e)
-    {
-        var _mainPage = _serviceProvider.GetService<MainPage>();
-        await Navigation.PushAsync(_mainPage);
-    }
-
     private async void OnImageTappedMenu(object sender, EventArgs e)
     {
         MainContent.IsVisible = false;
@@ -87,7 +85,6 @@ public partial class Perfil_Usuario : ContentPage
         CloseMenu();
     }
 
-
     private async void CloseMenu()
     {
         await BottomMenu.TranslateTo(0, 700, 250, Easing.SinInOut);
@@ -97,4 +94,8 @@ public partial class Perfil_Usuario : ContentPage
         MainContent.IsVisible = true;
     }
 
+    private async void imgArrowBack_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();    
+    }
 }

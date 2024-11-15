@@ -31,6 +31,7 @@ namespace NicamicsApp
             _detalleManga = detalleMangaFactory;
             _userService = userService;
             _perfil = perfilUsuario;
+
              mainPageViewModel.InitializeData();
             _mainPageViewModel = mainPageViewModel;
             BindingContext = mainPageViewModel;

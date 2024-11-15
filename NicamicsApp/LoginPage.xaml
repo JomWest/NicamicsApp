@@ -48,7 +48,7 @@
             <VerticalStackLayout>
                 <Entry x:Name="UsernameEntry"
                        Text="{Binding Correo}"
-                       Placeholder="Usuario"
+                       Placeholder="Correo Electrónico"
                        PlaceholderColor="White"
                        TextColor="White"
                        FontSize="16"

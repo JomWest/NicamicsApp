@@ -55,13 +55,6 @@ public partial class DetalleManga : ContentPage
         }
     }
 
-    // Método para ir a la página principal
-    private async void OnImageTapped(object sender, EventArgs e)
-    {
-        var _mainPage = _serviceProvider.GetService<MainPage>();
-        await Navigation.PushAsync(_mainPage);
-    }
-
     // Método para mostrar el menú
     private async void OnImageTappedMenu(object sender, EventArgs e)
     {
@@ -122,4 +115,8 @@ public partial class DetalleManga : ContentPage
         
     }
 
+    private async void imgArrowBack_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

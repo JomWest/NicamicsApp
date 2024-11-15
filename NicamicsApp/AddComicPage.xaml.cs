@@ -15,6 +15,24 @@ public partial class AddComicPage : ContentPage
     private readonly string applicationId = "6811ED10-B9CA-4692-895B-D155D30D93CF";
     private readonly string apiKey = "EA901995-4C55-4759-8D58-193BA7F8D167";
 
+    List<string> generos = new List<string>
+        {
+            "Accion",
+            "Aventura",
+            "Comedia",
+            "Drama",
+            "Fantasia",
+            "Horror",
+            "Misterio",
+            "Romance",
+            "Ciencia Ficcion",
+            "Deportes",
+            "Supernatural",
+            "Suspenso",
+            "Mecha",
+            "Historico"
+        };
+
     ComicService _comicService;
     public AddComicPage(ComicService comicService)
 	{
@@ -22,6 +40,7 @@ public partial class AddComicPage : ContentPage
         stock = Convert.ToInt32(lblStock.Text);
         _comicService = comicService;
 
+        comboBox.ItemsSource = generos;
     }
 
     private async void btnUploadImage_Clicked(object sender, EventArgs e)
@@ -130,6 +149,12 @@ public partial class AddComicPage : ContentPage
                 return;
             }
 
+            if (string.IsNullOrEmpty(comboBox.SelectedItem.ToString()))
+            {
+                await DisplayAlert("Error", "Seleccione un género", "OK");
+                return;
+            }
+
             imageUrl = await UploadImageToBackendless(photoToUpload);
 
             // Crea el objeto Comic
@@ -140,10 +165,10 @@ public partial class AddComicPage : ContentPage
                 stock = stock,
                 imagenPortada = imageUrl, 
                 descripcion = entryDesc.Text,
-                categoria = "Aventura",
+                categoria = comboBox.SelectedItem.ToString(),
                 nombrevendedor = IpAddress.nombreusuario,
                 precio = double.Parse(entryPrecio.Text),
-                vendedorId = "670c05ca1c5dec5b0d11566e",
+                vendedorId = IpAddress.userId,
                 capitulos = 10,
                 imagenes = new List<string> {} 
             };
@@ -163,5 +188,10 @@ public partial class AddComicPage : ContentPage
         {
             await DisplayAlert("Error", $"No se pudo enviar el formulario: {ex.Message}", "OK");
         }
+    }
+
+    private async void imgArrowBack_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }
