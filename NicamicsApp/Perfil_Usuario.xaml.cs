@@ -21,7 +21,7 @@ public partial class Perfil_Usuario : ContentPage
         _detalleManga = detalleMangaFactory;
         BindingContext = perfilUsuarioViewModel;
         _perfilUsuarioViewModel = perfilUsuarioViewModel;
-        comprobaruser();
+       
         _perfilUsuarioViewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
 
@@ -43,14 +43,6 @@ public partial class Perfil_Usuario : ContentPage
                 // Limpia el cómic seleccionado después de la navegación
                 _perfilUsuarioViewModel.SelectedComic = string.Empty;
             }
-        }
-    }
-
-    private async void comprobaruser()
-    {
-        if(IpAddress.tipouser.ToLower() == "vendedor")
-        {
-            BotonesVendedor.IsVisible = true;
         }
     }
 

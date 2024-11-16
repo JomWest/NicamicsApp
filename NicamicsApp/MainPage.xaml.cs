@@ -16,21 +16,18 @@ namespace NicamicsApp
         Perfil_Usuario _perfil;
         CarritoPage _carritoPage;
         DetalleMangaFactory _detalleManga;
-
+        IServiceProvider _serviceProvider;
 
         MainPageViewModel _mainPageViewModel;
 
-        public MainPage(ComicService comicService, UserServices userService,
-            Perfil_Usuario perfilUsuario,CarritoPage carritoPage,
+        public MainPage(IServiceProvider serviceProvider, ComicService comicService, UserServices userService,
             DetalleMangaFactory detalleMangaFactory,MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
             _comicService = comicService;
-            _perfil = perfilUsuario;
-            _carritoPage = carritoPage;
             _detalleManga = detalleMangaFactory;
             _userService = userService;
-            _perfil = perfilUsuario;
+            _serviceProvider = serviceProvider;
 
              mainPageViewModel.InitializeData();
             _mainPageViewModel = mainPageViewModel;
@@ -60,11 +57,13 @@ namespace NicamicsApp
         }
         private void OnProfileImageTapped(object sender, EventArgs e)
         {
-             Navigation.PushAsync(_perfil);
+            var perfilPage = _serviceProvider.GetRequiredService<Perfil_Usuario>();
+            Navigation.PushAsync(perfilPage);
         }
         private async void OnCarritoClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(_carritoPage); 
+            var carritoPage = _serviceProvider.GetRequiredService<CarritoPage>();
+            await Navigation.PushAsync(carritoPage); 
         }
 
         private async void CompraTapped(object sender, EventArgs e)

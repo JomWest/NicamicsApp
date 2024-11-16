@@ -38,7 +38,7 @@
              
                 </Grid>
 
-                <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="50"  Margin="90,30,0,0" IsVisible="False" >
+                <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="50"  Margin="90,30,0,0" IsVisible="{Binding IsVendedor}" >
                     <VerticalStackLayout>
                         <Label Text="Reportes"  VerticalOptions="Center"/>
                         <Frame CornerRadius="100" >

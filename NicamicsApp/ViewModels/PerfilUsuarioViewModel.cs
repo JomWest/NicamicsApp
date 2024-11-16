@@ -34,6 +34,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<Comic> comics = new();
 
+        [ObservableProperty]
+        private bool _isVendedor;
+
         public void InitializeData()
         {
             LoadUser();
@@ -52,6 +55,8 @@ namespace NicamicsApp.ViewModels
                     NombreUsuario = user.nombre;
                     NombreCompleto = user.nombreCompleto;
                     IpAddress.tipouser = user.tipoUsuario;
+
+                    IsVendedor = IpAddress.tipouser.ToLower() == "vendedor";
                 }
 
             }

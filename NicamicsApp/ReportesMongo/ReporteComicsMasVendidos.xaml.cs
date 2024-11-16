@@ -14,6 +14,7 @@ namespace NicamicsApp.ReportesMongo
 
         private string _fechaInicio = "";
         private string _fechaFinal = "";
+        private string _userId = IpAddress.userId;
 
         public ReporteComicsMasVendidos(ReporteService reporteService)
         {
@@ -39,7 +40,7 @@ namespace NicamicsApp.ReportesMongo
             await LoadBarChart(_fechaInicio, _fechaFinal);
             await LoadPieChart(_fechaInicio, _fechaFinal);
             await LoadLineChart();
-            await LoadBarChartComicsValorados(IpAddress.userId);
+            await LoadBarChartComicsValorados();
         }
 
         private async void OnDateChanged(object sender, DateChangedEventArgs e)
@@ -62,13 +63,13 @@ namespace NicamicsApp.ReportesMongo
             await LoadLineChart();
         }
 
-        private async Task LoadBarChartComicsValorados(string userId)
+        private async Task LoadBarChartComicsValorados()
         {
             try
             {
 
                 // Llamar al servicio para obtener los cómics mejor valorados del usuario
-                var reportData = await _reporteService.GetComicsMejorValoradosAsync("670c05ca1c5dec5b0d11566e");
+                var reportData = await _reporteService.GetComicsMejorValoradosAsync(_userId);
 
                 // Verificar si no se encontraron datos
                 if (reportData.Count == 0)
@@ -117,9 +118,9 @@ namespace NicamicsApp.ReportesMongo
             {
                 DateRangeLabel.Text = $"Período: {fechaInicio} - {fechaFinal}";
 
-                var reportData = await _reporteService.GetComicsMasVendidosAsync("670c05ca1c5dec5b0d11566e", fechaInicio, fechaFinal);
+                var reportData = await _reporteService.GetComicsMasVendidosAsync(_userId, fechaInicio, fechaFinal);
 
-                var totalVentas = await _reporteService.GetVentasTotalesPorFecha("670c05ca1c5dec5b0d11566e", fechaInicio, fechaFinal);
+                var totalVentas = await _reporteService.GetVentasTotalesPorFecha(_userId, fechaInicio, fechaFinal);
 
                 DateRangeLabelTotalVentas.Text = $"Período: {fechaInicio} - {fechaFinal}";
 
@@ -165,9 +166,7 @@ namespace NicamicsApp.ReportesMongo
         {
             try
             {
-                var vendedorId = "670c05ca1c5dec5b0d11566e"; // Reemplaza con el ID del vendedor real
-
-                var ventasData = await _reporteService.GetVentasPorCategoriaAsync(vendedorId, fechaInicio, fechaFinal);
+                var ventasData = await _reporteService.GetVentasPorCategoriaAsync(_userId, fechaInicio, fechaFinal);
 
                 if (ventasData.Count == 0)
                 {
