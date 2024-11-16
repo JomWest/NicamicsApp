@@ -68,24 +68,24 @@
                 </ScrollView>
 
 
-                <CollectionView x:Name="ComicFavoritosCollectionView"
+                    <CollectionView x:Name="ComicFavoritosCollectionView"
                         ItemsSource="{Binding Comics}" 
                     VerticalOptions="FillAndExpand"
                                 ItemsLayout="VerticalList"
+                                SelectionMode="Single"
                                 >
-
-                    <!-- Definición de la plantilla de datos -->
+                        <!-- Definición de la plantilla de datos -->
                     <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:Comic">
                                 <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Grey" HasShadow="True" Margin="0,30,0,0">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
-                                      CommandParameter="{Binding comicId}" />
-                                </Frame.GestureRecognizers>
-                                <Frame.Shadow>
+                                    <Frame.Shadow>
                                     <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="100"/>
                                 </Frame.Shadow>
                                     <HorizontalStackLayout>
+                                        <HorizontalStackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
+                                      CommandParameter="{Binding comicId}"></TapGestureRecognizer>
+                                        </HorizontalStackLayout.GestureRecognizers>
                                         <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
 
                                             <ImageButton Source="{Binding imagenPortada}" HeightRequest="110" WidthRequest="75" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"

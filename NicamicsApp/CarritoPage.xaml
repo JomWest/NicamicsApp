@@ -51,9 +51,9 @@
                                                 <Label Text="{Binding Cantidad}" FontSize="16" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" WidthRequest="30" Margin="-5,0,0,0"/>
                                             </HorizontalStackLayout>
                                             <Image Source="eliminarr.png" WidthRequest="30" HeightRequest="30" Margin="220,0,0,0" HorizontalOptions="End">
-                                                <!--<Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CartViewModel}}, Path=RemoveFromCartCommand}" CommandParameter="{Binding .}"/>
-                                                </Image.GestureRecognizers>-->
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CartViewModel}}, Path=RemoveFromCartCommand}" CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>
                                             </Image>
                                         </VerticalStackLayout>
                                     </HorizontalStackLayout>

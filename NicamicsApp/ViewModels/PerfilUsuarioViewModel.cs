@@ -91,6 +91,7 @@ namespace NicamicsApp.ViewModels
         [RelayCommand]
         public void SelectComic(string comicId)
         {
+            SelectedComic = "";
             SelectedComic = comicId;
         }
 

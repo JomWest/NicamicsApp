@@ -13,7 +13,7 @@
             <VerticalStackLayout x:Name="MainContent">
                 <!-- Encabezado -->
                 <StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="10">
-                    <Image Source="arrow.png" />
+                    <ImageButton x:Name="imgArrowBack" Source="arrow.png" Clicked="imgArrowBack_Clicked"/>
                     <Label Text="Confirmación del pedido" 
             FontSize="Title"
             FontAttributes="Bold"

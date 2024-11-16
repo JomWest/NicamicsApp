@@ -94,4 +94,9 @@ public partial class CompraDetalle : ContentPage
     {
         CloseMenu();
     }
+
+    private async void imgArrowBack_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

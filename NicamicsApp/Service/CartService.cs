@@ -35,6 +35,7 @@ namespace NicamicsApp.Service
 
                 if (response.IsSuccessStatusCode)
                 {
+
                     return await response.Content.ReadFromJsonAsync<Cart>();
                 }
                 else
@@ -111,11 +112,11 @@ namespace NicamicsApp.Service
         }
 
         // Eliminar un ítem del carrito
-        public async Task<string> EliminarDelCarrito(string comicId, string userId, string token)
+        public async Task<string> EliminarDelCarrito(string cartId, string comicId, string token)
         {
             try
             {
-                var url = $"/api/Cart/{userId}/{comicId}";  
+                var url = $"/api/Cart/eliminar-item?cartId={cartId}&comicId={comicId}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
@@ -139,6 +140,8 @@ namespace NicamicsApp.Service
                 return $"Error: {ex.Message}";
             }
         }
+
+
 
         public async Task<string> EliminarCarrito(string userId)
         {

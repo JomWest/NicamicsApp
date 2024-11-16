@@ -46,6 +46,9 @@ namespace NicamicsApp.ViewModels
         private ObservableCollection<CartItem> cartItems = new();
 
         [ObservableProperty]
+        private string cartId;
+
+        [ObservableProperty]
         private double totalCart;
 
         [ObservableProperty]
@@ -124,8 +127,6 @@ namespace NicamicsApp.ViewModels
         }
 
 
-
-
         public async void LoadCart()
         {
             try
@@ -135,6 +136,7 @@ namespace NicamicsApp.ViewModels
                 if(cart != null)
                 {
                     CartItems = new ObservableCollection<CartItem>(cart.Items);
+                    CartId = cart.Id;
                     TotalCart = CalculateTotalCart();
                     foreach (var item in cart.Items)
                     {
@@ -245,11 +247,19 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                var response = await _cartService.EliminarDelCarrito(item.ComicId, IpAddress.userId, IpAddress.token);
-                Console.WriteLine(response);
+                var response = await _cartService.EliminarDelCarrito(CartId, item.ComicId, IpAddress.token);
 
-                CartItems.Remove(item);
-                TotalCart = CalculateTotalCart();
+                if (response.Contains("Error"))
+                {
+                    Mensaje = response;
+                }
+                else
+                {
+                    CartItems.Remove(item);
+                    TotalCart = CalculateTotalCart();
+                    Mensaje = response;
+                }
+                
             }
             catch (Exception ex)
             {

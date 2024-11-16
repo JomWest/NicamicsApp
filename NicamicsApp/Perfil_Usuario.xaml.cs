@@ -39,7 +39,6 @@ public partial class Perfil_Usuario : ContentPage
             if (_perfilUsuarioViewModel.SelectedComic != null && _perfilUsuarioViewModel.SelectedComic != "")
             {
                 // Navega a la página de detalle
-                Console.WriteLine($"Navegar Navegar");
                 await Navigation.PushAsync(_detalleManga.Create(_perfilUsuarioViewModel.SelectedComic));
             }
         }
