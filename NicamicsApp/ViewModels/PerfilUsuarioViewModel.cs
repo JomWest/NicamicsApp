@@ -1,6 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using BackendlessAPI.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NicamicsApp.Models;
+using NicamicsApp.Models.UserRequest;
 using NicamicsApp.Service;
 using System;
 using System.Collections.Generic;
@@ -29,13 +31,16 @@ namespace NicamicsApp.ViewModels
         private string _nombreCompleto;
 
         [ObservableProperty]
-        private string _selectedComic;
+        private string _selectedComic = "";
 
         [ObservableProperty]
         private ObservableCollection<Comic> comics = new();
 
         [ObservableProperty]
         private bool _isVendedor;
+
+        [ObservableProperty]
+        private string _mensaje = "";
 
         public void InitializeData()
         {
@@ -87,6 +92,27 @@ namespace NicamicsApp.ViewModels
         public void SelectComic(string comicId)
         {
             SelectedComic = comicId;
+        }
+
+        [RelayCommand]
+        public async Task AgregarEliminarFavoritoComic(string comicId)
+        {
+            try
+            {
+                var request = new AgregarFavoritoRequest
+                {
+                    UserId = IpAddress.userId,
+                    NuevoFavorito = comicId
+                };
+
+                var response = await _userServices.AgregarEliminarComicFavorito(request);
+
+                LoadComics();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error {ex.Message}");
+            }
         }
     }
 }

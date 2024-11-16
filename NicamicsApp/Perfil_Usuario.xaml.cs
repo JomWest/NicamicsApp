@@ -39,9 +39,8 @@ public partial class Perfil_Usuario : ContentPage
             if (_perfilUsuarioViewModel.SelectedComic != null && _perfilUsuarioViewModel.SelectedComic != "")
             {
                 // Navega a la página de detalle
-                NavegarAlDetalle(_perfilUsuarioViewModel.SelectedComic);
-                // Limpia el cómic seleccionado después de la navegación
-                _perfilUsuarioViewModel.SelectedComic = string.Empty;
+                Console.WriteLine($"Navegar Navegar");
+                await Navigation.PushAsync(_detalleManga.Create(_perfilUsuarioViewModel.SelectedComic));
             }
         }
     }
@@ -56,11 +55,6 @@ public partial class Perfil_Usuario : ContentPage
     {
         var _addcomic = _serviceProvider.GetService<AddComicPage>();
         await Navigation.PushAsync(_addcomic);
-    }
-    private async void NavegarAlDetalle(string comicId)
-    {
-        var detalleComic = _detalleManga.Create(comicId);
-        await Navigation.PushAsync(detalleComic);
     }
 
     private async void OnImageTappedMenu(object sender, EventArgs e)

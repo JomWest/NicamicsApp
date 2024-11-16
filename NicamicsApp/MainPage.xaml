@@ -111,6 +111,9 @@
                         <TapGestureRecognizer Tapped="CompraTapped"/>
                     </VerticalStackLayout.GestureRecognizers>
                     <Frame CornerRadius="50" Padding="0" Margin="0,10" HasShadow="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="CompraTapped"/>
+                        </Frame.GestureRecognizers>
                         <Grid>
                             <Image Source="{Binding ComicMasVendido.imagenPortada}" Aspect="AspectFill" HeightRequest="350" WidthRequest="400"/>
                         </Grid>

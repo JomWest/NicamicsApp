@@ -101,7 +101,7 @@ namespace NicamicsApp.ViewModels
         }
 
         [RelayCommand]
-        public async void AgregarEliminarFavoritoComic()
+        public async Task AgregarEliminarFavoritoComic()
         {
             try
             {
@@ -159,7 +159,7 @@ namespace NicamicsApp.ViewModels
 
                     if (message.Contains("Carrito"))
                     {
-                        Cart cart2 = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
+                        Cart? cart2 = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
 
                         if (cart2 != null)
                         {

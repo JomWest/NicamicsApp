@@ -6,8 +6,9 @@
              x:DataType="viewModels:PerfilUsuarioViewModel"
              xmlns:models="clr-namespace:NicamicsApp.Models"
              NavigationPage.HasNavigationBar="False">
-
-    <Grid>
+    <ScrollView>
+        <Grid>
+        
         <Frame x:Name="MainContent" BackgroundColor="Transparent" Padding="0" HasShadow="True" CornerRadius="0">
             <VerticalStackLayout VerticalOptions="FillAndExpand">
                 <VerticalStackLayout>
@@ -69,13 +70,14 @@
 
                 <CollectionView x:Name="ComicFavoritosCollectionView"
                         ItemsSource="{Binding Comics}" 
-                    SelectionMode="None"
-                    VerticalOptions="FillAndExpand">
+                    VerticalOptions="FillAndExpand"
+                                ItemsLayout="VerticalList"
+                                >
 
                     <!-- Definición de la plantilla de datos -->
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Comic">
-                            <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Grey" HasShadow="True" Margin="0,30,0,0">
+                            <DataTemplate x:DataType="models:Comic">
+                                <Frame HeightRequest="140" WidthRequest="350" CornerRadius="25" BorderColor="Grey" HasShadow="True" Margin="0,30,0,0">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
                                       CommandParameter="{Binding comicId}" />
@@ -83,9 +85,11 @@
                                 <Frame.Shadow>
                                     <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="100"/>
                                 </Frame.Shadow>
-                                <HorizontalStackLayout>
-                                    <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
-                                        <Image Source="{Binding imagenPortada}" HeightRequest="110" WidthRequest="75"/>
+                                    <HorizontalStackLayout>
+                                        <Frame Padding="0" HeightRequest="110" WidthRequest="75" CornerRadius="18">
+
+                                            <ImageButton Source="{Binding imagenPortada}" HeightRequest="110" WidthRequest="75" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=SelectComicCommand}"
+                                                         CommandParameter="{Binding comicId}"/>
                                     </Frame>
                                     <VerticalStackLayout Margin="10,0,0,0">
                                         <Label Text="{Binding nombre}" FontSize="15" WidthRequest="130" Margin="0,0,0,0"/>
@@ -103,10 +107,24 @@
                                                     <GradientStop Color="#A2B2FC" Offset="1.0" />
                                                 </LinearGradientBrush>
                                             </Frame.Background>
-                                            <Image Source="favorito_rojo.png"  HeightRequest="125" WidthRequest="125" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <ImageButton Source="favorito_rojo"  HeightRequest="125" WidthRequest="125" VerticalOptions="Center" HorizontalOptions="Center"
+                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PerfilUsuarioViewModel}}, Path=AgregarEliminarFavoritoComicCommand}"
+                                                         CommandParameter="{Binding comicId}"/>
                                         </Frame>
-                                        <Label Text="Marca 9.9" Margin="0,35,0,0" HorizontalOptions="Center" FontSize="12"/>
-                                    </VerticalStackLayout>
+                                            <StackLayout Padding="10">
+                                                <!-- Etiqueta estática 'Rating' -->
+                                                <Label Text="Rating" 
+                                                 HorizontalOptions="Start" 
+                                                 FontSize="12" 
+                                                 Margin="0,0,0,5"/>
+
+                                                <!-- Valor de ratingPromedio con el binding -->
+                                                <Label Text="{Binding ratingPromedio}" 
+                                                 HorizontalOptions="Center" 
+                                                 FontSize="12" 
+                                                 />
+                                            </StackLayout>
+                                        </VerticalStackLayout>
                                 </HorizontalStackLayout>
                             </Frame>
                         </DataTemplate>
@@ -125,7 +143,7 @@
                  IsVisible="False"
                  VerticalOptions="FillAndExpand"
                  HorizontalOptions="FillAndExpand"/>
-        <Frame x:Name="BottomMenu"
+            <Frame x:Name="BottomMenu"
                CornerRadius="98"
                Padding="10"
                IsVisible="False"
@@ -137,27 +155,28 @@
                VerticalOptions="End"
                Margin="0,0,0,-60"
                >
-            <Frame.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#F2F2F2" Offset="0.0" />
-                    <GradientStop Color="#A2B2FC" Offset="1.0" />
-                </LinearGradientBrush>
-            </Frame.Background>
-            <StackLayout>
-                <Image Source="menos.png" HorizontalOptions="Center" HeightRequest="120" WidthRequest="70" Margin="0,-40,0,0">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnTappedSalidaMenu"/>
-                    </Image.GestureRecognizers>
-                </Image>
-                <VerticalStackLayout Spacing="-20">
-                    <Button Text="Ajustes"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,300,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
-                    <Button Text="Historial de Compras"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,265,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
-                    <Button Text="Lista de Deseos"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,315,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
-                    <Button Text="Cerrar Sesion"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,235,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#F2F2F2" Offset="0.0" />
+                        <GradientStop Color="#A2B2FC" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <StackLayout>
+                    <Image Source="menos.png" HorizontalOptions="Center" HeightRequest="120" WidthRequest="70" Margin="0,-40,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTappedSalidaMenu"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout Spacing="-20">
+                        <Button Text="Ajustes"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,300,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                        <Button Text="Historial de Compras"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,265,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                        <Button Text="Lista de Deseos"     FontSize="22"  WidthRequest="550"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,315,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
+                        <Button Text="Cerrar Sesion"     FontSize="22"  WidthRequest="450"  HeightRequest="80"  HorizontalOptions="Start"  Padding="0,0,235,0"     TextColor="Black"  FontAttributes="Bold" BackgroundColor="Transparent" />
 
 
-                </VerticalStackLayout>
-            </StackLayout>
-        </Frame>
-    </Grid>
+                    </VerticalStackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
 </ContentPage>

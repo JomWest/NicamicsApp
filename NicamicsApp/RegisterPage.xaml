@@ -119,7 +119,7 @@
                  WidthRequest="320"
                  Margin="0,20,0,0"
                  TextColor="#fff"
-                 TitleColor="#fff"
+                 TitleColor="#fef"
                  BackgroundColor="Transparent">
                     </Picker>
 
