@@ -53,6 +53,41 @@ namespace NicamicsApp.Service
             }
         }
 
+        public async Task<List<Comic>> Obtener20ComicsPorNombre(string nombre,string token)
+        {
+            try
+            {
+                if(nombre == "")
+                {
+                    return await Obtener20Comics(token);
+                }
+
+                var url = $"/api/Comic/BuscarComicsPorNombre?nombre={nombre.ToLower()}";
+
+                // Agregar el encabezado de autenticación Bearer
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<List<Comic>>();
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
 
         public async Task<string> CrearComic(Comic comic, string token)
         {

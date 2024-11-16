@@ -5,8 +5,8 @@
              xmlns:models="clr-namespace:NicamicsApp.Models"
              x:DataType="viewmodel:MainPageViewModel"
               NavigationPage.HasNavigationBar="False">
-
     <Grid RowDefinitions="*,Auto" Padding="0">
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding ExecuteRefreshCommandCommand}">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="10,20">
                 <Grid ColumnDefinitions="Auto,*">
@@ -39,7 +39,7 @@
                     </HorizontalStackLayout>
                 </Grid>
 
-                <Frame BorderColor="White" HasShadow="True" CornerRadius="50" WidthRequest="350" HeightRequest="62">
+                <Frame BorderColor="White" HasShadow="True" CornerRadius="50" WidthRequest="350" HeightRequest="80">
                     <Frame.Shadow>
                         <Shadow
                            Brush="#000000"
@@ -49,9 +49,15 @@
                     </Frame.Shadow>
                     <Grid>
                         <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand" Spacing="10">
-                            <Image Source="lupa.png" HorizontalOptions="Start" HeightRequest="21" VerticalOptions="Center" />
-                            <Label Text="Buscar Comics" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" />
-                            <Image Source="filtrar.png" HorizontalOptions="End" HeightRequest="22" WidthRequest="22" Margin="130,0,0,0"/>
+                            <ImageButton Source="lupa.png" HorizontalOptions="Start" HeightRequest="21" VerticalOptions="Center" Command="{Binding LoadComicsPorNombreCommand}"/>
+                            <!--<Label Text="Buscar Comics" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" /> -->
+                            <Entry Placeholder="Buscar Comics" Text="{Binding NombreBusqueda}" FontSize="15"
+                                   FontAttributes="Bold" VerticalOptions="End" TextColor="#000"
+                                   BackgroundColor="Transparent"
+                                HorizontalOptions="FillAndExpand"
+                                   WidthRequest="220"
+                                ></Entry>
+                            <Image Source="filtrar.png" HorizontalOptions="End" HeightRequest="22" WidthRequest="22" Margin="0,0,0,0"/>
                         </HorizontalStackLayout>
                     </Grid>
                 </Frame>
@@ -148,5 +154,6 @@
 
             </VerticalStackLayout>
         </ScrollView>
+        </RefreshView>
     </Grid>
 </ContentPage>

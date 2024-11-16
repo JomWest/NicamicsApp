@@ -24,6 +24,8 @@ namespace NicamicsApp.ViewModels
             _userService = userService;
         }
 
+        [ObservableProperty]
+        private bool _isRefreshing = false;
 
         [ObservableProperty]
         private string nombreUsuario = "";
@@ -42,6 +44,9 @@ namespace NicamicsApp.ViewModels
 
         [ObservableProperty]
         private string selectedComic;
+
+        [ObservableProperty]
+        private string _nombreBusqueda;
 
         public void InitializeData()
         {
@@ -81,6 +86,20 @@ namespace NicamicsApp.ViewModels
             }
         }
 
+        [RelayCommand]
+        public async void LoadComicsPorNombre()
+        {
+            try
+            {
+                var comicsList = await _comicService.Obtener20ComicsPorNombre(NombreBusqueda,IpAddress.token);
+                Comics = new ObservableCollection<Comic>(comicsList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error {ex.Message}");
+            }
+        }
+
         private async void ComicMasVendidoFunc()
         {
             if (string.IsNullOrEmpty(IpAddress.token))
@@ -107,6 +126,24 @@ namespace NicamicsApp.ViewModels
         public void SelectComic(string comicId)
         {
             SelectedComic = comicId; 
+        }
+
+        [RelayCommand]
+        private async void ExecuteRefreshCommand()
+        {
+            // Empezamos el refresco
+            IsRefreshing = true;
+
+            try
+            {
+                NombreBusqueda = "";
+                InitializeData();
+            }
+            finally
+            {
+                // Detenemos el refresco
+                IsRefreshing = false;
+            }
         }
 
     }

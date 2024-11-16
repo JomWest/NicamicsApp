@@ -71,6 +71,27 @@ namespace NicamicsApp
            var detalle = _detalleManga.Create(_mainPageViewModel.ComicMasVendido.comicId);
             await Navigation.PushAsync(detalle);
         }
+
+        private async void DisplayExitConfirmation()
+        {
+            var result = await DisplayAlert("Salir", "¿Deseas salir de la aplicación?", "Sí", "No");
+            if (result)
+            {
+                // Si el usuario confirma, cerrar la aplicación
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+            }
+            else
+            {
+                // Si el usuario elige No, mantener la app abierta
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            DisplayExitConfirmation();
+            return true;
+            
+        }
     }
 
 }
