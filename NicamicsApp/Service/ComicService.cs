@@ -1,4 +1,5 @@
 ﻿using NicamicsApp.Models;
+using NicamicsApp.Models.ComicRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,11 +54,11 @@ namespace NicamicsApp.Service
             }
         }
 
-        public async Task<List<Comic>> Obtener20ComicsPorNombre(string nombre,string token)
+        public async Task<List<Comic>> Obtener20ComicsPorNombre(string nombre, string token)
         {
             try
             {
-                if(nombre == "")
+                if (nombre == "")
                 {
                     return await Obtener20Comics(token);
                 }
@@ -184,7 +185,7 @@ namespace NicamicsApp.Service
         }
 
 
-        public async Task<Comic> ComicConMasVentas(string token)
+        public async Task<ComicMasVendidoCategoriaResp> ComicConMasVentas(string token)
         {
             try
             {
@@ -196,7 +197,36 @@ namespace NicamicsApp.Service
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<Comic>();
+                    return await response.Content.ReadFromJsonAsync<ComicMasVendidoCategoriaResp>();
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
+        public async Task<ComicMasVendidoCategoriaResp> ComicConMasVentasPorCategoria(string categoria)
+        {
+            try
+            {
+                var url = $"/api/Comic/ComicMasVendidoPorCategoria?categoria={categoria}";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<ComicMasVendidoCategoriaResp>();
                 }
                 else
                 {

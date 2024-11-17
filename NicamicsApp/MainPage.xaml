@@ -115,13 +115,13 @@
                             <TapGestureRecognizer Tapped="CompraTapped"/>
                         </Frame.GestureRecognizers>
                         <Grid>
-                            <Image Source="{Binding ComicMasVendido.imagenPortada}" Aspect="AspectFill" HeightRequest="350" WidthRequest="400"/>
+                            <Image Source="{Binding ComicMasVendido.ImagenPortada}" Aspect="AspectFill" HeightRequest="350" WidthRequest="400"/>
                         </Grid>
                     </Frame>
                     <StackLayout Padding="15" HorizontalOptions="Start" Margin="0,-10,0,10">
-                        <Label Text="{Binding ComicMasVendido.nombre}" FontSize="21" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding ComicMasVendido.Nombre}" FontSize="21" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="Top 1 en ventas" FontSize="22" TextColor="#A2B2FC" />
-                        <Label Text="{Binding ComicMasVendido.descripcion}" FontSize="12" TextColor="Black"/>
+                        <Label Text="{Binding ComicMasVendido.Descripcion}" FontSize="12" TextColor="Black"/>
                     </StackLayout>
 
                     <Label Text="Contenido mas leido" FontSize="20" FontAttributes="Bold" Margin="10,10" />

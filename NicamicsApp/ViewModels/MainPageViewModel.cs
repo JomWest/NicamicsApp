@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NicamicsApp.Models;
+using NicamicsApp.Models.ComicRequest;
 using NicamicsApp.Service;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace NicamicsApp.ViewModels
         private string mensaje = "";
 
         [ObservableProperty]
-        private Comic? comicMasVendido;
+        private ComicMasVendidoCategoriaResp? comicMasVendido;
 
         [ObservableProperty]
         private string selectedComic;
@@ -131,6 +132,12 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
+                if(categoria == "Inicio") { 
+                    LoadComics();
+                    ComicMasVendidoFunc();
+                    return;
+                }
+
                 var response = await _comicService.Obtener20ComicsPorCategoria(categoria, IpAddress.token);
 
                 if (response.Count == 0)
@@ -140,6 +147,13 @@ namespace NicamicsApp.ViewModels
                 }
                 else
                 {
+                    var responseComic = await _comicService.ComicConMasVentasPorCategoria(categoria);
+
+                    if (responseComic != null)
+                    {
+                        ComicMasVendido = responseComic;
+                    }
+
                     Comics = new ObservableCollection<Comic>(response);
                 }
             }
