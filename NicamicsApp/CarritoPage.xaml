@@ -80,7 +80,7 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="DetalleCompra"/>
                         </Frame.GestureRecognizers>
-                        <Button Text="Comprar Ahora" FontSize="18" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center"  />
+                        <Button Text="Comprar Ahora" FontSize="18" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked" />
                     </Frame>
                 </VerticalStackLayout>
             </Frame>

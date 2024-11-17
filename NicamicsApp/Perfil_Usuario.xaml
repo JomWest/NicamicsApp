@@ -63,11 +63,11 @@
 
                 <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
 
-                <ScrollView Orientation="Vertical">
-                    <VerticalStackLayout x:Name="ComicFavoritos" Spacing="15" />
-                </ScrollView>
-
-
+                    <ScrollView Orientation="Vertical">
+                        <VerticalStackLayout x:Name="ComicFavoritos" Spacing="15" />
+                    </ScrollView>
+                
+                
                     <CollectionView x:Name="ComicFavoritosCollectionView"
                         ItemsSource="{Binding Comics}" 
                     VerticalOptions="FillAndExpand"

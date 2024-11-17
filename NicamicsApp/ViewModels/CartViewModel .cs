@@ -18,12 +18,15 @@ namespace NicamicsApp.ViewModels
         private readonly CartService _cartService;
         private readonly AddressService _addressService;
         private readonly OrderService _orderService;
+        private readonly TarifaService _tarifaService;
 
-        public CartViewModel(CartService cartService, AddressService addressService, OrderService orderService)
+        public CartViewModel(CartService cartService, AddressService addressService,
+            OrderService orderService, TarifaService tarifaService)
         {
             _cartService = cartService;
             _addressService = addressService;
             _orderService = orderService;
+            _tarifaService = tarifaService;
         }
 
         [ObservableProperty]
@@ -83,6 +86,8 @@ namespace NicamicsApp.ViewModels
 
 
 
+        [ObservableProperty]
+        private string _envio;
 
         [ObservableProperty]
         private double _precio ;
@@ -103,7 +108,7 @@ namespace NicamicsApp.ViewModels
         private string _errorMessage = "";
 
 
-        public async void LoadAddresses()
+        public async Task LoadAddresses()
         {
             try
             {
@@ -127,7 +132,7 @@ namespace NicamicsApp.ViewModels
         }
 
 
-        public async void LoadCart()
+        public async Task LoadCart()
         {
             try
             {
@@ -137,7 +142,6 @@ namespace NicamicsApp.ViewModels
                 {
                     CartItems = new ObservableCollection<CartItem>(cart.Items);
                     CartId = cart.Id;
-                    TotalCart = CalculateTotalCart();
                     foreach (var item in cart.Items)
                     {
                         Console.WriteLine($"ImagenPortada{item.imagenPortada}  ,NombreComic: {item.nombreComic}, Precio: {item.Precio}, Cantidad: {item.Cantidad}");
@@ -232,15 +236,84 @@ namespace NicamicsApp.ViewModels
         }
 
 
-        private double CalculateTotalCart()
+        public double CalculateTotalCart()
         {
             double total = 0;
             foreach (var item in CartItems)
             {
                 total += item.Cantidad * item.Precio;
             }
+            TotalCart = total;
             return total;
         }
+
+        [RelayCommand]
+        public async Task<double> CalculateTotalCart2(Address? address)
+        {
+            double total = 0;
+            double envioTotal = 0;
+
+            // Verificar si hay direcciones disponibles
+            if (Addresses == null || !Addresses.Any())
+            {
+                Envio = "C$ 0";
+                TotalCart = CalculateTotalCart();
+                return 0;
+            }
+
+            foreach (var item in CartItems)
+            {
+                double? costoEnvio;
+                // Calcular el costo del envío para este item
+
+                if (address?.Departamento == "")
+                {
+                    costoEnvio = await CalcularCostoEnvio(item.VendedorID, Addresses[0].Departamento);
+                }
+                else
+                {
+                    costoEnvio = await CalcularCostoEnvio(item.VendedorID, address?.Departamento!);
+                }
+                
+
+                // Sumar el costo del envío si no es nulo
+                if (costoEnvio.HasValue)
+                {
+                    envioTotal += costoEnvio.Value;
+                }
+
+                // Sumar el costo de los productos al total
+                total += item.Cantidad * item.Precio;
+            }
+            SelectedAddress = address!;
+            Envio = $"C$ {envioTotal.ToString("F2")}";
+            TotalCart = total + envioTotal;
+            return total + envioTotal;
+        }
+
+        private async Task<double?> CalcularCostoEnvio(string vendedorId, string departamentoDestino)
+        {
+            try
+            {
+                // Obtener el departamento del vendedor
+                var departamentoVendedor = await _tarifaService.ObtenerDepartamentoUsuario(vendedorId);
+
+                if (departamentoVendedor != null)
+                {
+                    // Obtener el precio de la tarifa entre los departamentos
+                    return await _tarifaService.ObtenerPrecioTarifa(departamentoVendedor, departamentoDestino, IpAddress.token);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción relacionada con el cálculo del envío
+                Console.WriteLine($"Error al calcular el costo de envío: {ex.Message}");
+            }
+
+            // Retornar null si no se pudo calcular el costo de envío
+            return null;
+        }
+
 
         [RelayCommand]
         public async void RemoveFromCart(CartItem item)

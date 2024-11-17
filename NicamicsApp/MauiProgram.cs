@@ -28,7 +28,7 @@ namespace NicamicsApp
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<AddressService>();
             builder.Services.AddSingleton<OrderService>();
-
+            builder.Services.AddSingleton<TarifaService>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();

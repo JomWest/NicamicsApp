@@ -63,56 +63,50 @@
                 </Frame>
 
 
-                <ScrollView Orientation="Horizontal">
-                    <HorizontalStackLayout Margin="0,10" Spacing="-30">
-                        <Frame WidthRequest="90" HeightRequest="38" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
-                            <Frame.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#F2F2F2" Offset="0.0" />
-                                    <GradientStop Color="#A2B2FC" Offset="1.0" />
-                                </LinearGradientBrush>
-                            </Frame.Background>
-                            <Frame.Shadow>
-                                <Shadow
-                                  Brush="#000000"
-                                  Opacity="0.1"
-                                  Offset="0,1"
-                                  Radius="100"/>
-                            </Frame.Shadow>
-                            <Button Text="Inicio" FontSize="14" FontAttributes="Bold" TextColor="White" BackgroundColor="Transparent" Margin="0,0,0,0" />
-                        </Frame>
+                    <CollectionView 
+                        ItemsSource="{Binding Categorias}" 
+                        ItemsLayout="HorizontalList" 
+                        Margin="0,10" 
+                        HorizontalScrollBarVisibility="Never">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Categoria">
+                                <Frame 
+                             MaximumWidthRequest="150"
+                            HeightRequest="40" 
+                            CornerRadius="100" 
+                            Padding="0" 
+                            Margin="10,0" 
+                            HasShadow="True" 
+                            BorderColor="Transparent">
+                                    <Frame.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#F2F2F2" Offset="0.0" />
+                                            <GradientStop Color="#A2B2FC" Offset="1.0" />
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                    <Frame.Shadow>
+                                        <Shadow 
+                                 Brush="#000000" 
+                                 Opacity="0.1" 
+                                 Offset="0,1" 
+                                 Radius="20"/>
+                                    </Frame.Shadow>
+                                    <Button 
+                                        Text="{Binding categoria}" 
+                                        FontSize="14" 
+                                        FontAttributes="Bold" 
+                                        TextColor="Black" 
+                                        BackgroundColor="Transparent" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=LoadComicsPorCategoriaCommand}"
+                                        CommandParameter="{Binding categoria}"
+                                        />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                        <Frame WidthRequest="90" HeightRequest="38" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
-                            <Frame.Shadow>
-                                <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="20"/>
-                            </Frame.Shadow>
-                            <Button Text="Misterio" FontSize="14" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" Margin="0,0,0,0" />
-                        </Frame>
 
-                        <Frame WidthRequest="90" HeightRequest="38" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
-                            <Frame.Shadow>
-                                <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="20"/>
-                            </Frame.Shadow>
-                            <Button Text="Romance" FontSize="14" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" Margin="0,0,0,0" />
-                        </Frame>
-
-                        <Frame WidthRequest="95" HeightRequest="40" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
-                            <Frame.Shadow>
-                                <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="20"/>
-                            </Frame.Shadow>
-                            <Button Text="Psicologia" FontSize="14" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" Margin="0,0,0,0" />
-                        </Frame>
-
-                        <Frame WidthRequest="90" HeightRequest="38" CornerRadius="100" Padding="0" Margin="20" HasShadow="True" BorderColor="Transparent">
-                            <Frame.Shadow>
-                                <Shadow Brush="#000000" Opacity="0.2" Offset="0,1" Radius="20"/>
-                            </Frame.Shadow>
-                            <Button Text="Misterio" FontSize="14" FontAttributes="Bold" TextColor="Black" BackgroundColor="Transparent" Margin="0,0,0,0" />
-                        </Frame>
-
-                    </HorizontalStackLayout>
-                </ScrollView>
-                <VerticalStackLayout>
+                    <VerticalStackLayout>
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CompraTapped"/>
                     </VerticalStackLayout.GestureRecognizers>

@@ -15,10 +15,11 @@ public partial class CarritoPage : ContentPage
         BindingContext = _cartviewmodel;
     }
 
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
-        _cartviewmodel.LoadCart();
+        await _cartviewmodel.LoadCart();
+        _cartviewmodel.CalculateTotalCart();
     }
 
     private async void OnImageTappedMenu(object sender, EventArgs e)
@@ -54,6 +55,12 @@ public partial class CarritoPage : ContentPage
     private async void imgArrowBack_Clicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        var _detalleCompra = _serviceProvider.GetService<CompraDetalle>();
+        await Navigation.PushAsync(_detalleCompra);
     }
 
     //private void OnStepperValueChanged(object sender, ValueChangedEventArgs e)

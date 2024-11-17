@@ -33,6 +33,11 @@
                                     <Grid Padding="10" RowDefinitions="auto, auto" ColumnDefinitions="auto, *" Margin="5">
                                         <!-- Cambia el borde de Frame si es la dirección seleccionada -->
                                         <Frame Grid.Column="1" CornerRadius="10"  BorderColor="{Binding Source={x:Reference this}, Path=BindingContext.SelectedAddress, Converter={StaticResource AddressBorderConverter}}"   HasShadow="True" Padding="10" Margin="0">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CartViewModel}}, Path=CalculateTotalCart2Command}"
+                                                                      CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                            </Frame.GestureRecognizers>
                                             <VerticalStackLayout Spacing="5">
                                                 <HorizontalStackLayout>
                                                     <Image Source="location_icon.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="Start"/>
@@ -117,7 +122,7 @@
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Gastos de envío" FontSize="16" />
-                            <Label Text="C$0.00" FontSize="16" HorizontalOptions="EndAndExpand" />
+                            <Label Text="{Binding Envio}" FontSize="16" HorizontalOptions="EndAndExpand" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

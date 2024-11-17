@@ -38,6 +38,8 @@ namespace NicamicsApp
 
         private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+
+
             if (e.PropertyName == nameof(_mainPageViewModel.SelectedComic))
             {
                 // Verifica si hay un cómic seleccionado
@@ -48,6 +50,11 @@ namespace NicamicsApp
                     // Limpia el cómic seleccionado después de la navegación
                     _mainPageViewModel.SelectedComic = string.Empty;
                 }
+            }
+
+            if(e.PropertyName == nameof(_mainPageViewModel.Mensaje) && _mainPageViewModel.Mensaje != "")
+            {
+                await DisplayAlert("Mensaje", _mainPageViewModel.Mensaje, "OK");
             }
         }
 

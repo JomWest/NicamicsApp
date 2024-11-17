@@ -22,7 +22,29 @@ namespace NicamicsApp.ViewModels
         {
             _comicService = comicService;
             _userService = userService;
+
+            Categorias = new List<Categoria>
+            {
+        new Categoria("Inicio", true),
+        new Categoria("Accion", false),
+        new Categoria("Aventura", false),
+        new Categoria("Comedia", false),
+        new Categoria("Drama", false),
+        new Categoria("Fantasia", false),
+        new Categoria("Horror", false),
+        new Categoria("Misterio", false),
+        new Categoria("Romance", false),
+        new Categoria("Ciencia Ficcion", false),
+        new Categoria("Deportes", false),
+        new Categoria("Supernatural", false),
+        new Categoria("Suspenso", false),
+        new Categoria("Mecha", false),
+        new Categoria("Historico", false)
+    };
         }
+
+        [ObservableProperty]
+        private List<Categoria> _categorias;
 
         [ObservableProperty]
         private bool _isRefreshing = false;
@@ -46,13 +68,16 @@ namespace NicamicsApp.ViewModels
         private string selectedComic;
 
         [ObservableProperty]
+        private string _selectedCategoria;
+
+        [ObservableProperty]
         private string _nombreBusqueda;
 
         public void InitializeData()
         {
-             LoadUser();
-             LoadComics();
-             ComicMasVendidoFunc();
+            LoadUser();
+            LoadComics();
+            ComicMasVendidoFunc();
         }
 
         public async void LoadUser()
@@ -60,12 +85,13 @@ namespace NicamicsApp.ViewModels
             try
             {
                 var user = await _userService.ObtenerUsuarioPorId(IpAddress.userId);
-                if (user != null){
+                if (user != null)
+                {
                     FotoUsuario = user.foto;
                     NombreUsuario = user.nombre;
                     IpAddress.nombreusuario = user.nombre;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -87,17 +113,41 @@ namespace NicamicsApp.ViewModels
         }
 
         [RelayCommand]
-        public async void LoadComicsPorNombre()
+        public async Task LoadComicsPorNombre()
         {
             try
             {
-                var comicsList = await _comicService.Obtener20ComicsPorNombre(NombreBusqueda,IpAddress.token);
+                var comicsList = await _comicService.Obtener20ComicsPorNombre(NombreBusqueda, IpAddress.token);
                 Comics = new ObservableCollection<Comic>(comicsList);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error {ex.Message}");
             }
+        }
+
+        [RelayCommand]
+        public async Task LoadComicsPorCategoria(string categoria)
+        {
+            try
+            {
+                var response = await _comicService.Obtener20ComicsPorCategoria(categoria, IpAddress.token);
+
+                if (response.Count == 0)
+                {
+                    Mensaje = "";
+                    Mensaje = $"No se encontraron comics en la categoría: {categoria}";
+                }
+                else
+                {
+                    Comics = new ObservableCollection<Comic>(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+            }
+
         }
 
         private async void ComicMasVendidoFunc()
@@ -111,7 +161,7 @@ namespace NicamicsApp.ViewModels
             {
                 var response = await _comicService.ComicConMasVentas(IpAddress.token);
 
-                if(response != null)
+                if (response != null)
                 {
                     ComicMasVendido = response;
                 }
@@ -125,11 +175,11 @@ namespace NicamicsApp.ViewModels
         [RelayCommand]
         public void SelectComic(string comicId)
         {
-            SelectedComic = comicId; 
+            SelectedComic = comicId;
         }
 
         [RelayCommand]
-        private async void ExecuteRefreshCommand()
+        private void ExecuteRefreshCommand()
         {
             // Empezamos el refresco
             IsRefreshing = true;

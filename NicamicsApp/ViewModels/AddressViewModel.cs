@@ -63,10 +63,10 @@ namespace NicamicsApp.ViewModels
         {
             Departamento = new ObservableCollection<string>
             {
-               "Boaco", "Carazo", "Chinandega", "Chontales", "Estelí",
-            "Granada", "Jinotega", "León", "Madriz", "Managua",
-            "Masaya", "Matagalpa", "Nueva Segovia", "Rivas", "Río San Juan",
-            "Región Autónoma de la Costa Caribe Norte", "Región Autónoma de la Costa Caribe Sur"
+               "Boaco", "Carazo", "Chinandega", "Chontales", "Esteli",
+            "Granada", "Jinotega", "Leon", "Madriz", "Managua",
+            "Masaya", "Matagalpa", "Nueva Segovia", "Rivas", "Rio San Juan",
+            "RAAN", "RAAS"
             };
         }
 

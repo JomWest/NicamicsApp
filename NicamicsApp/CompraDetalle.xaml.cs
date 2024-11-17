@@ -13,11 +13,17 @@ public partial class CompraDetalle : ContentPage
         _serviceProvider = serviceProvider;
         _cartviewmodel = _serviceProvider.GetService<CartViewModel>();
         BindingContext = _cartviewmodel;
-        _cartviewmodel.LoadCart();
-        _cartviewmodel.LoadAddresses();
         InitializeComponent();
 
         _cartviewmodel.PropertyChanged += OnViewModelPropertyChanged;
+    }
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        await _cartviewmodel.LoadCart();
+        await _cartviewmodel.LoadAddresses();
+        await _cartviewmodel.CalculateTotalCart2(null);
     }
 
     private async void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
