@@ -70,7 +70,7 @@
 
                         <!-- Stepper para cantidad -->
                         <VerticalStackLayout HorizontalOptions="Center" Margin="0,20,0,0">
-                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="15" IsVisible="{Binding EnCarrito}">
                                 <Frame Padding="0" HeightRequest="40" WidthRequest="40">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnDecrementClicked"/>
@@ -113,7 +113,7 @@
                                         <GradientStop Color="#A2B2FC" Offset="1.0" />
                                     </LinearGradientBrush>
                                 </Frame.Background>
-                                <Button Text="Agregar al carrito" 
+                                <Button Text="{Binding EnCarritoText}" 
                                         FontSize="18" 
                                         TextColor="White" 
                                         BackgroundColor="Transparent" 
@@ -163,7 +163,6 @@
                 <VerticalStackLayout Spacing="-20">
                     <Button Text="Ajustes" FontSize="22" WidthRequest="450" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,300,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
                     <Button Text="Historial de Compras" FontSize="22" WidthRequest="550" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,265,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
-                    <Button Text="Lista de Deseos" FontSize="22" WidthRequest="550" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,315,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
                     <Button Text="Cerrar Sesión" FontSize="22" WidthRequest="450" HeightRequest="80" HorizontalOptions="Start" Padding="0,0,235,0" TextColor="Black" FontAttributes="Bold" BackgroundColor="Transparent" />
                 </VerticalStackLayout>
             </StackLayout>

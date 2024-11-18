@@ -171,5 +171,52 @@ namespace NicamicsApp.Service
                 return $"Error: {ex.Message}";
             }
         }
+
+        public async Task<bool> ComicEnCarrito(string userId, string comicId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(comicId) || string.IsNullOrEmpty(token))
+            {
+                throw new ArgumentException("userId, comicId y token no pueden estar vacíos.");
+            }
+
+            try
+            {
+                // Configura el encabezado de autorización con el token
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                // Construye la URL con los parámetros
+                var url = $"/api/Cart/ComicEnCarrito?userId={userId}&comicId={comicId}";
+
+                // Realiza la solicitud GET
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return false;
+                }
+                else
+                {
+                    // Si hay otro tipo de error, lanza una excepción
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Error al verificar el carrito: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Manejo de errores de solicitud HTTP
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores generales
+                throw new Exception($"Error inesperado: {ex.Message}", ex);
+            }
+        }
+
     }
 }

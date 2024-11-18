@@ -38,6 +38,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private double _precio;
 
+        [ObservableProperty]
+        private int _stock;
+
         public string PrecioFormatted => $"C$ {Precio}";
 
         [ObservableProperty]
@@ -61,6 +64,13 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         public string _nombrevendedor = "";
 
+
+        [ObservableProperty]
+        private bool _enCarrito = false;
+
+        [ObservableProperty]
+        private string _enCarritoText = "Agregar al carrito";
+
         public async void LoadComic(string comicId)
         {
             try
@@ -76,10 +86,25 @@ namespace NicamicsApp.ViewModels
                     DescripcionComic = response.descripcion;
                     ImagenPortada = response.imagenPortada;
                     Rating = $"{response.ratingPromedio.ToString()}/5";
+                    Stock = response.stock;
                     CambiarImagenFavorito(IpAddress.userId, comicId);
 
                     OnPropertyChanged(nameof(PrecioFormatted));
+                } else{return;}
+
+                var response2 = await _cartService.ComicEnCarrito(IpAddress.userId, response.comicId,IpAddress.token);
+
+                if (response2)
+                {
+                    EnCarrito = !response2;
+                    EnCarritoText = "Ya en el carrito";
                 }
+                else
+                {
+                    EnCarrito = !response2;
+                    EnCarritoText = "Agregar al carrito";
+                }
+
             }
             catch (Exception ex)
             {
@@ -147,11 +172,17 @@ namespace NicamicsApp.ViewModels
         }
 
         [RelayCommand]
-        public async void AgregarAlCarrito()
+        public async Task AgregarAlCarrito()
         {
             try
             {
-                Cart cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
+                if (!EnCarrito)
+                {
+                    Mensaje = "Comic ya agregado en el carrito";
+                    return;
+                }
+
+                Cart? cart = await _cartService.ObtenerCarrito(IpAddress.userId, IpAddress.token);
 
                 if (cart == null)
                 {
@@ -163,6 +194,12 @@ namespace NicamicsApp.ViewModels
 
                         if (cart2 != null)
                         {
+                            if(Cantidad > Stock)
+                            {
+                                Mensaje = "La cantidad ingresada es mayor al stock disponible";
+                                return;
+                            }
+
                             var item = new CartItem
                             {
                                 ComicId = _comicId,
@@ -171,14 +208,12 @@ namespace NicamicsApp.ViewModels
                                 nombreComic = NombreComic,
                                 Cantidad = Cantidad,
                                 Precio = Precio,
-                               
-
                             };
 
                             var response = await _cartService.AgregarCarrito(item, cart2.Id);
                             if (response.Contains("Item"))
                             {
-                                Mensaje = "Comic se agrego al carrito con exito";
+                                Mensaje = "Comic se agregado al carrito con exito";
                             }
                             else
                             {
@@ -190,6 +225,12 @@ namespace NicamicsApp.ViewModels
                 }
                 else
                 {
+                    if (Cantidad > Stock)
+                    {
+                        Mensaje = "La cantidad ingresada es mayor al stock disponible";
+                        return;
+                    }
+
                     var item = new CartItem
                     {
                         ComicId = _comicId,
@@ -203,7 +244,7 @@ namespace NicamicsApp.ViewModels
                     var response =  await _cartService.AgregarCarrito(item, cart.Id);
                     if (response.Contains("Item"))
                     {
-                        Mensaje = "Comic se agrego al carrito con exito";
+                        Mensaje = "Comic agregado al carrito con exito";
                     }
                     else
                     {

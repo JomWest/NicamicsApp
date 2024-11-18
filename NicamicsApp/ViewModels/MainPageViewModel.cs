@@ -149,14 +149,14 @@ namespace NicamicsApp.ViewModels
                 }
                 else
                 {
+                    Comics = new ObservableCollection<Comic>(response);
+
                     var responseComic = await _comicService.ComicConMasVentasPorCategoria(categoria);
 
                     if (responseComic != null)
                     {
                         ComicMasVendido = responseComic;
-                    }
-
-                    Comics = new ObservableCollection<Comic>(response);
+                    } 
                 }
             }
             catch (Exception ex)

@@ -45,6 +45,13 @@ public partial class DetalleManga : ContentPage
             var viewModel = (DetalleMangaViewModel)BindingContext;
             if (!string.IsNullOrEmpty(viewModel.Mensaje))
             {
+                if(viewModel.Mensaje != "Comic agregado al carrito con exito" && viewModel.Mensaje != "Comic ya agregado en el carrito")
+                {
+                    await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                    viewModel.Mensaje = string.Empty;
+                    return;
+                }
+
                 await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
                 viewModel.Mensaje = string.Empty;
                 var _compradetalle = _serviceProvider.GetService<CarritoPage>();

@@ -214,7 +214,7 @@ namespace NicamicsApp.Service
             }
         }
 
-        public async Task<ComicMasVendidoCategoriaResp> ComicConMasVentasPorCategoria(string categoria)
+        public async Task<ComicMasVendidoCategoriaResp?> ComicConMasVentasPorCategoria(string categoria)
         {
             try
             {
@@ -230,7 +230,7 @@ namespace NicamicsApp.Service
                 }
                 else
                 {
-                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    return null;
                 }
             }
             catch (HttpRequestException ex)
