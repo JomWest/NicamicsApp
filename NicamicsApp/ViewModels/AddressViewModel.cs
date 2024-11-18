@@ -59,7 +59,7 @@ namespace NicamicsApp.ViewModels
         private string _errorMessage = "";
 
 
-        public async void cargardepartamentos()
+        public void cargardepartamentos()
         {
             Departamento = new ObservableCollection<string>
             {
@@ -98,6 +98,44 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
+
+                if (string.IsNullOrEmpty(Departamentoselect))
+                {
+                    Mensaje = "Seleccione el departamento donde reside";
+                    return Mensaje;
+                }
+
+                if (string.IsNullOrEmpty(Nombre))
+                {
+                    Mensaje = "Ingrese un nombre de contacto";
+                    return Mensaje;
+                }
+
+                if (string.IsNullOrEmpty(Numero))
+                {
+                    Mensaje = "Ingrese su número de teléfono";
+                    return Mensaje;
+                }
+
+                if (Numero.Length < 8)
+                {
+                    Mensaje = "El número de teléfono no puede tener menos de 8 caracteres";
+                    return Mensaje;
+                }
+
+                if (string.IsNullOrEmpty(AddressName))
+                {
+                    Mensaje = "Ingrese su dirección";
+                    return Mensaje;
+                }
+
+
+                if (string.IsNullOrEmpty(City))
+                {
+                    Mensaje = "Ingrese la ciudad donde reside";
+                    return Mensaje;
+                }
+
                 Address address = new Address
                 {
                     Id = "",

@@ -40,7 +40,7 @@ namespace NicamicsApp.ViewModels
         private string mensaje = "";
 
         [RelayCommand]
-        private async void IniciarSesion()
+        private async Task IniciarSesion()
         {
             try
             {
@@ -72,7 +72,7 @@ namespace NicamicsApp.ViewModels
         }
 
         [RelayCommand]
-        private async void NavegarHaciaRegistro()
+        private async Task NavegarHaciaRegistro()
         {
             var registerPage = _serviceProvider.GetService<RegisterPage>();
             await _navigation.PushAsync(registerPage);

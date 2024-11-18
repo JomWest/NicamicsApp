@@ -39,7 +39,7 @@
                 <Entry Placeholder="Nombre de contacto*" Text="{Binding Nombre}"  FontSize="14" />
                 <StackLayout Orientation="Horizontal">
                     <Label Text="+505" FontSize="14" VerticalOptions="Center" />
-                    <Entry Placeholder="Teléfono móvil*"  Text="{Binding Numero}" FontSize="14" />
+                    <Entry Placeholder="Teléfono móvil*"  Text="{Binding Numero}" FontSize="14" MaxLength="8"/>
                 </StackLayout>
             </StackLayout>
         </Frame>

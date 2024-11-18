@@ -33,6 +33,13 @@ public partial class CompraDetalle : ContentPage
             var viewModel = (CartViewModel)BindingContext;
             if (!string.IsNullOrEmpty(viewModel.Mensaje))
             {
+                if (viewModel.Mensaje != "Has hecho tu compra con exito!, Gracias por confiar en NiCamics!")
+                {
+                    await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                    viewModel.Mensaje = string.Empty;
+                    return;
+                }
+
                 await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
                 viewModel.Mensaje = string.Empty;
                 var _compradetalle = _serviceProvider.GetService<MainPage>();
@@ -89,6 +96,12 @@ public partial class CompraDetalle : ContentPage
 
     private async void PagoBtn(object sender, EventArgs e)
     {
+        if (_cartviewmodel.SelectedAddress == null)
+        {
+            _cartviewmodel.Mensaje = "Debe seleccionar una dirección";
+            return;
+        }
+
         MainContent.IsVisible = false;
 
 

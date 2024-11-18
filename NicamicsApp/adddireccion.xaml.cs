@@ -16,7 +16,7 @@ public partial class adddireccion : ContentPage
         _serviceProvider = serviceProvider;
         _addresviewmodels = _serviceProvider.GetService<AddressViewModel>();
         BindingContext = _addresviewmodels;
-        _addresviewmodels.cargardepartamentos();
+        _addresviewmodels?.cargardepartamentos();
 
         // Suscribirse al evento PropertyChanged
         _addresviewmodels.PropertyChanged += OnViewModelPropertyChanged;
@@ -29,6 +29,12 @@ public partial class adddireccion : ContentPage
             var viewModel = (AddressViewModel)BindingContext;
             if (!string.IsNullOrEmpty(viewModel.Mensaje))
             {
+                if (viewModel.Mensaje != "Direccion guardada con exito")
+                {
+                    await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
+                    viewModel.Mensaje = string.Empty;
+                    return;
+                }
                 await DisplayAlert("Mensaje", viewModel.Mensaje, "OK");
                 viewModel.Mensaje = string.Empty;
                     var _compradetalle = _serviceProvider.GetService<CompraDetalle>();

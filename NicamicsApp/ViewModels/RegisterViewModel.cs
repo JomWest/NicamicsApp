@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static BackendlessAPI.File.FilePermission;
 
@@ -53,16 +54,59 @@ namespace NicamicsApp.ViewModels
         private string mensaje = "";
 
         [ObservableProperty]
-        private string tipoSeleccionado;
+        private string tipoSeleccionado = "";
 
         [RelayCommand]
-        public async void RegistrarUsuario()
+        public async Task RegistrarUsuario()
         {
             try
             {
+
+                if (string.IsNullOrEmpty(NombreCompleto))
+                {
+                    Mensaje = "El campo nombre no puede estar vacío";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Username))
+                {
+                    Mensaje = "El campo nombre de usuario no puede estar vacío";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Correo))
+                {
+                    Mensaje = "El campo correo electrónico no puede estar vacío";
+                    return;
+                }
+
+                if (!ValidarCorreo(Correo))
+                {
+                    Mensaje = "El correo electrónico ingresado no es válido";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Contraseña))
+                {
+                    Mensaje = "El campo contraseña no puede estar vacío";
+                    return;
+                }
+
+                if (Contraseña.Length < 8)
+                {
+                    Mensaje = "La contraseña debe contener como mínimo 8 caracteres";
+                    return;
+                }
+
                 if (Contraseña != RepetirContraseña)
                 {
                     Mensaje = "Las contraseñas no coinciden";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(TipoSeleccionado))
+                {
+                    Mensaje = "Debe seleccionar un tipo de usuario";
                     return;
                 }
 
@@ -86,5 +130,18 @@ namespace NicamicsApp.ViewModels
                 Mensaje = ex.Message;
             }
         }
+
+        public bool ValidarCorreo(string correo)
+        {
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!Regex.IsMatch(correo, patronCorreo))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

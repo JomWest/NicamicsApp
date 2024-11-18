@@ -42,6 +42,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private string _expiryYear = "";
 
+        [ObservableProperty]
+        private string _CVV = "";
+
 
 
 
@@ -176,6 +179,35 @@ namespace NicamicsApp.ViewModels
                 }
                 Console.WriteLine($"Dirección seleccionada: {SelectedAddress.Nombre}, {SelectedAddress.City}, {selectedAddress.Numero}");
 
+                if (CardNumber.Length < 19)
+                {
+                    Mensaje = "El número de tarjeta ingresado no es válido";
+                    return Mensaje;
+                }
+
+                if (string.IsNullOrEmpty(CardHolder))
+                {
+                    Mensaje = "El campo nombre no puede estar vacío";
+                    return Mensaje;
+                }
+
+                if (ExpiryMonth.Length < 2 || int.Parse(ExpiryMonth) > 12 || int.Parse(ExpiryMonth) < 1)
+                {
+                    Mensaje = "El mes de expiración ingresado no es válido";
+                    return Mensaje;
+                }
+
+                if (ExpiryYear.Length < 2 || int.Parse(ExpiryYear) < 24)
+                {
+                    Mensaje = "El año de expiración ingresado no es válido";
+                    return Mensaje;
+                }
+
+                if (CVV.Length < 3)
+                {
+                    Mensaje = "El CVV ingresado no es válido";
+                    return Mensaje;
+                }
 
                 Order order = new Order
                 {

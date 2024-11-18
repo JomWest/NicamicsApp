@@ -15,6 +15,8 @@ public partial class AddComicPage : ContentPage
     private readonly string applicationId = "6811ED10-B9CA-4692-895B-D155D30D93CF";
     private readonly string apiKey = "EA901995-4C55-4759-8D58-193BA7F8D167";
 
+    private readonly IServiceProvider _serviceProvider;
+
     List<string> generos = new List<string>
         {
             "Accion",
@@ -34,12 +36,12 @@ public partial class AddComicPage : ContentPage
         };
 
     ComicService _comicService;
-    public AddComicPage(ComicService comicService)
+    public AddComicPage(ComicService comicService, IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
         stock = Convert.ToInt32(lblStock.Text);
         _comicService = comicService;
-
+        _serviceProvider = serviceProvider;
         comboBox.ItemsSource = generos;
     }
 
@@ -143,6 +145,25 @@ public partial class AddComicPage : ContentPage
         try
         {
             // Verifica si la URL de la imagen está disponible
+
+            if (string.IsNullOrEmpty(entryNombre.Text))
+            {
+                await DisplayAlert("Error", "El campo nombre no puede estar vacío", "OK");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(entryPrecio.Text))
+            {
+                await DisplayAlert("Error", "El campo precio no puede estar vacío", "OK");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(entryDesc.Text))
+            {
+                await DisplayAlert("Error", "El campo dirección no puede estar vacío", "OK");
+                return;
+            }
+
             if (string.IsNullOrEmpty(photoToUpload?.FileName))
             {
                 await DisplayAlert("Error", "Sube una imagen antes de enviar el formulario", "OK");
@@ -178,6 +199,10 @@ public partial class AddComicPage : ContentPage
             if (!response.Contains("Error"))
             {
                 await DisplayAlert("Éxito", "Cómic guardado correctamente", "OK");
+
+                var _mainPage = _serviceProvider.GetService<MainPage>();
+                Navigation.InsertPageBefore(_mainPage, this);
+                await Navigation.PopAsync();
             }
             else
             {

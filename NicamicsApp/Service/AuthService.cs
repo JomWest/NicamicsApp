@@ -44,7 +44,7 @@ namespace NicamicsApp.Service
                 }
                 else
                 {
-                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    throw new Exception("Credenciales incorrectas");
                 }
             }
             catch (HttpRequestException ex)
