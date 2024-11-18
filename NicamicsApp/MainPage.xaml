@@ -78,6 +78,18 @@
                             Margin="10,0" 
                             HasShadow="True" 
                             BorderColor="Transparent">
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding isSelected}" Value="True">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#D1D1D1" Offset="0.0" />
+                                                        <GradientStop Color="#FF705C" Offset="1.0" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
                                     <Frame.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                             <GradientStop Color="#F2F2F2" Offset="0.0" />
@@ -86,10 +98,10 @@
                                     </Frame.Background>
                                     <Frame.Shadow>
                                         <Shadow 
-                                 Brush="#000000" 
-                                 Opacity="0.1" 
-                                 Offset="0,1" 
-                                 Radius="20"/>
+                        Brush="#000000" 
+                        Opacity="0.1" 
+                        Offset="0,1" 
+                        Radius="20"/>
                                     </Frame.Shadow>
                                     <Button 
                                         Text="{Binding categoria}" 

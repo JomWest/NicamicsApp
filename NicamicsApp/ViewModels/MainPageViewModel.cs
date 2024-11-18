@@ -81,7 +81,7 @@ namespace NicamicsApp.ViewModels
             ComicMasVendidoFunc();
         }
 
-        public async void LoadUser()
+        private async void LoadUser()
         {
             try
             {
@@ -132,7 +132,9 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                if(categoria == "Inicio") { 
+                SelectCategoria(categoria);
+
+                if (categoria == "Inicio") { 
                     LoadComics();
                     ComicMasVendidoFunc();
                     return;
@@ -186,6 +188,18 @@ namespace NicamicsApp.ViewModels
             }
         }
 
+        public void SelectCategoria(string categoria)
+        {
+            foreach (var cat in Categorias)
+            {
+                cat.isSelected = cat.categoria == categoria;
+            }
+
+            // Notifica el cambio en la lista
+            Categorias = new List<Categoria>(Categorias);
+        }
+
+
         [RelayCommand]
         public void SelectComic(string comicId)
         {
@@ -201,7 +215,9 @@ namespace NicamicsApp.ViewModels
             try
             {
                 NombreBusqueda = "";
-                InitializeData();
+                LoadComics();
+                ComicMasVendidoFunc();
+                SelectCategoria("Inicio");
             }
             finally
             {
