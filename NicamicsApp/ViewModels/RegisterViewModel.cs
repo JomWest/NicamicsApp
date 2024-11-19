@@ -22,6 +22,8 @@ namespace NicamicsApp.ViewModels
         private readonly INavigation _navigation;
         public ObservableCollection<string> TiposUsuario { get; set; }
 
+        public ObservableCollection<string> Departamentos { get; set; }
+
         public RegisterViewModel(IServiceProvider serviceProvider, AuthService authService, INavigation navigation)
         {
             _serviceProvider = serviceProvider;
@@ -32,6 +34,14 @@ namespace NicamicsApp.ViewModels
             {
                 "Comprador",
                 "Vendedor"
+            };
+
+            Departamentos = new ObservableCollection<string>
+            {
+                "Boaco", "Carazo", "Chinandega", "Chontales", "Esteli",
+            "Granada", "Jinotega", "Leon", "Madriz", "Managua",
+            "Masaya", "Matagalpa", "Nueva Segovia", "Rivas", "Rio San Juan",
+            "RAAN", "RAAS"
             };
         }
 
@@ -55,6 +65,9 @@ namespace NicamicsApp.ViewModels
 
         [ObservableProperty]
         private string tipoSeleccionado = "";
+
+        [ObservableProperty]
+        private string _departamento = "";
 
         [RelayCommand]
         public async Task RegistrarUsuario()
@@ -110,7 +123,13 @@ namespace NicamicsApp.ViewModels
                     return;
                 }
 
-                var request = new RegisterRequest(NombreCompleto,Username, Contraseña, Correo, TipoSeleccionado);
+                if (string.IsNullOrEmpty(Departamento))
+                {
+                    Mensaje = "Debe seleccionar un departamento";
+                    return;
+                }
+
+                var request = new RegisterRequest(NombreCompleto,Username, Contraseña, Correo, TipoSeleccionado,Departamento);
 
                 var response = await _authService.RegisterUser(request);
 

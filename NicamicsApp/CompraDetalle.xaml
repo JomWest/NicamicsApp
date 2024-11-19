@@ -12,8 +12,8 @@
         <StackLayout Padding="15">
             <VerticalStackLayout x:Name="MainContent">
                 <!-- Encabezado -->
-                <StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="10">
-                    <ImageButton x:Name="imgArrowBack" Source="arrow.png" Clicked="imgArrowBack_Clicked"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="15">
+                    <ImageButton x:Name="imgArrowBack" Source="arrow.png" WidthRequest="26" Clicked="imgArrowBack_Clicked"/>
                     <Label Text="Confirmación del pedido" 
             FontSize="Title"
             FontAttributes="Bold"

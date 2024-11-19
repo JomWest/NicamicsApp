@@ -38,7 +38,7 @@
 
             </VerticalStackLayout>
 
-            <Frame WidthRequest="395" HeightRequest="600" CornerRadius="25" Margin="0,50,0,0">
+            <Frame WidthRequest="420" HeightRequest="800" CornerRadius="25" Margin="0,0,0,-120">
                 <Frame.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#1335D0" Offset="1.0" />
@@ -47,7 +47,8 @@
                 </Frame.Background>
 
                 <VerticalStackLayout>
-
+                    <ScrollView>
+                        <StackLayout>
                     <Entry x:Name="fullNameEntry"
                         Text="{Binding NombreCompleto}"
                         Placeholder="Ingresa tu nombre completo"
@@ -123,6 +124,19 @@
                  BackgroundColor="Transparent">
                     </Picker>
 
+                    <Picker x:Name="comboBoxDepartamento" 
+                    Title="Departamento" 
+                    ItemsSource="{Binding Departamentos}"
+                    SelectedItem="{Binding Departamento, Mode=TwoWay}"
+                    FontSize="16"
+                    HeightRequest="50"
+                    WidthRequest="320"
+                    Margin="0,20,0,0"
+                    TextColor="#fff"
+                    TitleColor="#fef"
+                    BackgroundColor="Transparent">
+                    </Picker>
+
                     <Label HorizontalOptions="End" Text="Olvidaste tu contraseña?" Background="Transparent" TextColor="White" BackgroundColor="Transparent" Margin="0,0,20,0"/>
 
                     <Button 
@@ -137,10 +151,13 @@
                         CornerRadius="50"
                         Command="{Binding RegistrarUsuarioCommand}"
                         />
+                        </StackLayout>
+                    </ScrollView>
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Label  Text="Tienes una cuenta?" Margin="0,15,0,0" FontSize="16" Padding="-4" TextColor="White"/>
                         <Button x:Name="btnLogin" Text="Iniciar Sesión!" FontSize="16" Background="Transparent"  TextColor="White"  Margin="0,0,0,0" Clicked="btnLogin_Clicked"/>
                     </HorizontalStackLayout>
+                   
                 </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
