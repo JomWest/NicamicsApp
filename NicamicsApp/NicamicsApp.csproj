@@ -73,6 +73,7 @@
 	  <None Remove="Resources\Images\configuraciones.png" />
 	  <None Remove="Resources\Images\corazon.png" />
 	  <None Remove="Resources\Images\cuadrino.png" />
+	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\eliminarr.png" />
 	  <None Remove="Resources\Images\espadas.png" />
 	  <None Remove="Resources\Images\favorito.png" />
@@ -83,6 +84,7 @@
 	  <None Remove="Resources\Images\graf.png" />
 	  <None Remove="Resources\Images\hada.png" />
 	  <None Remove="Resources\Images\inicioo.png" />
+	  <None Remove="Resources\Images\inv.png" />
 	  <None Remove="Resources\Images\kanye.jpeg" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\location_icon.png" />
@@ -123,10 +125,16 @@
 	  <MauiXaml Update="CarritoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ComicEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="CompraDetalle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="DetalleManga.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="EdeitarPerfilPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="formaPago.xaml">
@@ -136,6 +144,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="OpcionesLogin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PageInventario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Perfil_Usuario.xaml">

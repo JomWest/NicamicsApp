@@ -184,6 +184,35 @@ namespace NicamicsApp.Service
             }
         }
 
+        public async Task<Comic> ObternercodigoporIdVendedor(string VendedorID, string token)
+        {
+            try
+            {
+                var url = $"/api/Comic/BuscarComicPorIdVendedor?vendedorId={VendedorID}";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<Comic>();
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
 
         public async Task<ComicMasVendidoCategoriaResp> ComicConMasVentas(string token)
         {
@@ -213,6 +242,30 @@ namespace NicamicsApp.Service
                 throw new Exception($"Error: {ex.Message}");
             }
         }
+
+        public async Task<bool> ActualizarComic(string comicId, Comic comicActualizado)
+        {
+            try
+            {
+                var url = $"/api/Comic/{comicId}";
+
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                var response = await _httpClient.PutAsJsonAsync(url, comicActualizado);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
 
         public async Task<ComicMasVendidoCategoriaResp?> ComicConMasVentasPorCategoria(string categoria)
         {

@@ -62,10 +62,10 @@ namespace NicamicsApp
         {
 
         }
-        private void OnProfileImageTapped(object sender, EventArgs e)
+        private async void OnProfileImageTapped(object sender, EventArgs e)
         {
             var perfilPage = _serviceProvider.GetRequiredService<Perfil_Usuario>();
-            Navigation.PushAsync(perfilPage);
+            await Navigation.PushAsync(perfilPage);
         }
         private async void OnCarritoClicked(object sender, EventArgs e)
         {

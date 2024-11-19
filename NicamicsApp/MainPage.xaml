@@ -49,16 +49,17 @@
                     </Frame.Shadow>
                     <Grid>
                         <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand" Spacing="10">
-                            <ImageButton Source="lupa.png" HorizontalOptions="Start" HeightRequest="21" VerticalOptions="Center" Command="{Binding LoadComicsPorNombreCommand}"/>
+                           
                             <!--<Label Text="Buscar Comics" FontSize="15" FontAttributes="Bold" VerticalOptions="Center" /> -->
-                            <Entry Placeholder="Buscar Comics" Text="{Binding NombreBusqueda}" FontSize="15"
+                                <Entry Placeholder="Buscar Comics" Text="{Binding NombreBusqueda}" FontSize="15"
                                    FontAttributes="Bold" VerticalOptions="End" TextColor="#000"
                                    BackgroundColor="Transparent"
                                 HorizontalOptions="FillAndExpand"
                                    WidthRequest="220"
+                                   Margin="30,0,0,0"
                                 ></Entry>
-                            <Image Source="filtrar.png" HorizontalOptions="End" HeightRequest="22" WidthRequest="22" Margin="0,0,0,0"/>
-                        </HorizontalStackLayout>
+                                <ImageButton Source="lupa.png" HorizontalOptions="Start" HeightRequest="21" VerticalOptions="Center" Command="{Binding LoadComicsPorNombreCommand}"/>
+                            </HorizontalStackLayout>
                     </Grid>
                 </Frame>
 

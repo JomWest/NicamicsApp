@@ -40,6 +40,10 @@ namespace NicamicsApp
             builder.Services.AddTransient<Reportes>();
             builder.Services.AddTransient<formaPago>();
             builder.Services.AddTransient<ReporteComicsMasVendidos>();
+            builder.Services.AddTransient<PageInventario>();
+            builder.Services.AddTransient<EdeitarPerfilPage>();
+            builder.Services.AddTransient<ComicEditPage>();
+
 
             builder.Services.AddTransient<DetalleMangaFactory>();
             builder.Services.AddTransient<MainPageFactory>();
@@ -58,7 +62,8 @@ namespace NicamicsApp
             builder.Services.AddSingleton<PerfilUsuarioViewModel>();
             builder.Services.AddSingleton<CartViewModel>();
             builder.Services.AddSingleton<AddressViewModel>();
-            
+            builder.Services.AddSingleton<InventarioViewModel>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

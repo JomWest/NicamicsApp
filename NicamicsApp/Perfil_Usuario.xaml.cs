@@ -53,8 +53,24 @@ public partial class Perfil_Usuario : ContentPage
     private async void AgregarComicTapped(object sender, EventArgs e)
     {
         var _addcomic = _serviceProvider.GetService<AddComicPage>();
-        await Navigation.PushAsync(_addcomic);
+        Navigation.InsertPageBefore(_addcomic, this);
+        await Navigation.PopAsync();
     }
+
+    private async void InventarioTapped(object sender, EventArgs e)
+    {
+        var _inventario = _serviceProvider.GetService<PageInventario>();
+        Navigation.InsertPageBefore(_inventario, this);
+        await Navigation.PopAsync();
+    }
+
+    private async void EditPerfil(object sender, EventArgs e)
+    {
+        var _editarperfil = _serviceProvider.GetService<EdeitarPerfilPage>();
+        Navigation.InsertPageBefore(_editarperfil, this);
+        await Navigation.PopAsync();
+    }
+
 
     private async void OnImageTappedMenu(object sender, EventArgs e)
     {

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.EdeitarPerfilPage"
+             xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+             x:DataType="viewModels:PerfilUsuarioViewModel"
+             NavigationPage.HasNavigationBar="False"
+             Title="">
+    <StackLayout>
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="50">
+            <HorizontalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,30,0,0" Spacing="0">
+                <Image Source="arrow.png" Margin="-10,0,0,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="backtapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Editar Perfil de usuario" HorizontalOptions="Center" FontSize="24" Margin="20,0,0,0"/>
+            </HorizontalStackLayout>
+            
+            <VerticalStackLayout Spacing="50">
+                <Frame CornerRadius="100" WidthRequest="150" HeightRequest="150" Margin="0,0,0,0">
+                    <Image Source="{Binding FotoUsuario}"  
+               WidthRequest="150" HeightRequest="150"  
+               Aspect="AspectFill"  
+               HorizontalOptions="Center"  
+               VerticalOptions="Center"  
+               BackgroundColor="Gray" />
+                </Frame>
+                <Button Text="+"
+            FontSize="20"
+            BackgroundColor="Blue"
+            TextColor="White"
+            WidthRequest="45" HeightRequest="45"
+            CornerRadius="100"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="0,-85,75,0"/>
+
+                <!-- Entradas de texto para editar el perfil -->
+                <Entry Text="{Binding NombreCompleto}"
+       Placeholder="Nombre completo"
+       TextColor="Black"
+       BackgroundColor="Transparent"
+       PlaceholderColor="Gray"
+       HorizontalOptions="Center"
+       WidthRequest="250" />
+                <Entry Text="{Binding NombreUsuario}"
+       Placeholder="Nombre de usuario"
+       TextColor="Black"
+       BackgroundColor="Transparent"
+       PlaceholderColor="Gray"
+       HorizontalOptions="Center"
+       WidthRequest="250" />
+                <Entry Text="{Binding Correousaer}"
+       Placeholder="Correo electrónico"
+       TextColor="Black"
+       BackgroundColor="Transparent"
+       PlaceholderColor="Gray"
+       HorizontalOptions="Center"
+       WidthRequest="250" />
+
+                <!-- Botón para guardar cambios -->
+                <Button Text="Editar Perfil"
+        BackgroundColor="#d4d4d4"
+        TextColor="Black"
+        HorizontalOptions="Center"
+        CornerRadius="10"
+        WidthRequest="200"
+        HeightRequest="50"
+        Command="{Binding ActualizarUsuarioCommand}" />
+            </VerticalStackLayout>
+                
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.PageInventario"
+              xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
+             x:DataType="viewModels:InventarioViewModel"
+             NavigationPage.HasNavigationBar="False">
+
+    <StackLayout Padding="10" >
+        <HorizontalStackLayout Spacing="50">
+            <Image Source="arrow.png">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="clickedback"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Inventario De Comics" HorizontalOptions="Center" FontSize="24"/>
+        </HorizontalStackLayout>
+        <!-- Lista del inventario -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Comics}" SelectionMode="Single" Margin="0,35,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Comic">
+                    <Frame CornerRadius="15" Padding="10" Margin="5" WidthRequest="350" BackgroundColor="White" HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding imagenPortada}"   WidthRequest="60"     HeightRequest="80"  Aspect="AspectFill" />
+                            <VerticalStackLayout WidthRequest="220">
+                                <Label Text="{Binding nombre}"  FontAttributes="Bold"  FontSize="18"  TextColor="#333"   Margin="10,0,0,0" />
+                                <Label Text="{Binding descripcion}"  FontSize="16"  TextColor="#555"  Margin="10,0,0,0" />
+                                <Label Text="{Binding precio, StringFormat='Precio: {0:C}'}"  Margin="10,0,0,0" FontSize="16"  HorizontalOptions="Start" />
+                                <Label Text="{Binding stock, StringFormat='Stock: {0:}'}" FontSize="16"   TextColor="#005AE1"  Margin="10,0,0,0" HorizontalOptions="Start" />
+                            </VerticalStackLayout>
+                            <Image Source="edit.png" WidthRequest="30" Margin="0,55,0,0" />
+
+
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>

@@ -34,32 +34,50 @@
                             <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
                             <Label Text="{Binding NombreCompleto}" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
                         </VerticalStackLayout>
-                       
-                    </HorizontalStackLayout>
+                            <Image Source="edit.png" WidthRequest="30" Margin="0,25,0,0">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="EditPerfil"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </HorizontalStackLayout>
              
                 </Grid>
 
-                <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="50"  Margin="90,30,0,0" IsVisible="{Binding IsVendedor}" >
-                    <VerticalStackLayout>
-                        <Label Text="Reportes"  VerticalOptions="Center"/>
-                        <Frame CornerRadius="100" >
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Reportestapped"/>
-                            </Frame.GestureRecognizers>
-                            <Image Source="graf.png" WidthRequest="25" HeightRequest="25"/>
-                        </Frame>
-                    </VerticalStackLayout>
-                    <VerticalStackLayout>
-                        <Label Text="Agg Comic"  VerticalOptions="Center"/>
-                        <Frame CornerRadius="100">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="AgregarComicTapped"/>
-                            </Frame.GestureRecognizers>
-                            <Image Source="addcom.png" WidthRequest="25" HeightRequest="25"/>
-                        </Frame>
-                    </VerticalStackLayout>
-                 
-                </HorizontalStackLayout>
+                    <Label Text="Panel de Vendedor" HorizontalOptions="Center" FontSize="22" Margin="0,20,0,0"/>
+                    <Frame WidthRequest="350" HeightRequest="130" CornerRadius="50" >
+                        <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="30"  Margin="10,0,0,0" IsVisible="{Binding IsVendedor}" >
+                            <VerticalStackLayout>
+                                <Frame CornerRadius="100" >
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Reportestapped"/>
+                                    </Frame.GestureRecognizers>
+                                    <Image Source="graf.png" WidthRequest="25" HeightRequest="25"/>
+                                </Frame>
+                                <Label Text="Reportes"  VerticalOptions="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Frame CornerRadius="100" WidthRequest="65" HeightRequest="65">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="AgregarComicTapped"/>
+                                        </Frame.GestureRecognizers>
+                                        <Image Source="addcom.png" WidthRequest="25" HeightRequest="25"/>
+                                    </Frame>
+                                <Label Text="Agregar Comic"  VerticalOptions="Center"/> 
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Frame CornerRadius="100" WidthRequest="65" HeightRequest="65">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="InventarioTapped"/>
+                                    </Frame.GestureRecognizers>
+                                    <Image Source="inv.png" WidthRequest="25" HeightRequest="25"/>
+                                </Frame>
+                                <Label Text="Inventario"  VerticalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                        </HorizontalStackLayout>
+
+                    </Frame>
+               
 
                 <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
 
