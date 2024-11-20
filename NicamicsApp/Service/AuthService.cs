@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
+using NicamicsApp.Models;
 using NicamicsApp.Models.AuthRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,6 +84,61 @@ namespace NicamicsApp.Service
             catch (Exception ex)
             {
                 return $"Error: {ex.Message}";
+            }
+        }
+
+        public async Task<bool> ActualizarUsuarioAsync(User user)
+        {
+            try
+            {
+                // Validar entrada
+                if (user == null || string.IsNullOrEmpty(user.id))
+                {
+                    throw new ArgumentException("El usuario o su ID no pueden ser nulos.");
+                }
+
+                // Construir la URL
+                var url = $"/api/Auth/{user.id}";
+
+                // Agregar token al encabezado de autorización
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
+
+                // Enviar solicitud PUT
+                var response = await _httpClient.PutAsJsonAsync(url, user);
+
+                // Validar respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al actualizar el usuario: {ex.Message}");
+            }
+        }
+
+        public async Task<User?> ObtenerUsuarioPorCorreoAsync(string correo)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(correo))
+                {
+                    throw new ArgumentException("El correo no puede ser nulo o vacío.");
+                }
+
+                var response = await _httpClient.GetAsync($"api/Auth/correo/{correo}");
+
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadFromJsonAsync<User>();
+            }
+            catch (HttpRequestException httpEx)
+            {
+                Console.WriteLine(httpEx.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 

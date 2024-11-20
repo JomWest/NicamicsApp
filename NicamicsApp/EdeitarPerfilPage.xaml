@@ -9,17 +9,14 @@
     <StackLayout>
         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="50">
             <HorizontalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,30,0,0" Spacing="0">
-                <Image Source="arrow.png" Margin="-10,0,0,0">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="backtapped"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                <ImageButton x:Name="imgArrowBack" Source="arrow.png" Margin="-10,0,0,0" Clicked="imgArrowBack_Clicked" HorizontalOptions="Start" HeightRequest="30" WidthRequest="30"></ImageButton>
                 <Label Text="Editar Perfil de usuario" HorizontalOptions="Center" FontSize="24" Margin="20,0,0,0"/>
             </HorizontalStackLayout>
             
             <VerticalStackLayout Spacing="50">
                 <Frame CornerRadius="100" WidthRequest="150" HeightRequest="150" Margin="0,0,0,0">
-                    <Image Source="{Binding FotoUsuario}"  
+                    <Image x:Name="imgPerfil"
+                        Source="{Binding FotoUsuario}"  
                WidthRequest="150" HeightRequest="150"  
                Aspect="AspectFill"  
                HorizontalOptions="Center"  
@@ -34,7 +31,9 @@
             CornerRadius="100"
             VerticalOptions="End"
             HorizontalOptions="End"
-            Margin="0,-85,75,0"/>
+            Margin="0,-85,75,0"
+                        Clicked="Button_Clicked"
+                        />
 
                 <!-- Entradas de texto para editar el perfil -->
                 <Entry Text="{Binding NombreCompleto}"

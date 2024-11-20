@@ -43,9 +43,9 @@
              
                 </Grid>
 
-                    <Label Text="Panel de Vendedor" HorizontalOptions="Center" FontSize="22" Margin="0,20,0,0"/>
-                    <Frame WidthRequest="350" HeightRequest="130" CornerRadius="50" >
-                        <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="30"  Margin="10,0,0,0" IsVisible="{Binding IsVendedor}" >
+                    <Label Text="Panel de Vendedor" HorizontalOptions="Center" FontSize="22" Margin="0,20,0,0" IsVisible="{Binding IsVendedor}"/>
+                    <Frame WidthRequest="350" HeightRequest="130" CornerRadius="50" IsVisible="{Binding IsVendedor}">
+                        <HorizontalStackLayout x:Name="BotonesVendedor" Spacing="30"  Margin="10,0,0,0">
                             <VerticalStackLayout>
                                 <Frame CornerRadius="100" >
                                     <Frame.GestureRecognizers>

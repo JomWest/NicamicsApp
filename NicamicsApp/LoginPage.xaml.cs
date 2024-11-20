@@ -23,6 +23,7 @@ namespace NicamicsApp
         {
             InitializeComponent();
             _userServices = userServices;
+            _authService = authService;
             var navigation = this.Navigation;
             var viewModel = new LoginViewModel(serviceProvider, authService, mainPageFactory, navigation);
             BindingContext = viewModel;
@@ -46,7 +47,7 @@ namespace NicamicsApp
 
         private async void btnRestablecer_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RestablecerContraseña(_userServices));
+            await Navigation.PushAsync(new RestablecerContraseña(_authService));
         }
     }
 }

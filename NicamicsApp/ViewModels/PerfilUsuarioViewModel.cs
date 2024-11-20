@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NicamicsApp.ViewModels
@@ -16,6 +17,11 @@ namespace NicamicsApp.ViewModels
     public partial class PerfilUsuarioViewModel : ObservableObject
     {
         private readonly UserServices _userServices;
+        private User _user;
+        string imageUrl = string.Empty;
+
+        private readonly string applicationId = "6811ED10-B9CA-4692-895B-D155D30D93CF";
+        private readonly string apiKey = "EA901995-4C55-4759-8D58-193BA7F8D167";
 
         public PerfilUsuarioViewModel(UserServices userService)
         {
@@ -49,6 +55,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private string _contraseña = "";
 
+        [ObservableProperty]
+        private FileResult? _fileResult = null;
+
         public void InitializeData()
         {
             LoadUser();
@@ -63,6 +72,7 @@ namespace NicamicsApp.ViewModels
 
                 if (user != null)
                 {
+                    _user = user;
                     FotoUsuario = user.foto;
                     NombreUsuario = user.nombre;
                     Correousaer = user.correo;
@@ -129,24 +139,50 @@ namespace NicamicsApp.ViewModels
         {
             try
             {
-                LoadUser();
-               
-                var usuarioActualizado = new User
+                if (string.IsNullOrEmpty(NombreCompleto))
                 {
-                    id = IpAddress.userId,
-                    nombre = NombreUsuario,
-                    nombreCompleto = NombreCompleto,
-                    foto = FotoUsuario,
-                    correo = Correousaer,
-                    edad = 0,
-                    contraseña = Contraseña,
-                    tipoUsuario = IpAddress.tipouser,
-                    direccion = null, 
-                    favoritos = Comics.Select(c => c.vendedorId).ToList(), 
-                    orders = new List<string>() 
-                };
+                    Mensaje = "El campo nombre no puede estar vacío";
+                    return;
+                }
+                if (string.IsNullOrEmpty(NombreUsuario))
+                {
+                    Mensaje = "El campo nombre de usuario no puede estar vacío";
+                    return;
+                }
+                if (string.IsNullOrEmpty(Correousaer))
+                {
+                    Mensaje = "El campo correo electrónico no puede estar vacío";
+                    return;
+                }
 
-                bool resultado = await _userServices.ActualizarUsuario(usuarioActualizado);
+                if (!ValidarCorreo(Correousaer))
+                {
+                    Mensaje = "El correo electrónico ingresado no es válido";
+                    return;
+                }
+
+                if (FileResult != null)
+                {
+                    imageUrl = await UploadImageToBackendless(FileResult,_user.id);
+
+                    if(imageUrl != null && imageUrl != "")
+                    {
+                        FotoUsuario = imageUrl;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                LoadUser();
+
+                _user.nombre = NombreCompleto;
+                _user.foto = FotoUsuario;
+                _user.correo = Correousaer;
+                _user.nombre = NombreUsuario;
+
+                bool resultado = await _userServices.ActualizarUsuario(_user);
 
                 if (resultado)
                 {
@@ -162,6 +198,79 @@ namespace NicamicsApp.ViewModels
                 Mensaje = $"Error al actualizar el perfil: {ex.Message}";
             }
         }
+
+        public bool ValidarCorreo(string correo)
+        {
+            string patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            if (!Regex.IsMatch(correo, patronCorreo))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task<string> UploadImageToBackendless(FileResult photo, string userId)
+        {
+            try
+            {
+                // Validar entrada
+                if (photo == null || string.IsNullOrEmpty(userId))
+                {
+                    Mensaje = "Foto o ID de usuario inválidos.";
+                    return string.Empty;
+                }
+
+                // Nombre esperado para la imagen del usuario
+                string fileName = $"{userId}_perfil{Path.GetExtension(photo.FileName)}";
+                string fileUrl = $"https://api.backendless.com/{applicationId}/{apiKey}/files/nicamicsImages/{fileName}";
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Add("application-id", applicationId);
+                client.DefaultRequestHeaders.Add("secret-key", apiKey);
+
+                // Verificar si la imagen ya existe
+                var responseCheck = await client.GetAsync(fileUrl);
+                if (responseCheck.IsSuccessStatusCode)
+                {
+                    // Si el archivo existe, eliminarlo primero
+                    var responseDelete = await client.DeleteAsync(fileUrl);
+                    if (!responseDelete.IsSuccessStatusCode)
+                    {
+                        Mensaje = "No se pudo eliminar la imagen existente.";
+                        return string.Empty;
+                    }
+                }
+
+                // Subir la nueva imagen
+                using (var stream = await photo.OpenReadAsync())
+                {
+                    var content = new MultipartFormDataContent();
+                    var imageContent = new StreamContent(stream);
+                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+
+                    content.Add(imageContent, "file", fileName);
+
+                    var responseUpload = await client.PostAsync(fileUrl, content);
+                    if (responseUpload.IsSuccessStatusCode)
+                    {
+                        return fileUrl; // Retorna la URL de la imagen subida
+                    }
+                    else
+                    {
+                        Mensaje = "No se pudo subir la imagen.";
+                        return string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Excepción al subir la imagen: {ex.Message}";
+                return string.Empty;
+            }
+        }
+
+
 
     }
 }

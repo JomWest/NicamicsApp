@@ -14,11 +14,11 @@ public partial class RestablecerContraseña : ContentPage
     private const string SenderEmail = "juan132y@gmail.com";
     private const string AppPassword = "kuzisugjaadiiexk";
 
-    private readonly UserServices _services;
-    public RestablecerContraseña(UserServices userServices)
+    private readonly AuthService _services;
+    public RestablecerContraseña(AuthService authService)
 	{
 		InitializeComponent();
-        _services = userServices;
+        _services = authService;
 
     }
 
@@ -45,7 +45,7 @@ public partial class RestablecerContraseña : ContentPage
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(resetCode);
             user.contraseña = hashedPassword;
 
-            bool exito = await _services.ActualizarUsuario(user);
+            bool exito = await _services.ActualizarUsuarioAsync(user);
 
             if (exito)
             {
@@ -75,7 +75,7 @@ public partial class RestablecerContraseña : ContentPage
 
         try
         {
-            var response = await _services.ObtenerUsuarioPorCorreo(email);
+            var response = await _services.ObtenerUsuarioPorCorreoAsync(email);
 
             if (response == null)
             {

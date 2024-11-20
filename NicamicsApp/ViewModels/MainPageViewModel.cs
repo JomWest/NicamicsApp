@@ -215,6 +215,7 @@ namespace NicamicsApp.ViewModels
             try
             {
                 NombreBusqueda = "";
+                LoadUser();
                 LoadComics();
                 ComicMasVendidoFunc();
                 SelectCategoria("Inicio");
