@@ -58,18 +58,30 @@
                        BackgroundColor="Transparent"
                        />
 
-                <Entry x:Name="PasswordEntry"
-                       Text="{Binding Contraseña}"
-                       Placeholder="Contraseña"
-                       FontSize="16"
-                       IsPassword="True"
-                       HeightRequest="50"
-                       WidthRequest="320"
-                       Margin="0,20,0,0"
-                       PlaceholderColor="White"
-                       TextColor="White"
-                       BackgroundColor="Transparent"
-                       />
+                <Grid HeightRequest="50" WidthRequest="320" Margin="0,20,0,0">
+                    <Entry x:Name="PasswordEntry"
+       Text="{Binding Contraseña}"
+       Placeholder="Contraseña"
+       FontSize="16"
+       IsPassword="True"
+       HeightRequest="50"
+       WidthRequest="320"
+       Margin="0,10,0,0"
+       PlaceholderColor="White"
+       TextColor="White"
+       BackgroundColor="Transparent"
+       />
+
+                    <ImageButton x:Name="imgContra" Source="eyeslash.png"
+        VerticalOptions="Center"
+        HorizontalOptions="End"
+        BackgroundColor="Transparent"
+        WidthRequest="25"
+        HeightRequest="25"
+        Margin="8"
+        Clicked="imgContra_Clicked"
+        />
+                </Grid>
 
                 <Button x:Name="btnRestablecer" Text="Olvidaste tu contraseña?" FontSize="16" Background="Transparent"  TextColor="White"  Margin="0,0,20,0" HorizontalOptions="End"
                         Clicked="btnRestablecer_Clicked"/>

@@ -76,6 +76,8 @@
 	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\eliminarr.png" />
 	  <None Remove="Resources\Images\espadas.png" />
+	  <None Remove="Resources\Images\eyeopen.png" />
+	  <None Remove="Resources\Images\eyeslash.png" />
 	  <None Remove="Resources\Images\favorito.png" />
 	  <None Remove="Resources\Images\favorito_blanco.png" />
 	  <None Remove="Resources\Images\favorito_rojo.png" />

@@ -85,33 +85,54 @@
                         BackgroundColor="Transparent"/>
 
 
-                    <Entry x:Name="PasswordEntry"
-                       Text="{Binding Contraseña}"    
-                       Placeholder="Contraseña"
-                       FontSize="16"
-                       IsPassword="True"
-                       HeightRequest="50"
-                       WidthRequest="320"
-                       Margin="0,20,0,0"
-                       PlaceholderColor="White"
-                       TextColor="White"
-                       BackgroundColor="Transparent"
-                       />
-
-                    <Entry x:Name="RepeatPasswordEntry"
-                 Text="{Binding RepetirContraseña}"
-                 Placeholder="Repetir Contraseña"
-                 FontSize="16"
-                 IsPassword="True"
-                 HeightRequest="50"
-                 WidthRequest="320"
-                 Margin="0,20,0,0"
-                 PlaceholderColor="White"
-                 TextColor="White"
+                            <Grid HeightRequest="50" WidthRequest="320" Margin="0,20,0,0">
+                                <Entry x:Name="PasswordEntry"
+           Text="{Binding Contraseña}"    
+           Placeholder="Contraseña"
+           FontSize="16"
+           IsPassword="True"
+           PlaceholderColor="White"
+           TextColor="White"
+           BackgroundColor="Transparent"
+           VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand" />
+                                <ImageButton x:Name="imgContra" Source="eyeslash.png"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End"
                  BackgroundColor="Transparent"
-                 />
+                 WidthRequest="25"
+                 HeightRequest="25"
+                 Margin="8"
+                 TranslationY="-3"
+                 Clicked="imgContra_Clicked"
+                  />
+                            </Grid>
 
-                    <Picker x:Name="comboBox" 
+                            <Grid HeightRequest="50" WidthRequest="320" Margin="0,20,0,0">
+                                <Entry x:Name="RepeatPasswordEntry"
+           Text="{Binding RepetirContraseña}"
+           Placeholder="Repetir Contraseña"
+           FontSize="16"
+           IsPassword="True"
+           PlaceholderColor="White"
+           TextColor="White"
+           BackgroundColor="Transparent"
+           VerticalOptions="Center"
+           HorizontalOptions="FillAndExpand" />
+                                <ImageButton Source="eyeslash.png"
+                                             x:Name="imgRepContra"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End"
+                 BackgroundColor="Transparent"
+                 WidthRequest="25"
+                 HeightRequest="25"
+                 Margin="8"
+                    TranslationY="-3"
+                 Clicked="imgRepContra_Clicked"
+                 />
+                            </Grid>
+
+                            <Picker x:Name="comboBox" 
                 Title="Tipo de usuario" 
                  ItemsSource="{Binding TiposUsuario}"
                  SelectedItem="{Binding TipoSeleccionado, Mode=TwoWay}"

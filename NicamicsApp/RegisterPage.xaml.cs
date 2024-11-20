@@ -41,4 +41,29 @@ public partial class RegisterPage : ContentPage
 		await Navigation.PopAsync();
     }
 
+    private void imgContra_Clicked(object sender, EventArgs e)
+    {
+        PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        if (PasswordEntry.IsPassword)
+        {
+            imgContra.Source = "eyeslash.png";
+        }
+        else
+        {
+            imgContra.Source = "eyeopen.png";
+        }
+    }
+
+    private void imgRepContra_Clicked(object sender, EventArgs e)
+    {
+        RepeatPasswordEntry.IsPassword = !RepeatPasswordEntry.IsPassword;
+        if (RepeatPasswordEntry.IsPassword)
+        {
+            imgRepContra.Source = "eyeslash.png";
+        }
+        else
+        {
+            imgRepContra.Source = "eyeopen.png";
+        }
+    }
 }

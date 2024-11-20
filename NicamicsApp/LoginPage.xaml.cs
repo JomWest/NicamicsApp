@@ -49,5 +49,18 @@ namespace NicamicsApp
         {
             await Navigation.PushAsync(new RestablecerContraseña(_authService));
         }
+
+        private void imgContra_Clicked(object sender, EventArgs e)
+        {
+            PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+            if (PasswordEntry.IsPassword)
+            {
+                imgContra.Source = "eyeslash.png";
+            }
+            else
+            {
+                imgContra.Source = "eyeopen.png";
+            }
+        }
     }
 }

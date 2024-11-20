@@ -71,6 +71,9 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private string _enCarritoText = "Agregar al carrito";
 
+        [ObservableProperty]
+        private bool _ocultar = true;
+
         public async void LoadComic(string comicId)
         {
             try
@@ -79,6 +82,8 @@ namespace NicamicsApp.ViewModels
 
                 if (response != null)
                 {
+
+
                     IdVendedor = response.vendedorId;
                     NombreComic = response.nombre;
                     Precio = response.precio;
@@ -91,6 +96,13 @@ namespace NicamicsApp.ViewModels
 
                     OnPropertyChanged(nameof(PrecioFormatted));
                 } else{return;}
+
+                if (response.vendedorId == IpAddress.userId)
+                {
+                    Ocultar = false;
+                    EnCarrito = false;
+                    return;
+                }
 
                 var response2 = await _cartService.ComicEnCarrito(IpAddress.userId, response.comicId,IpAddress.token);
 
@@ -213,7 +225,7 @@ namespace NicamicsApp.ViewModels
                             var response = await _cartService.AgregarCarrito(item, cart2.Id);
                             if (response.Contains("Item"))
                             {
-                                Mensaje = "Comic se agregado al carrito con exito";
+                                Mensaje = "Comic agregado al carrito con exito";
                             }
                             else
                             {
