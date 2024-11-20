@@ -2,73 +2,51 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NicamicsApp.ComicEditPage"
-               xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
+             xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
              xmlns:models="clr-namespace:NicamicsApp.Models"
-             x:DataType="viewModels:InventarioViewModel"
+             x:DataType="viewModels:ComicEditViewModel"
              NavigationPage.HasNavigationBar="False">
-    <StackLayout>
-        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="50">
-            <HorizontalStackLayout VerticalOptions="Start" HorizontalOptions="Start" Margin="0,30,0,0" Spacing="0">
-                <Image Source="arrow.png" Margin="-10,0,0,0">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="backtapped"/>
-                    </Image.GestureRecognizers>
-                </Image>
-                <Label Text="Editar Perfil de usuario" HorizontalOptions="Center" FontSize="24" Margin="20,0,0,0"/>
-            </HorizontalStackLayout>
 
-            <VerticalStackLayout Spacing="50">
-                <Frame CornerRadius="100" WidthRequest="150" HeightRequest="150" Margin="0,0,0,0">
-                    <Image Source="a.png"  
-            WidthRequest="150" HeightRequest="150"  
-            Aspect="AspectFill"  
-            HorizontalOptions="Center"  
-            VerticalOptions="Center"  
-            BackgroundColor="Gray" />
-                </Frame>
-                <Button Text="+"
-         FontSize="20"
-         BackgroundColor="Blue"
-         TextColor="White"
-         WidthRequest="45" HeightRequest="45"
-         CornerRadius="100"
-         VerticalOptions="End"
-         HorizontalOptions="End"
-         Margin="0,-85,75,0"/>
+    <StackLayout Padding="20" Spacing="15">
+        <!-- Encabezado -->
+        <Grid Padding="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <!-- Flecha -->
+                <ColumnDefinition Width="*" />
+                <!-- Texto centrado -->
+            </Grid.ColumnDefinitions>
+            <!-- Flecha -->
+            <ImageButton  Source="arrow.png" WidthRequest="25" HeightRequest="25"
+                         BackgroundColor="Transparent"
+                         Grid.Column="0"
+                         Clicked="ImageButton_Clicked" />
+            <!-- Texto centrado -->
+            <Label Text="Actualizar Comic" FontSize="20" FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Grid.Column="1" />
+        </Grid>
 
-                <!-- Entradas de texto para editar el perfil -->
-                <Entry Text="a"
-    Placeholder="Nombre completo"
-    TextColor="Black"
-    BackgroundColor="Transparent"
-    PlaceholderColor="Gray"
-    HorizontalOptions="Center"
-    WidthRequest="250" />
-                <Entry Text="a"
-    Placeholder="Nombre de usuario"
-    TextColor="Black"
-    BackgroundColor="Transparent"
-    PlaceholderColor="Gray"
-    HorizontalOptions="Center"
-    WidthRequest="250" />
-                <Entry Text="a"
-    Placeholder="Correo electrónico"
-    TextColor="Black"
-    BackgroundColor="Transparent"
-    PlaceholderColor="Gray"
-    HorizontalOptions="Center"
-    WidthRequest="250" />
+        <!-- Imagen con botón redondeado -->
+        <Grid>
+            <!-- Imagen existente -->
+            <Image x:Name="imgComic" Source="{Binding Comic.imagenPortada}" HeightRequest="300" Aspect="AspectFill" />
+            <!-- Botón redondeado en la esquina inferior derecha -->
+            <Button Text="+" WidthRequest="50" HeightRequest="50" CornerRadius="30"
+                    BackgroundColor="#0078D7" TextColor="White"
+                    VerticalOptions="End" HorizontalOptions="End"
+                    Margin="10"
+                    Clicked="Button_Clicked"
+                     />
+        </Grid>
 
-                <!-- Botón para guardar cambios -->
-                <Button Text="Editar Perfil"
-     BackgroundColor="#d4d4d4"
-     TextColor="Black"
-     HorizontalOptions="Center"
-     CornerRadius="10"
-     WidthRequest="200"
-     HeightRequest="50" />
-            </VerticalStackLayout>
-
-        </VerticalStackLayout>
+        <!-- Formulario -->
+        <Entry Placeholder="Nombre" Text="{Binding Comic.nombre}" />
+        <Editor Placeholder="Descripción" Text="{Binding Comic.descripcion}" 
+                HeightRequest="100" AutoSize="TextChanges" />
+        <Entry Placeholder="Precio" Text="{Binding Comic.precio}" Keyboard="Numeric" />
+        <Entry Placeholder="Stock" Text="{Binding Comic.stock}" Keyboard="Numeric" />
+        <Button Text="Guardar" Command="{Binding SaveComicCommand}" />
     </StackLayout>
+
 </ContentPage>

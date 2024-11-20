@@ -47,6 +47,7 @@ namespace NicamicsApp
 
             builder.Services.AddTransient<DetalleMangaFactory>();
             builder.Services.AddTransient<MainPageFactory>();
+            builder.Services.AddTransient<ComicEditFactory>();
             /* Cambio no fusionado mediante combinación del proyecto 'NicamicsApp (net8.0-android)'
             Antes:
                         builder.Services.AddTransient<DetalleManga.DetalleManga>();
@@ -63,6 +64,7 @@ namespace NicamicsApp
             builder.Services.AddSingleton<CartViewModel>();
             builder.Services.AddSingleton<AddressViewModel>();
             builder.Services.AddSingleton<InventarioViewModel>();
+            builder.Services.AddSingleton<ComicEditViewModel>();
 
 
 #if DEBUG

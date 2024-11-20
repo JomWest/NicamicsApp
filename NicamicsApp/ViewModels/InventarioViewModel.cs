@@ -14,7 +14,6 @@ public partial class InventarioViewModel : ObservableObject
     public InventarioViewModel(ComicService comicService)
     {
         _comicService = comicService;
-        LoadComicVendedor();
     }
 
     [ObservableProperty]
@@ -22,7 +21,7 @@ public partial class InventarioViewModel : ObservableObject
 
 
     [ObservableProperty]
-    private Comic selectedComic;
+    private Comic? selectedComic;
 
     [ObservableProperty]
     private string comicNombre;
@@ -40,7 +39,10 @@ public partial class InventarioViewModel : ObservableObject
     private string comicImagenPortada;
 
     [ObservableProperty]
-    private bool isEditing = false; 
+    private bool isEditing = false;
+
+    [ObservableProperty]
+    private string _mensaje = "";
 
 
     public async Task LoadComicVendedor()
@@ -51,11 +53,11 @@ public partial class InventarioViewModel : ObservableObject
 
             if (comic != null)
             {
-                Comics.Clear();
-                Comics.Add(comic);
+                Comics = new ObservableCollection<Comic>(comic);
             }
             else
             {
+                Mensaje = "No se encontraron comics";
                 Console.WriteLine("No comic found for the given vendor.");
             }
         }
@@ -65,46 +67,14 @@ public partial class InventarioViewModel : ObservableObject
         }
     }
 
-    // Comando para iniciar la edición
     [RelayCommand]
-    public void EditarComic(Comic comic)
+    public void SeleccionarComic(Comic comic)
     {
-        if (comic == null) return;
-
+        Console.WriteLine(comic.nombre);
+        SelectedComic = null;
         SelectedComic = comic;
-        comicNombre = comic.nombre;
-        ComicDescripcion = comic.descripcion;
-        ComicPrecio = comic.precio;
-        ComicStock = comic.stock;
-        ComicImagenPortada = comic.imagenPortada;
-
-        IsEditing = true;
     }
 
-    [RelayCommand]
-    public async Task GuardarCambios()
-    {
-        if (SelectedComic == null) return;
-
-        SelectedComic.nombre = ComicNombre;
-        SelectedComic.descripcion = ComicDescripcion;
-        SelectedComic.precio = comicPrecio;
-        SelectedComic.stock = ComicStock;
-        SelectedComic.imagenPortada = ComicImagenPortada;
-
-
-        var resultado = await _comicService.ActualizarComic(selectedComic.comicId,SelectedComic);
-
-        if (resultado)
-        {
-            await App.Current.MainPage.DisplayAlert("Éxito", "Cómic actualizado correctamente.", "OK");
-            IsEditing = false; 
-        }
-        else
-        {
-            await App.Current.MainPage.DisplayAlert("Error", "No se pudo actualizar el cómic.", "OK");
-        }
-    }
 
 
     [RelayCommand]

@@ -3,6 +3,7 @@ using NicamicsApp.Models.ComicRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -184,7 +185,7 @@ namespace NicamicsApp.Service
             }
         }
 
-        public async Task<Comic> ObternercodigoporIdVendedor(string VendedorID, string token)
+        public async Task<List<Comic>> ObternercodigoporIdVendedor(string VendedorID, string token)
         {
             try
             {
@@ -196,7 +197,7 @@ namespace NicamicsApp.Service
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<Comic>();
+                    return await response.Content.ReadFromJsonAsync<List<Comic>>();
                 }
                 else
                 {
@@ -220,7 +221,7 @@ namespace NicamicsApp.Service
             {
                 var url = "/api/Comic/ComicMasVendido";
 
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 var response = await _httpClient.GetAsync(url);
 
@@ -250,7 +251,7 @@ namespace NicamicsApp.Service
                 var url = $"/api/Comic/{comicId}";
 
 
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", IpAddress.token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", IpAddress.token);
 
                 var response = await _httpClient.PutAsJsonAsync(url, comicActualizado);
 
