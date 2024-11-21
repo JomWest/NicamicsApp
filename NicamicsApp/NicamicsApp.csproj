@@ -97,6 +97,8 @@
 	  <None Remove="Resources\Images\nori_tama.jpg" />
 	  <None Remove="Resources\Images\novela-romantica.png" />
 	  <None Remove="Resources\Images\novela_romantica.png" />
+	  <None Remove="Resources\Images\order.png" />
+	  <None Remove="Resources\Images\pedido.png" />
 	  <None Remove="Resources\Images\poster.jpg" />
 	  <None Remove="Resources\Images\rezero.jpeg" />
 	  <None Remove="Resources\Images\sin_menores.png" />

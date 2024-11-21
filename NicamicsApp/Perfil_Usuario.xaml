@@ -30,11 +30,11 @@
                         <Frame Padding="10" CornerRadius="100" WidthRequest="75" HeightRequest="75" HorizontalOptions="Start" Margin="20" HasShadow="True" BorderColor="LightBlue">
                             <Image x:Name="imgFoto" Source="{Binding FotoUsuario}" HeightRequest="75" WidthRequest="130" />
                         </Frame>
-                        <VerticalStackLayout HorizontalOptions="Center" Margin="0,30,50,0">
+                        <VerticalStackLayout HorizontalOptions="Center" Margin="0,30,50,0" WidthRequest="180">
                             <Label x:Name="lblNombre" Text="{Binding NombreUsuario}" FontAttributes="Bold" TextColor="Black" CharacterSpacing="1" FontSize="24"/>
                             <Label Text="{Binding NombreCompleto}" TextColor="Gray" CharacterSpacing="1" FontSize="18"/>
                         </VerticalStackLayout>
-                            <Image Source="edit.png" WidthRequest="30" Margin="0,25,0,0">
+                            <Image Source="edit.png" WidthRequest="30" Margin="-35,25,0,0">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="EditPerfil"/>
                                 </Image.GestureRecognizers>
@@ -80,9 +80,24 @@
 
                     </Frame>
 
-                    <Button x:Name="btOrdenes" Text="Ordenes" Clicked="btOrdenes_Clicked"></Button>
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="80" Margin="20">
+                        <VerticalStackLayout>
+                            <Frame CornerRadius="100" WidthRequest="70" HeightRequest="70">
+                                <ImageButton Source="order.png" WidthRequest="25" HeightRequest="25" Clicked="btOrdenes_Clicked"/>
+                            </Frame>
+                            <Label Text="Orden" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+           
+                        <VerticalStackLayout>
+                            <Frame CornerRadius="100" WidthRequest="70" HeightRequest="70">
+                                <ImageButton Source="pedido.png" WidthRequest="45"  Clicked="btnPedidos_Clicked" />
+                            </Frame>
+                            <Label Text="Pedidos" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                 
 
-                    <Button x:Name="btnPedidos" Text="Pedidos" Clicked="btnPedidos_Clicked"></Button>
+                    </HorizontalStackLayout>
+                  
 
                     <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
 
