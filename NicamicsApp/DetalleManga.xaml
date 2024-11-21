@@ -130,6 +130,48 @@
             </Frame>
         </ScrollView>
 
+
+        <BoxView x:Name="Overlay11"
+         BackgroundColor="Black"
+         Opacity="0.5"
+         IsVisible="{Binding DarRating}"
+         VerticalOptions="FillAndExpand"
+         HorizontalOptions="FillAndExpand"/>
+
+        <!-- Cuadro de puntuación, visible cuando DarRating es true -->
+        <Frame BackgroundColor="White"
+       Padding="20"
+       IsVisible="{Binding DarRating}"
+       VerticalOptions="Center"
+       HorizontalOptions="Center"
+       CornerRadius="20"
+       HasShadow="True"
+       WidthRequest="350" HeightRequest="500">
+            <StackLayout Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Text="Califica este cómic" FontSize="20" HorizontalOptions="Center"/>
+
+                <!-- Sistema de rating con RadioButton en disposición vertical -->
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="10">
+                    <RadioButton Content="★" Value="1" GroupName="RatingGroup" 
+                 IsChecked="{Binding Puntuacion, Mode=TwoWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" />
+                    <RadioButton Content="★★" Value="2" GroupName="RatingGroup" 
+                 IsChecked="{Binding Puntuacion, Mode=TwoWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}" />
+                    <RadioButton Content="★★★" Value="3" GroupName="RatingGroup" 
+                 IsChecked="{Binding Puntuacion, Mode=TwoWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}" />
+                    <RadioButton Content="★★★★" Value="4" GroupName="RatingGroup" 
+                 IsChecked="{Binding Puntuacion, Mode=TwoWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}" />
+                    <RadioButton Content="★★★★★" Value="5" GroupName="RatingGroup" 
+                 IsChecked="{Binding Puntuacion, Mode=TwoWay, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}" />
+                </StackLayout>
+
+                <!-- Botón de salir -->
+                <Button Text="Enviar" HorizontalOptions="Center" Command="{Binding PuntuarComicCommand}" Padding="10" WidthRequest="150"/>
+                <Button Text="Salir" HorizontalOptions="Center" Command="{Binding SalirRatingCommand}" Padding="10" WidthRequest="150"/>
+            </StackLayout>
+        </Frame>
+
+
+
         <!-- Overlay oscuro -->
         <BoxView x:Name="Overlay"
                  BackgroundColor="Black"

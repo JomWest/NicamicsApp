@@ -74,6 +74,15 @@ namespace NicamicsApp.ViewModels
         [ObservableProperty]
         private bool _ocultar = true;
 
+        [ObservableProperty]
+        private Comic? _comicActualizar;
+
+        [ObservableProperty]
+        private bool _darRating;
+
+        [ObservableProperty]
+        private int _puntuacion;
+
         public async void LoadComic(string comicId)
         {
             try
@@ -82,8 +91,7 @@ namespace NicamicsApp.ViewModels
 
                 if (response != null)
                 {
-
-
+                    ComicActualizar = response;
                     IdVendedor = response.vendedorId;
                     NombreComic = response.nombre;
                     Precio = response.precio;
@@ -93,8 +101,8 @@ namespace NicamicsApp.ViewModels
                     Rating = $"{response.ratingPromedio.ToString()}/5";
                     Stock = response.stock;
                     CambiarImagenFavorito(IpAddress.userId, comicId);
-
                     OnPropertyChanged(nameof(PrecioFormatted));
+                    await ComprobarRating();
                 } else{return;}
 
                 if (response.vendedorId == IpAddress.userId)
@@ -268,9 +276,75 @@ namespace NicamicsApp.ViewModels
             {
                 Console.WriteLine(ex.Message);
             }
-
-
         }
+
+        public async Task ComprobarRating()
+        {
+            try
+            {
+                var response = await _comicService.EsElegibleParaRating(IpAddress.userId, _comicId,IpAddress.token);
+
+                DarRating = response;
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [RelayCommand]
+        public void SalirRating()
+        {
+            DarRating = false;
+            Console.WriteLine($"Puntuación: {Puntuacion}");
+        }
+
+        [RelayCommand]
+        public async Task PuntuarComic()
+        {
+            try
+            {
+                if (Puntuacion == 0)
+                {
+                    Mensaje = "La puntuación del comic no puede ser 0";
+                    return;
+                }
+
+                var rating = new UserRating
+                {
+                    rating = Puntuacion,
+                    userId = IpAddress.userId,
+                };
+
+                ComicActualizar.ratings.Add(rating);
+
+                ComicActualizar.ratingPromedio = await calcularRatingPromedio(ComicActualizar.ratings);
+
+               var exito = await _comicService.ActualizarComic(ComicActualizar.comicId,ComicActualizar);
+                if (exito)
+                {
+                    Mensaje = "Calificación realizada con éxito";
+                }
+                SalirRating();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task<double> calcularRatingPromedio(List<UserRating> ratings)
+        {
+            int count = 0;
+
+            foreach (var rating in ratings)
+            {
+                count += rating.rating;
+            }
+            return count / ratings.Count;
+        }
+
     }
 }
     

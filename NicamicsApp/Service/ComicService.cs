@@ -297,5 +297,32 @@ namespace NicamicsApp.Service
             }
         }
 
+        public async Task<bool> EsElegibleParaRating(string userId, string comicId, string token)
+        {
+            try
+            {
+                // Establecer el token de autorización en los encabezados
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // Realizar la solicitud al API
+                var url = $"/api/Comic/esElegibleParaRating/{userId}/{comicId}";
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<dynamic>();
+                    return true; // El usuario es elegible para calificar
+                }
+                else
+                {
+                    return false; // El usuario no es elegible para calificar
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al verificar elegibilidad para calificar: {ex.Message}");
+            }
+        }
+
     }
 }
