@@ -12,18 +12,16 @@ namespace NicamicsApp.PedidosOrdenes
     public class DetalleOrdenFactory
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly DetalleOrdenViewModel _detalleOrdenViewModel;
         private readonly OrderService _orderService;
-        public DetalleOrdenFactory(IServiceProvider serviceProvider,OrderService orderService, DetalleOrdenViewModel detalleOrdenViewModel)
+        public DetalleOrdenFactory(IServiceProvider serviceProvider,OrderService orderService)
         {
             _serviceProvider = serviceProvider;
             _orderService = orderService;
-            _detalleOrdenViewModel = detalleOrdenViewModel;
         }
 
-        public DetalleOrden Create(orderDetail orderDetail)
+        public DetalleOrden Create(orderDetailJson orderDetail)
         {
-            return new DetalleOrden(_serviceProvider, _orderService, _detalleOrdenViewModel, orderDetail);
+            return new DetalleOrden(_serviceProvider, _orderService, orderDetail);
         }
     }
 }

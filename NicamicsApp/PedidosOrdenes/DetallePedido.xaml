@@ -42,17 +42,17 @@
                         <Label Text="{Binding OrderDetail.nombrecomic, StringFormat='Nombre: {0}'}" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>
                         <Label Text="{Binding OrderDetail.precio, StringFormat='Precio: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
                         <Label Text="{Binding OrderDetail.cantidad, StringFormat='Cantidad: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding ResumenOrderDto.PrecioEnvio, StringFormat='Precio de Envío: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
                         <Label Text="{Binding Total, StringFormat='Total: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Precio de Envío: $5.00" FontSize="14" HorizontalOptions="FillAndExpand"/>
                     </VerticalStackLayout>
 
                     <!-- Datos del comprador -->
                     <VerticalStackLayout Padding="15" Spacing="10" BackgroundColor="#f9f9f9" HorizontalOptions="FillAndExpand">
-                        <Label Text="Datos del Comprador" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                        <Label Text="Nombre Completo: Juan Pérez" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Departamento: Lima" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Ciudad: Miraflores" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Dirección: Av. Principal 123, Dpto. 405" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Datos del Cliente" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding ResumenOrderDto.NombreCompletoComprador, StringFormat='Nombre Completo: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding ResumenOrderDto.DepartamentoComprador, StringFormat='Departamento: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding ResumenOrderDto.MunicipioComprador, StringFormat='Municipio: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding ResumenOrderDto.DireccionComprador, StringFormat='Dirección: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
                     </VerticalStackLayout>
 
                     <!-- Botones de acción -->

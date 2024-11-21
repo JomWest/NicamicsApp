@@ -1,4 +1,5 @@
 ﻿using NicamicsApp.Models;
+using NicamicsApp.Models.ModelOrderMapper;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Json;
@@ -23,7 +24,7 @@ namespace NicamicsApp.Service
         }
 
 
-        public async Task<List<Order>> ObtenerOrdenesPorIdUsuario(string userId, string token)
+        public async Task<List<OrderMapper>> ObtenerOrdenesPorIdUsuario(string userId, string token)
         {
             try
             {
@@ -34,11 +35,11 @@ namespace NicamicsApp.Service
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<List<Order>>();
+                    return await response.Content.ReadFromJsonAsync<List<OrderMapper>>();
                 }
                 else
                 {
-                    return new List<Order>();
+                    return new List<OrderMapper>();
                 }
             }
             catch (HttpRequestException ex)
@@ -142,6 +143,39 @@ namespace NicamicsApp.Service
                 throw new Exception($"Error: {ex.Message}");
             }
         }
+
+        public async Task<ResumenOrderDto?> ObtenerResumenOrdenPorOrderDetailId(string orderDetailId, string token)
+        {
+            try
+            {
+                // Construir la URL con el OrderDetailId
+                var url = $"/api/Order/resumen/{orderDetailId}";
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // Hacer la solicitud GET
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Deserializar la respuesta en un ResumenOrdenDto
+                    return await response.Content.ReadFromJsonAsync<ResumenOrderDto>();
+                }
+                else
+                {
+                    return null; // En caso de respuesta no exitosa
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
 
     }
 }

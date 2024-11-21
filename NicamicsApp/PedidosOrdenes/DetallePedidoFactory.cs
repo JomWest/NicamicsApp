@@ -11,7 +11,6 @@ namespace NicamicsApp.PedidosOrdenes
     public class DetallePedidoFactory
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly DetallePedidoViewModel _detalleOrdenViewModel;
         private readonly OrderService _orderService;
         public DetallePedidoFactory(IServiceProvider serviceProvider, OrderService orderService)
         {

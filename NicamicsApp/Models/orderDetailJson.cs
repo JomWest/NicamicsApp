@@ -9,7 +9,7 @@ namespace NicamicsApp.Models
 {
     public class orderDetailJson
     {
-        public string _id { get; set; }
+        public string orderDetailId { get; set; }
         public double precio { get; set; }
         public int cantidad { get; set; }
         public string comicId { get; set; }

@@ -20,10 +20,10 @@ namespace NicamicsApp.PedidosOrdenes
         }
 
         [ObservableProperty]
-        private ObservableCollection<orderDetail> ordenes = new ObservableCollection<orderDetail>();
+        private ObservableCollection<orderDetailJson> ordenes = new ObservableCollection<orderDetailJson>();
 
         [ObservableProperty]
-        private orderDetail? _orderDetailSelected = null;
+        private orderDetailJson? _orderDetailSelected = null;
 
         [ObservableProperty]
         private string _mensaje = "";
@@ -32,12 +32,11 @@ namespace NicamicsApp.PedidosOrdenes
         {
             try
             {
-                Ordenes = new ObservableCollection<orderDetail>();
+                Ordenes = new ObservableCollection<orderDetailJson>();
                 var response = await _orderService.ObtenerOrdenesPorIdUsuario(IpAddress.userId, IpAddress.token);
 
                 if (response.Count > 0)
                 {
-                    var ordenes = new List<orderDetail>();
                     for(int i = 0; i < response.Count; i++)
                     {
                         for (int j = 0; j < response[i].orderDetail.Count; j++)
@@ -58,7 +57,7 @@ namespace NicamicsApp.PedidosOrdenes
         }
 
         [RelayCommand]
-        public void selectedDetail(orderDetail orderDetail)
+        public void selectedDetail(orderDetailJson orderDetail)
         {
             OrderDetailSelected = null;
             OrderDetailSelected = orderDetail;

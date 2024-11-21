@@ -38,28 +38,21 @@
 
                     <!-- Detalles del cómic -->
                     <VerticalStackLayout Padding="15" Spacing="10" BackgroundColor="#f0f0f0" HorizontalOptions="FillAndExpand">
-                        <Image Source="comic_cover.jpg" HeightRequest="200" Aspect="AspectFill" HorizontalOptions="FillAndExpand" />
-                        <Label Text="Nombre del Cómic: Spider-Man Vol. 1" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Precio: $10.00" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Cantidad: 2" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Total: $20.00" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Precio de Envío: $5.00" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Image Source="{Binding OrderDetail.imgurl}" HeightRequest="200" Aspect="AspectFill" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding OrderDetail.nombrecomic, StringFormat='Nombre: {0}'}" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding OrderDetail.precio, StringFormat='Precio: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding OrderDetail.cantidad, StringFormat='Cantidad: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding ResumenOrderDto.PrecioEnvio, StringFormat='Precio de Envío: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding Total, StringFormat='Total: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
                     </VerticalStackLayout>
 
                     <!-- Datos del comprador -->
                     <VerticalStackLayout Padding="15" Spacing="10" BackgroundColor="#f9f9f9" HorizontalOptions="FillAndExpand">
-                        <Label Text="Datos del Comprador" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                        <Label Text="Nombre Completo: Juan Pérez" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Departamento: Lima" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Ciudad: Miraflores" FontSize="14" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Dirección: Av. Principal 123, Dpto. 405" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Datos del Vendedor" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding UserVendedor.nombreCompleto, StringFormat='Nombre completo: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding UserVendedor.correo, StringFormat='Contacto: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding UserVendedor.direccion.departamento, StringFormat='Departamento: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
                     </VerticalStackLayout>
-
-                    <!-- Botones de acción -->
-                    <HorizontalStackLayout Padding="10" Spacing="10" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
-                        <Button Text="Cancelar" BackgroundColor="Red" TextColor="White" WidthRequest="120" HeightRequest="40" HorizontalOptions="FillAndExpand"/>
-                        <Button Text="Confirmar" BackgroundColor="Green" TextColor="White" WidthRequest="120" HeightRequest="40" HorizontalOptions="FillAndExpand"/>
-                    </HorizontalStackLayout>
 
                 </VerticalStackLayout>
             </ScrollView>
