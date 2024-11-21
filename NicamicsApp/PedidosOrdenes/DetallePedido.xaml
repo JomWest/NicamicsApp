@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.PedidosOrdenes.DetallePedido"
+             Title="DetallePedido"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:viewModel="clr-namespace:NicamicsApp.PedidosOrdenes"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
+             x:DataType="viewModel:DetallePedidoViewModel"
+             >
+    <ContentPage.Content>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid HeightRequest="50">
+                <!-- Botón de retroceso -->
+                <ImageButton Source="arrow.png"
+                 HeightRequest="25"
+                 WidthRequest="25"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 BackgroundColor="Transparent"
+                 Clicked="ImageButton_Clicked" />
+
+                <!-- Texto centrado -->
+                <Label Text="Detalle de Pedido"
+           FontSize="24"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+            </Grid>
+
+            <!-- Contenido principal -->
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Padding="10" Spacing="15" HorizontalOptions="FillAndExpand">
+
+                    <!-- Detalles del cómic -->
+                    <VerticalStackLayout Padding="15" Spacing="10" BackgroundColor="#f0f0f0" HorizontalOptions="FillAndExpand">
+                        <Image Source="{Binding OrderDetail.imgurl}" HeightRequest="200" Aspect="AspectFill" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding OrderDetail.nombrecomic, StringFormat='Nombre: {0}'}" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding OrderDetail.precio, StringFormat='Precio: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding OrderDetail.cantidad, StringFormat='Cantidad: {0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding Total, StringFormat='Total: C${0}'}" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Precio de Envío: $5.00" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                    </VerticalStackLayout>
+
+                    <!-- Datos del comprador -->
+                    <VerticalStackLayout Padding="15" Spacing="10" BackgroundColor="#f9f9f9" HorizontalOptions="FillAndExpand">
+                        <Label Text="Datos del Comprador" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                        <Label Text="Nombre Completo: Juan Pérez" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Departamento: Lima" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Ciudad: Miraflores" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="Dirección: Av. Principal 123, Dpto. 405" FontSize="14" HorizontalOptions="FillAndExpand"/>
+                    </VerticalStackLayout>
+
+                    <!-- Botones de acción -->
+                    <HorizontalStackLayout Padding="10" Spacing="10" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+                        <Button Text="Cancelar" BackgroundColor="Red" TextColor="White" WidthRequest="120" HeightRequest="40" HorizontalOptions="FillAndExpand"/>
+                        <Button Text="Confirmar" BackgroundColor="Green" TextColor="White" WidthRequest="120" HeightRequest="40" HorizontalOptions="FillAndExpand"/>
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -17,7 +17,7 @@
 
         <!-- Encabezado -->
         <HorizontalStackLayout Grid.Row="0" Spacing="50" VerticalOptions="Start">
-            <Image Source="arrow.png" WidthRequest="30" HeightRequest="30">
+            <Image Source="arrow.png" WidthRequest="25" HeightRequest="25">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="clickedback" />
                 </Image.GestureRecognizers>
@@ -38,7 +38,7 @@
                             <VerticalStackLayout WidthRequest="220" Spacing="5">
                                 <Label Text="{Binding nombre}" FontAttributes="Bold" FontSize="18" TextColor="#333" />
                                 <Label Text="{Binding descripcion}" FontSize="16" TextColor="#555" LineBreakMode="TailTruncation" MaxLines="2" />
-                                <Label Text="{Binding precio, StringFormat='Precio: {0:C}'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding precio, StringFormat='Precio: C${0}'}" FontSize="16" TextColor="#333" />
                                 <Label Text="{Binding stock, StringFormat='Stock: {0:}'}" FontSize="16" TextColor="#005AE1" />
                             </VerticalStackLayout>
 

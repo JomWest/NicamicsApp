@@ -7,7 +7,7 @@
     <ScrollView HorizontalOptions="CenterAndExpand" VerticalScrollBarVisibility="Never">
     <VerticalStackLayout  HorizontalOptions="CenterAndExpand">
  
-            <ImageButton x:Name="imgArrowBack" Source="arrow.png" WidthRequest="35" Margin="0,10,330,-40" Clicked="imgArrowBack_Clicked"/>
+            <ImageButton x:Name="imgArrowBack" Source="arrow.png" WidthRequest="25" Margin="0,10,330,-40" Clicked="imgArrowBack_Clicked"/>
             <Image Source="logo.png" WidthRequest="250"/>
 
      

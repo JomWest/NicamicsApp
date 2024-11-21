@@ -18,7 +18,7 @@
                         <Image Source="configuracion.png"
                                HorizontalOptions="End"
                                Margin="0,-19,25,0"
-                               HeightRequest="6.5">
+                               HeightRequest="6.5" IsVisible="False">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnImageTappedMenu"/>
                             </Image.GestureRecognizers>

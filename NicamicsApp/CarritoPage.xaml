@@ -19,7 +19,7 @@
                         <Image Source="configuracion.png"
                                HorizontalOptions="End"
                                Margin="0,-19,25,0"
-                               HeightRequest="6.5">
+                               HeightRequest="6.5" IsVisible="False">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnImageTappedMenu"/>
                             </Image.GestureRecognizers>
@@ -43,7 +43,7 @@
                                        
                                         <VerticalStackLayout>
                                             <Label Text="{Binding nombreComic}" FontSize="18" FontAttributes="Bold"/>
-                                            <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" FontSize="16"/>
+                                            <Label Text="{Binding Precio, StringFormat='Precio: C${0}'}" FontSize="16"/>
 
                                             <!-- Controles para ajustar la cantidad y eliminar el producto -->
                                             <HorizontalStackLayout>
@@ -65,8 +65,8 @@
                     <!-- Resumen del total y botón de comprar -->
                     <Frame HeightRequest="60" WidthRequest="350" CornerRadius="50" Padding="0" BackgroundColor="#E0E0E0" Margin="0,20,0,0">
                         <HorizontalStackLayout Spacing="100" VerticalOptions="Center" HorizontalOptions="Center">
-                            <Label Text="Total" FontSize="22" FontAttributes="Bold"/>
-                            <Label Text="{Binding TotalCart, StringFormat='Total: {0:C}'}" FontSize="22" FontAttributes="Bold" />
+                            <Label Text="Total:" FontSize="22" FontAttributes="Bold"/>
+                            <Label Text="{Binding TotalCart, StringFormat='C${0}'}" FontSize="22" FontAttributes="Bold" />
                         </HorizontalStackLayout>
                     </Frame>
 

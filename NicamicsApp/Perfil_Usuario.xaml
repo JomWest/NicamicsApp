@@ -5,7 +5,8 @@
              xmlns:viewModels="clr-namespace:NicamicsApp.ViewModels"
              x:DataType="viewModels:PerfilUsuarioViewModel"
              xmlns:models="clr-namespace:NicamicsApp.Models"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             >
     <ScrollView>
         <Grid>
         
@@ -14,11 +15,10 @@
                 <VerticalStackLayout>
                     <ImageButton x:Name="imgArrowBack" Source="arrow.png" HorizontalOptions="Start" Margin="30" HeightRequest="25" WidthRequest="25" Clicked="imgArrowBack_Clicked"></ImageButton>
                     <Label Text="Mi Perfil" CharacterSpacing="0.5" HorizontalOptions="Center" Margin="0,-55,0,0" FontSize="20" FontAttributes="Bold"/>
-                    <Image Source="configuracion.png"
+                    <Image Source="configuracion.png" IsVisible="False"
                            HorizontalOptions="End"
                            Margin="0,-19,25,0"
-                           HeightRequest="6.5"
-                           >
+                           HeightRequest="6.5">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnImageTappedMenu"/>
                         </Image.GestureRecognizers>
@@ -74,12 +74,17 @@
                                 <Label Text="Inventario"  VerticalOptions="Center"/>
                             </VerticalStackLayout>
 
+                            
+
                         </HorizontalStackLayout>
 
                     </Frame>
-               
 
-                <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
+                    <Button x:Name="btOrdenes" Text="Ordenes" Clicked="btOrdenes_Clicked"></Button>
+
+                    <Button x:Name="btnPedidos" Text="Pedidos" Clicked="btnPedidos_Clicked"></Button>
+
+                    <Label Text="Lista de Deseos" Margin="37,20,0,0" FontSize="20"/>
 
                     <ScrollView Orientation="Vertical">
                         <VerticalStackLayout x:Name="ComicFavoritos" Spacing="15" />

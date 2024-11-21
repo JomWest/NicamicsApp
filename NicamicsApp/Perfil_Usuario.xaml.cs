@@ -1,3 +1,4 @@
+using NicamicsApp.PedidosOrdenes;
 using NicamicsApp.ReportesMongo;
 using NicamicsApp.Service;
 using NicamicsApp.ViewModels;
@@ -98,5 +99,17 @@ public partial class Perfil_Usuario : ContentPage
     private async void imgArrowBack_Clicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();    
+    }
+
+    private async void btOrdenes_Clicked(object sender, EventArgs e)
+    {
+        var _historial = _serviceProvider.GetService<HistorialOrdenes>();
+        await Navigation.PushAsync(_historial);
+    }
+
+    private async void btnPedidos_Clicked(object sender, EventArgs e)
+    {
+        var _historial = _serviceProvider.GetService<HistorialPedidos>();
+        await Navigation.PushAsync(_historial);
     }
 }

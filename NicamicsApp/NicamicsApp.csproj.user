@@ -44,6 +44,18 @@
     <MauiXaml Update="PageInventario.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="PedidosOrdenes\DetalleOrden.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="PedidosOrdenes\DetallePedido.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="PedidosOrdenes\HistorialOrdenes.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="PedidosOrdenes\HistorialPedidos.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Perfil_Usuario.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

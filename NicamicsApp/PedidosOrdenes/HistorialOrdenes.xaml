@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NicamicsApp.PedidosOrdenes.HistorialOrdenes"
+             Title="Historial de Órdenes"
+             xmlns:viewModel="clr-namespace:NicamicsApp.PedidosOrdenes"
+             xmlns:models="clr-namespace:NicamicsApp.Models"
+             x:DataType="viewModel:HistorialOrdenesViewModel"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+    <VerticalStackLayout Padding="10">
+        <Grid HeightRequest="50">
+            <!-- Botón de retroceso -->
+            <ImageButton Source="arrow.png"
+                     HeightRequest="25"
+                     WidthRequest="25"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Start"
+                     BackgroundColor="Transparent"
+                     Clicked="ImageButton_Clicked" />
+            <!-- Texto centrado -->
+            <Label Text="Historial de órdenes"
+               FontSize="20"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        </Grid>
+
+
+        <!-- CollectionView para el contenido desplazable -->
+        <CollectionView VerticalOptions="FillAndExpand"
+                        ItemsSource="{Binding Ordenes}"
+                        Margin="0,10,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:orderDetail">
+                    <Frame CornerRadius="15" Padding="10" Margin="5" BackgroundColor="White" HasShadow="True">
+                        <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                            <!-- Imagen de portada -->
+                            <Image Source="{Binding imgurl}" WidthRequest="60" HeightRequest="80" Aspect="AspectFill" />
+
+                            <!-- Información del cómic -->
+                            <VerticalStackLayout WidthRequest="220" Spacing="5">
+                                <Label Text="{Binding nombrecomic}" FontAttributes="Bold" FontSize="18" TextColor="#333" />
+                                <Label Text="{Binding precio, StringFormat='Precio: C${0}'}" FontSize="16" TextColor="#333" />
+                                <Label Text="{Binding cantidad, StringFormat='Cantidad: {0}'}" FontSize="16" TextColor="#005AE1" />
+                            </VerticalStackLayout>
+
+                            <!-- Botón "Ver" alineado a la derecha -->
+                            <Button Text="Ver"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:HistorialOrdenesViewModel}}, Path=selectedDetailCommand}"
+                                    CommandParameter="{Binding .}"
+                        />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

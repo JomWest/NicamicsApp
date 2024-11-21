@@ -38,7 +38,7 @@ namespace NicamicsApp.Service
                 }
                 else
                 {
-                    return null;
+                    return new List<Order>();
                 }
             }
             catch (HttpRequestException ex)
@@ -109,5 +109,39 @@ namespace NicamicsApp.Service
                 return $"Error: {ex.Message}";
             }
         }
+
+        public async Task<List<orderDetailJson>?> ObtenerPedidosPorVendedor(string vendedorId, string token)
+
+        {
+            try
+            {
+                // Construir la URL con el vendedorId como parámetro
+                var url = $"/api/Order/pedidosPorVendedor?vendedorId={vendedorId}";
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // Hacer la solicitud GET
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Deserializar la respuesta en una lista de OrderDetail
+                    return await response.Content.ReadFromJsonAsync<List<orderDetailJson>>();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de solicitud HTTP: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
     }
 }

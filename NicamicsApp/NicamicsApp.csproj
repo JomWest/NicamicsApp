@@ -151,6 +151,18 @@
 	  <MauiXaml Update="PageInventario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PedidosOrdenes\DetalleOrden.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PedidosOrdenes\DetallePedido.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PedidosOrdenes\HistorialOrdenes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PedidosOrdenes\HistorialPedidos.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Perfil_Usuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

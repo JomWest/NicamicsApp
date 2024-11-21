@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using NicamicsApp.PedidosOrdenes;
 using NicamicsApp.ReportesMongo;
 using NicamicsApp.Service;
 using NicamicsApp.ViewModels;
@@ -43,11 +44,17 @@ namespace NicamicsApp
             builder.Services.AddTransient<PageInventario>();
             builder.Services.AddTransient<EdeitarPerfilPage>();
             builder.Services.AddTransient<ComicEditPage>();
+            builder.Services.AddTransient<HistorialOrdenes>();
+            builder.Services.AddTransient<HistorialPedidos>();
+            builder.Services.AddTransient<DetalleOrden>();
+            builder.Services.AddTransient<DetallePedido>();
 
 
             builder.Services.AddTransient<DetalleMangaFactory>();
             builder.Services.AddTransient<MainPageFactory>();
             builder.Services.AddTransient<ComicEditFactory>();
+            builder.Services.AddTransient<DetalleOrdenFactory>();
+            builder.Services.AddTransient<DetallePedidoFactory>();
             /* Cambio no fusionado mediante combinación del proyecto 'NicamicsApp (net8.0-android)'
             Antes:
                         builder.Services.AddTransient<DetalleManga.DetalleManga>();
@@ -65,7 +72,10 @@ namespace NicamicsApp
             builder.Services.AddSingleton<AddressViewModel>();
             builder.Services.AddSingleton<InventarioViewModel>();
             builder.Services.AddSingleton<ComicEditViewModel>();
-
+            builder.Services.AddSingleton<HistorialOrdenesViewModel>();
+            builder.Services.AddSingleton<HistorialPedidosViewModel>();
+            builder.Services.AddSingleton<DetallePedidoViewModel>();
+            builder.Services.AddSingleton<DetalleOrdenViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
